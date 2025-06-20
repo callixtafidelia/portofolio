@@ -11,7 +11,7 @@ import {
 
 export default function Home() {
   const stats = [
-    { value: '94%',  label: 'Model Accuracy',     icon: BarChart3, bg: 'bg-blue-100',   color: 'text-blue-600'   },
+    { value: '100%',  label: 'Model Accuracy',     icon: BarChart3, bg: 'bg-blue-100',   color: 'text-blue-600'   },
     { value: '15+',  label: 'Projects Completed',  icon: Users,     bg: 'bg-purple-100', color: 'text-purple-600' },
     { value: '3.8',  label: 'GPA Score',           icon: Award,     bg: 'bg-green-100',  color: 'text-green-600'  },
   ];
