@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 
 export default function BlogPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const blogPosts = [
     {
@@ -29,59 +29,10 @@ export default function BlogPage() {
       readTime: "8 min read",
       slug: "understanding-pca",
     },
-    {
-      id: 2,
-      title: "Comparing Classification Algorithms",
-      description:
-        "An analysis of different classification algorithms and their performance on various datasets.",
-      date: "April 22, 2024",
-      category: "Machine Learning",
-      readTime: "12 min read",
-      slug: "comparing-classification-algorithms",
-    },
-    {
-      id: 3,
-      title: "Data Visualization Best Practices",
-      description:
-        "Tips and techniques for creating effective and insightful data visualizations.",
-      date: "March 10, 2024",
-      category: "Data Visualization",
-      readTime: "6 min read",
-      slug: "data-visualization-best-practices",
-    },
-    {
-      id: 4,
-      title: "Introduction to Time Series Forecasting",
-      description:
-        "A beginner's guide to time series analysis and forecasting techniques.",
-      date: "February 5, 2024",
-      category: "Time Series",
-      readTime: "10 min read",
-      slug: "intro-to-time-series-forecasting",
-    },
-    {
-      id: 5,
-      title: "Feature Engineering Techniques",
-      description:
-        "Essential techniques for creating and selecting features that improve model performance.",
-      date: "January 18, 2024",
-      category: "Machine Learning",
-      readTime: "14 min read",
-      slug: "feature-engineering-techniques",
-    },
-    {
-      id: 6,
-      title: "Building Interactive Dashboards with Streamlit",
-      description:
-        "Step-by-step guide to creating interactive data science dashboards using Streamlit.",
-      date: "December 22, 2023",
-      category: "Data Visualization",
-      readTime: "11 min read",
-      slug: "streamlit-dashboards",
-    },
+    // ...add your other posts here
   ];
 
-  const categories = [
+  const categories: string[] = [
     "All",
     "Machine Learning",
     "Data Visualization",
@@ -89,11 +40,10 @@ export default function BlogPage() {
     "Deep Learning",
   ];
 
-  const getCategoryColor = (cat: string) => {
+  const getCategoryColor = (cat: string): string => {
     const map: Record<string, string> = {
       "Machine Learning": "bg-blue-100 text-blue-800 border-blue-200",
-      "Data Visualization":
-        "bg-green-100 text-green-800 border-green-200",
+      "Data Visualization": "bg-green-100 text-green-800 border-green-200",
       "Time Series": "bg-purple-100 text-purple-800 border-purple-200",
       "Deep Learning": "bg-red-100 text-red-800 border-red-200",
     };
@@ -109,11 +59,6 @@ export default function BlogPage() {
       post.description.toLowerCase().includes(term);
     return matchesCategory && matchesSearch;
   });
-
-  const handleRead = (slug: string) => {
-    console.log("Navigate to:", slug);
-    // e.g. router.push(`/blog/${slug}`)
-  };
 
   return (
     <div className="h-screen bg-gray-50 flex overflow-auto">
@@ -151,9 +96,7 @@ export default function BlogPage() {
               <Filter className="w-4 h-4 text-gray-500" />
               <select
                 value={selectedCategory}
-                onChange={(e) =>
-                  setSelectedCategory(e.target.value)
-                }
+                onChange={(e) => setSelectedCategory(e.target.value)}
                 className="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
               >
                 {categories.map((cat) => (
@@ -200,24 +143,25 @@ export default function BlogPage() {
                     </div>
                   </div>
                 </div>
+
                 {/* Content */}
                 <div className="flex-1 p-6">
-                  <h2
-                    className="text-xl font-semibold text-gray-900 mb-3 hover:text-blue-600 transition-colors cursor-pointer"
-                    onClick={() => handleRead(post.slug)}
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="text-xl font-semibold text-gray-900 mb-3 hover:text-blue-600 transition-colors block"
                   >
                     {post.title}
-                  </h2>
+                  </Link>
                   <p className="text-gray-700 leading-relaxed mb-4">
                     {post.description}
                   </p>
-                  <button
-                    onClick={() => handleRead(post.slug)}
+                  <Link
+                    href={`/blog/${post.slug}`}
                     className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors group"
                   >
                     Read article
                     <ArrowRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </article>
@@ -234,58 +178,6 @@ export default function BlogPage() {
               </p>
             </div>
           )}
-        </div>
-
-        {/* Newsletter & Stats */}
-        <div className="max-w-6xl mx-auto mt-12 space-y-8">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Stay Updated
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Get notified when I publish new articles about data science and
-              machine learning.
-            </p>
-            <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <button className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors">
-                Subscribe
-              </button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 text-center">
-              <div className="text-2xl font-bold text-blue-600">
-                {blogPosts.length}
-              </div>
-              <div className="text-sm text-gray-600">Total Articles</div>
-            </div>
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 text-center">
-              <div className="text-2xl font-bold text-green-600">
-                {categories.length - 1}
-              </div>
-              <div className="text-sm text-gray-600">Categories</div>
-            </div>
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 text-center">
-              <div className="text-2xl font-bold text-purple-600">
-                {blogPosts.reduce(
-                  (sum, p) =>
-                    sum + parseInt(p.readTime.replace(/\D/g, ""), 10),
-                  0
-                )}
-              </div>
-              <div className="text-sm text-gray-600">Total Read Time</div>
-            </div>
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 text-center">
-              <div className="text-2xl font-bold text-orange-600">2024</div>
-              <div className="text-sm text-gray-600">Started Writing</div>
-            </div>
-          </div>
         </div>
       </main>
     </div>
