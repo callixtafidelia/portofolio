@@ -1,6 +1,9 @@
 // app/page.tsx
+'use client';
+
 import React from 'react';
 import Sidebar from '@/components/sidebar';
+import { motion } from 'framer-motion';
 import {
   Download,
   ArrowRight,
@@ -22,7 +25,12 @@ export default function Home() {
 
       <main className="flex-1 h-full overflow-y-auto p-8">
         {/* Header */}
-        <div className="mb-8">
+        <motion.div
+          className="mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
               <span>⭐</span>
@@ -43,21 +51,34 @@ export default function Home() {
           </p>
 
           <div className="flex space-x-4">
-            <button className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+            >
               <Download size={20} />
               <span>Download Resume</span>
-            </button>
-            <button className="flex items-center space-x-2 border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors">
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-2 border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-100 transition"
+            >
               <span>View Projects</span>
               <ArrowRight size={20} />
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {stats.map(({ value, label, icon: Icon, bg, color }) => (
-            <div key={label} className="bg-white p-6 rounded-xl shadow-sm border">
+          {stats.map(({ value, label, icon: Icon, bg, color }, index) => (
+            <motion.div
+              key={label}
+              className="bg-white p-6 rounded-xl shadow-sm border hover:shadow-md transition-shadow cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * index }}
+              whileHover={{ scale: 1.03 }}
+            >
               <div className="flex items-center justify-between mb-4">
                 <div className={`${bg} w-12 h-12 rounded-lg flex items-center justify-center`}>
                   <Icon className={color} size={24} />
@@ -65,17 +86,22 @@ export default function Home() {
               </div>
               <div className="text-3xl font-bold text-gray-900 mb-2">{value}</div>
               <div className="text-gray-600">{label}</div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Journey */}
-        <div className="bg-white rounded-xl shadow-sm border p-8">
+        <motion.div
+          className="bg-white rounded-xl shadow-sm border p-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
           <h2 className="text-2xl font-bold text-gray-900 mb-4">My Data Science Journey</h2>
           <p className="text-gray-600 text-lg">
             From curiosity to expertise in machine learning and analytics
           </p>
-        </div>
+        </motion.div>
       </main>
     </div>
   );
