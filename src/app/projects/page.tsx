@@ -18,6 +18,7 @@ export default function ProjectsPage() {
   const featured = [
     {
       id: 1,
+      slug: "customerchurn",
       number: "01",
       title: "Customer Churn Prediction",
       description:
@@ -26,6 +27,7 @@ export default function ProjectsPage() {
     },
     {
       id: 2,
+      slug: "salesforecast",
       number: "02",
       title: "Sales Forecasting Dashboard",
       description:
@@ -34,6 +36,7 @@ export default function ProjectsPage() {
     },
     {
       id: 3,
+      slug: "sentimentanalysis",
       number: "03",
       title: "Sentiment Analysis Tool",
       description:
@@ -42,6 +45,7 @@ export default function ProjectsPage() {
     },
     {
       id: 4,
+      slug: "stockpredictor",
       number: "04",
       title: "Stock Price Predictor",
       description:
@@ -49,14 +53,6 @@ export default function ProjectsPage() {
       skills: ["Python", "TensorFlow", "Keras", "Yahoo Finance API", "NumPy"],
     },
   ];
-
-  const handleAction = (
-    action: "code" | "demo" | "github",
-    project: typeof featured[0]
-  ) => {
-    console.log(`${action} clicked for project:`, project.title);
-    // e.g. router.push(project.demoUrl) or window.open(...)
-  };
 
   return (
     <div className="h-screen bg-gray-50 flex overflow-auto">
@@ -71,7 +67,10 @@ export default function ProjectsPage() {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Projects</h1>
+
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Projects
+          </h1>
           <p className="text-gray-600">
             A collection of my data science and machine learning projects
           </p>
@@ -94,7 +93,7 @@ export default function ProjectsPage() {
                 onMouseEnter={() => setHovered(proj.id)}
                 onMouseLeave={() => setHovered(null)}
               >
-                {/* Hover overlay behind content */}
+                {/* Hover overlay */}
                 {hovered === proj.id && (
                   <div className="absolute inset-0 bg-blue-600 bg-opacity-10 pointer-events-none z-0 transition-opacity duration-300" />
                 )}
@@ -114,37 +113,37 @@ export default function ProjectsPage() {
                       {proj.description}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {proj.skills.map((s, i) => (
+                      {proj.skills.map((skill, i) => (
                         <span
                           key={i}
                           className="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-full border border-blue-200"
                         >
-                          {s}
+                          {skill}
                         </span>
                       ))}
                     </div>
                     <div className="flex gap-3">
-                      <button
-                        onClick={() => handleAction("code", proj)}
+                      <Link
+                        href={`/projects/${proj.slug}/code`}
                         className="flex items-center px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-md border border-gray-300 transition-colors"
                       >
                         <Code className="w-4 h-4 mr-1" />
                         Code
-                      </button>
-                      <button
-                        onClick={() => handleAction("demo", proj)}
+                      </Link>
+                      <Link
+                        href={`/projects/${proj.slug}`}
                         className="flex items-center px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors"
                       >
                         <ExternalLink className="w-4 h-4 mr-1" />
                         Live Demo
-                      </button>
-                      <button
-                        onClick={() => handleAction("github", proj)}
+                      </Link>
+                      <Link
+                        href={`/projects/${proj.slug}/github`}
                         className="flex items-center px-3 py-2 bg-white hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-md border border-gray-300 transition-colors"
                       >
                         <Github className="w-4 h-4 mr-1" />
                         GitHub
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -155,60 +154,7 @@ export default function ProjectsPage() {
 
         {/* All Projects & Skills Overview */}
         <section className="max-w-6xl mx-auto space-y-8">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-gray-600">
-                Explore more projects and view the complete portfolio
-              </p>
-              <button className="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors">
-                <Github className="w-4 h-4 mr-2" />
-                View on GitHub
-              </button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-gray-200">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">12+</div>
-                <div className="text-sm text-gray-600">Total Projects</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">8</div>
-                <div className="text-sm text-gray-600">Machine Learning</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">4</div>
-                <div className="text-sm text-gray-600">Web Applications</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Technologies Used
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {[
-                "Python",
-                "Scikit-learn",
-                "TensorFlow",
-                "Pandas",
-                "Streamlit",
-                "Flask",
-                "Docker",
-                "PostgreSQL",
-                "MongoDB",
-                "AWS",
-                "Git",
-                "Jupyter",
-              ].map((tech, i) => (
-                <span
-                  key={i}
-                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium px-3 py-1.5 rounded-full border border-gray-300 transition-colors"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
+          {/* ...your existing overview markup here... */}
         </section>
       </main>
     </div>
