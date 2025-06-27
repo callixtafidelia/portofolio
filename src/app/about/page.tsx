@@ -88,7 +88,7 @@ export default function AboutMe() {
         }
         
         .text-gradient-enhanced {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          background: linear-gradient(135deg, #667eea 0%,rgb(77, 3, 138) 50%,rgb(2, 131, 151) 100%);
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
