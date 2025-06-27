@@ -200,19 +200,19 @@ export default function ContactPage() {
       `}</style>
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-        {/* Sidebar - Fixed positioned */}
-        <div className="fixed top-0 left-0 h-full z-30">
-          <Sidebar active="contact" onToggle={setSidebarCollapsed} />
-        </div>
+
+        <Sidebar active="contact" onToggle={setSidebarCollapsed} />
 
         {/* Main content with dynamic margin */}
         <main
-          className="flex-1 overflow-y-auto p-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
           style={{
-            marginLeft: sidebarCollapsed ? "120px" : "288px",
+            marginLeft: "40px", // terniery operation
           }}
         >
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl">
+
+            
             {/* Header */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
               <Link
@@ -429,7 +429,7 @@ export default function ContactPage() {
                 <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
                   Looking forward to hearing from you!
                 </h3>
-                <p className="text-gray-300 leading-relaxed max-w-2xl mx-auto">
+                <p className="text-gray-300 leading-relaxed max-w-2xl">
                   Whether you have a project in mind, want to discuss data science trends, or just want to connect, I'm
                   always excited to meet new people and explore interesting opportunities.
                 </p>

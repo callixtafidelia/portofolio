@@ -213,167 +213,167 @@ export default function ExperiencePage() {
       `}</style>
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-        {/* Sidebar - Fixed positioned */}
-        <div className="fixed top-0 left-0 h-full z-30">
-          <Sidebar active="exp" onToggle={setSidebarCollapsed} />
-        </div>
+      
+        <Sidebar active="exp" onToggle={setSidebarCollapsed} />
 
         {/* Main content with dynamic margin */}
         <main
-          className="flex-1 overflow-y-auto p-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
           style={{
-            marginLeft: sidebarCollapsed ? "120px" : "288px",
+            marginLeft: "40px", // terniery operation
           }}
         >
-          {/* Header */}
-          <div className="mb-12 max-w-4xl mx-auto">
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-6 transition-all duration-300 hover:translate-x-1 group"
-              >
-                <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform duration-300" />
-                <span>Back to Home</span>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <Briefcase size={24} className="text-white" />
-                </div>
-                <h1 className="text-5xl font-extrabold">
-                  <span className="text-gradient-enhanced">Experience</span>
-                </h1>
-              </div>
-              <p className="text-xl text-gray-300 leading-relaxed">My professional journey and work experience</p>
-            </motion.div>
-          </div>
-
-          {/* Timeline */}
-          <div className="relative max-w-4xl mx-auto">
-            {/* Enhanced Vertical line */}
-            <div className="absolute left-8 top-0 bottom-0 w-1 timeline-line rounded-full"></div>
-
-            {experiences.map((exp, index) => {
-              const colors = getTypeColor(exp.type)
-              return (
-                <motion.div
-                  key={exp.id}
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="relative mb-12 last:mb-0"
+          <div className="max-w-6xl">
+            {/* Header */}
+            <div className="mb-12">
+              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-6 transition-all duration-300 hover:translate-x-1 group"
                 >
-                  {/* Enhanced Dot */}
-                  <div className="absolute left-6 w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full border-4 border-slate-900 shadow-2xl shadow-indigo-500/50 z-10"></div>
+                  <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform duration-300" />
+                  <span>Back to Home</span>
+                </Link>
+              </motion.div>
 
-                  {/* Enhanced Card */}
-                  <div className="ml-20">
-                    <div className="glow-card rounded-2xl p-8 group cursor-pointer">
-                      {/* Title & Company */}
-                      <div className="flex justify-between items-start mb-6">
-                        <div>
-                          <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors duration-300">
-                            {exp.title}
-                          </h3>
-                          <h4 className="text-xl font-semibold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-                            {exp.company}
-                          </h4>
-                        </div>
-                        <div className="flex gap-2">
-                          {exp.current && (
-                            <span className="inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 text-sm font-medium px-4 py-2 rounded-full">
-                              <Clock size={14} className="mr-1" />
-                              Current
-                            </span>
-                          )}
-                          <span
-                            className={`inline-flex items-center bg-gradient-to-r ${colors.bg} border ${colors.border} ${colors.text} text-sm font-medium px-4 py-2 rounded-full capitalize`}
-                          >
-                            {exp.type}
-                          </span>
-                        </div>
-                      </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <Briefcase size={24} className="text-white" />
+                  </div>
+                  <h1 className="text-5xl font-extrabold">
+                    <span className="text-gradient-enhanced">Experience</span>
+                  </h1>
+                </div>
+                <p className="text-xl text-gray-300 leading-relaxed">My professional journey and work experience</p>
+              </motion.div>
+            </div>
 
-                      {/* Location & Duration */}
-                      <div className="flex flex-wrap gap-6 mb-6 text-gray-400">
-                        <div className="flex items-center gap-2">
-                          <MapPin size={16} className="text-indigo-400" />
-                          <span>{exp.location}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Calendar size={16} className="text-purple-400" />
-                          <span>{exp.duration}</span>
-                        </div>
-                      </div>
+            {/* Timeline */}
+            <div className="relative">
+              {/* Enhanced Vertical line */}
+              <div className="absolute left-8 top-0 bottom-0 w-1 timeline-line rounded-full"></div>
 
-                      {/* Description */}
-                      <p className="text-gray-300 mb-6 leading-relaxed text-lg">{exp.description}</p>
+              {experiences.map((exp, index) => {
+                const colors = getTypeColor(exp.type)
+                return (
+                  <motion.div
+                    key={exp.id}
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 }}
+                    className="relative mb-12 last:mb-0"
+                  >
+                    {/* Enhanced Dot */}
+                    <div className="absolute left-6 w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full border-4 border-slate-900 shadow-2xl shadow-indigo-500/50 z-10"></div>
 
-                      {/* Achievements */}
-                      <div className="mb-6">
-                        <h5 className="text-white font-semibold mb-3 flex items-center gap-2">
-                          <Star size={16} className="text-yellow-400" />
-                          Key Achievements
-                        </h5>
-                        <ul className="space-y-2">
-                          {exp.achievements.map((achievement, i) => (
-                            <li key={i} className="text-gray-300 flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full mt-2 flex-shrink-0"></span>
-                              {achievement}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Skills */}
-                      <div>
-                        <h5 className="text-white font-semibold mb-3">Technologies & Skills</h5>
-                        <div className="flex flex-wrap gap-2">
-                          {exp.skills.map((skill, i) => (
+                    {/* Enhanced Card */}
+                    <div className="ml-20">
+                      <div className="glow-card rounded-2xl p-8 group cursor-pointer">
+                        {/* Title & Company */}
+                        <div className="flex justify-between items-start mb-6">
+                          <div>
+                            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors duration-300">
+                              {exp.title}
+                            </h3>
+                            <h4 className="text-xl font-semibold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                              {exp.company}
+                            </h4>
+                          </div>
+                          <div className="flex gap-2">
+                            {exp.current && (
+                              <span className="inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 text-sm font-medium px-4 py-2 rounded-full">
+                                <Clock size={14} className="mr-1" />
+                                Current
+                              </span>
+                            )}
                             <span
-                              key={i}
-                              className="bg-slate-800/50 border border-slate-700/50 text-slate-300 text-sm font-medium px-4 py-2 rounded-full hover:bg-slate-700/50 hover:border-indigo-500/30 hover:text-indigo-300 transition-all duration-300"
+                              className={`inline-flex items-center bg-gradient-to-r ${colors.bg} border ${colors.border} ${colors.text} text-sm font-medium px-4 py-2 rounded-full capitalize`}
                             >
-                              {skill}
+                              {exp.type}
                             </span>
-                          ))}
+                          </div>
+                        </div>
+
+                        {/* Location & Duration */}
+                        <div className="flex flex-wrap gap-6 mb-6 text-gray-400">
+                          <div className="flex items-center gap-2">
+                            <MapPin size={16} className="text-indigo-400" />
+                            <span>{exp.location}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Calendar size={16} className="text-purple-400" />
+                            <span>{exp.duration}</span>
+                          </div>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-gray-300 mb-6 leading-relaxed text-lg">{exp.description}</p>
+
+                        {/* Achievements */}
+                        <div className="mb-6">
+                          <h5 className="text-white font-semibold mb-3 flex items-center gap-2">
+                            <Star size={16} className="text-yellow-400" />
+                            Key Achievements
+                          </h5>
+                          <ul className="space-y-2">
+                            {exp.achievements.map((achievement, i) => (
+                              <li key={i} className="text-gray-300 flex items-start gap-2">
+                                <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full mt-2 flex-shrink-0"></span>
+                                {achievement}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Skills */}
+                        <div>
+                          <h5 className="text-white font-semibold mb-3">Technologies & Skills</h5>
+                          <div className="flex flex-wrap gap-2">
+                            {exp.skills.map((skill, i) => (
+                              <span
+                                key={i}
+                                className="bg-slate-800/50 border border-slate-700/50 text-slate-300 text-sm font-medium px-4 py-2 rounded-full hover:bg-slate-700/50 hover:border-indigo-500/30 hover:text-indigo-300 transition-all duration-300"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              )
-            })}
-          </div>
-
-          {/* Enhanced Footer */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="max-w-4xl mx-auto mt-16"
-          >
-            <div className="glow-card rounded-2xl p-8 text-center">
-              <div className="mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-2xl shadow-indigo-500/40">
-                  <Star size={28} className="text-white" />
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
-                Ready for New Opportunities
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
-                Looking for new opportunities to grow and contribute to meaningful projects that make a real impact.
-                Let's build something amazing together!
-              </p>
+                  </motion.div>
+                )
+              })}
             </div>
-          </motion.div>
+
+            {/* Enhanced Footer */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="mt-16"
+            >
+              <div className="glow-card rounded-2xl p-8 text-center">
+                <div className="mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-2xl shadow-indigo-500/40">
+                    <Star size={28} className="text-white" />
+                  </div>
+                </div>
+                <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
+                  Ready for New Opportunities
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                  Looking for new opportunities to grow and contribute to meaningful projects that make a real impact.
+                  Let's build something amazing together!
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </main>
       </div>
     </>

@@ -181,20 +181,20 @@ export default function ProjectsPage() {
         }
       `}</style>
 
-      <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-        {/* Sidebar - Fixed positioned */}
-        <div className="fixed top-0 left-0 h-full z-30">
+            <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
+      
           <Sidebar active="projects" onToggle={setSidebarCollapsed} />
-        </div>
 
         {/* Main content with dynamic margin */}
         <main
-          className="flex-1 overflow-y-auto p-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
           style={{
-            marginLeft: sidebarCollapsed ? "120px" : "288px",
+            marginLeft: "40px", // terniery operation
           }}
         >
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl">
+
+
             {/* Header */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
               <Link

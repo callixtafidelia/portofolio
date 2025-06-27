@@ -173,17 +173,17 @@ export default function CustomerChurnPage() {
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
         {/* Sidebar - Fixed positioned */}
-        <div className="fixed top-0 left-0 h-full z-30">
-          <Sidebar active="projects" onToggle={setSidebarCollapsed} />
-        </div>
-
+         <Sidebar active="projects" onToggle={setSidebarCollapsed} />
+  
         {/* Main content with dynamic margin */}
         <main
           className="flex-1 overflow-y-auto relative transition-all duration-300 ease-in-out"
           style={{
-            marginLeft: sidebarCollapsed ? "120px" : "288px",
+            marginLeft: "40px" ,
           }}
         >
+
+          
           {/* Header */}
           <div className="border-b border-white/10 bg-slate-900/50 backdrop-blur-xl">
             <div className="max-w-7xl mx-auto px-6 py-6">
