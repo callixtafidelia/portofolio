@@ -145,7 +145,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
             {/* inner wrapper clips the image */}
             <div className="overflow-hidden rounded-xl w-full h-full">
               <img
-                src="/photo.jpg"
+                src="./photo.jpg"
                 alt="Callixta Fidelia C"
                 className="w-full h-full object-cover"
               />
