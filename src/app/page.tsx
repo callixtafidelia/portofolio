@@ -10,7 +10,7 @@ import { OrbitControls, useGLTF, Environment } from '@react-three/drei'
 
 // Crystal Component
 function Crystal() {
-  const { scene } = useGLTF('/crystal.glb')
+  const { scene } = useGLTF('./crystal.glb')
   return (
     <primitive
       object={scene}
