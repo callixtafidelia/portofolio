@@ -133,19 +133,18 @@ export default function PCAArticle() {
       `}</style>
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-        {/* Sidebar - Fixed positioned */}
-        <div className="fixed top-0 left-0 h-full z-30">
-          <Sidebar active="blog" onToggle={setSidebarCollapsed} />
-        </div>
+           
+               <Sidebar active="blog" onToggle={setSidebarCollapsed} />
+     
+             {/* Main content with dynamic margin */}
+             <main
+               className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
+               style={{
+                 marginLeft: "40px", // terniery operation
+               }}
+             >
+               <div className="max-w-6xl">
 
-        {/* Main content with dynamic margin */}
-        <main
-          className="flex-1 overflow-y-auto relative transition-all duration-300 ease-in-out"
-          style={{
-            marginLeft: sidebarCollapsed ? "120px" : "288px",
-          }}
-        >
-          <div className="max-w-4xl mx-auto p-8">
             {/* Back link */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
               <Link
@@ -261,7 +260,7 @@ export default function PCAArticle() {
                           </div>
                         </li>
                         <li className="flex items-start gap-3">
-                          <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                           <div>
                             <strong className="text-white">Computational Efficiency:</strong> Speeds up downstream
                             machine learning algorithms
@@ -298,13 +297,13 @@ export default function PCAArticle() {
                           Compute the covariance matrix to understand how features vary together.
                         </p>
                       </div>
-                      <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-xl p-6">
+                      <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl p-6">
                         <h4 className="text-lg font-bold text-white mb-2">Step 3: Eigendecomposition</h4>
                         <p className="text-gray-300">
                           Extract eigenvalues and eigenvectors from the covariance matrix.
                         </p>
                       </div>
-                      <div className="bg-gradient-to-r from-red-500/10 to-pink-500/10 border border-red-500/20 rounded-xl p-6">
+                      <div className="bg-gradient-to-r from-red-500/10 to-blue-500/10 border border-red-500/20 rounded-xl p-6">
                         <h4 className="text-lg font-bold text-white mb-2">Step 4: Component Selection</h4>
                         <p className="text-gray-300">
                           Choose the top k components that explain the most variance in your data.

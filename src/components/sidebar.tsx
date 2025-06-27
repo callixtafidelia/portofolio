@@ -19,7 +19,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ active, onToggle }: SidebarProps) {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
 
   const handleToggle = () => {
     const newCollapsed = !collapsed
@@ -139,17 +139,24 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
           </button>
         </div>
 
-        {/* Profile Section */}
+     {/* Profile Section */}
         <div className="flex-shrink-0 p-6 border-b border-white/10 flex flex-col items-center">
-          <div className="profile-avatar w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-2xl shadow-indigo-500/40">
-            CF
+          <div className="profile-avatar w-16 h-16 rounded-xl shadow-xl shadow-indigo-500/40 ring-2 ring-blue-500/50">
+            {/* inner wrapper clips the image */}
+            <div className="overflow-hidden rounded-xl w-full h-full">
+              <img
+                src="/photo.jpg"
+                alt="Callixta Fidelia C"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
           {!collapsed && (
             <>
               <h2 className="mt-4 text-xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent text-center">
                 Callixta Fidelia C
               </h2>
-              <p className="text-slate-400 text-sm mt-1 text-center">Data Scientist</p>
+              <p className="text-slate-400 text-sm mt-1 text-center"> Data Scientist</p>
             </>
           )}
         </div>
@@ -168,7 +175,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
                   ${collapsed ? "justify-center" : ""}
                   ${
                     isActive
-                      ? "text-white bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-400/30 shadow-lg shadow-indigo-500/20"
+                      ? "text-white bg-gradient-to-r from-indigo-500/20 to-blue-500/20 border border-indigo-400/30 shadow-lg shadow-indigo-500/20"
                       : "text-slate-400 hover:text-white hover:translate-x-1"
                   }
                 `}
@@ -197,7 +204,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
             }`}
             title={collapsed ? "GitHub" : undefined}
           >
-            <Github size={18} className="group-hover:text-purple-400 transition-colors duration-300" />
+            <Github size={18} className="group-hover:text-blue-400 transition-colors duration-300" />
             {!collapsed && <span className="text-sm">GitHub</span>}
           </Link>
           <Link

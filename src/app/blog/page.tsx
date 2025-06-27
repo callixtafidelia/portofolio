@@ -204,19 +204,19 @@ export default function BlogPage() {
       `}</style>
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-        {/* Sidebar - Fixed positioned */}
-        <div className="fixed top-0 left-0 h-full z-30">
+      
           <Sidebar active="blog" onToggle={setSidebarCollapsed} />
-        </div>
 
         {/* Main content with dynamic margin */}
         <main
-          className="flex-1 overflow-y-auto p-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
           style={{
-            marginLeft: sidebarCollapsed ? "120px" : "288px",
+            marginLeft: "40px", // terniery operation
           }}
         >
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl">
+
+            
             {/* Header */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
               <Link
@@ -436,7 +436,7 @@ export default function BlogPage() {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="glow-card rounded-2xl p-12 text-center"
                 >
-                  <Search className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+                  <Search className="w-16 h-16 text-gray-400 mb-4" />
                   <h3 className="text-xl font-bold text-white mb-2">No articles found</h3>
                   <p className="text-gray-400">Try adjusting your search terms or category filter.</p>
                 </motion.div>
