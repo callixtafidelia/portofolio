@@ -1,7 +1,6 @@
-// src/app/blog/page.tsx
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Sidebar from "@/components/sidebar"
 import { motion } from "framer-motion"
@@ -23,6 +22,17 @@ export default function BlogPage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>("All")
   const [searchTerm, setSearchTerm] = useState<string>("")
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkIsMobile()
+    window.addEventListener("resize", checkIsMobile)
+    return () => window.removeEventListener("resize", checkIsMobile)
+  }, [])
 
   const blogPosts = [
     {
@@ -88,6 +98,7 @@ export default function BlogPage() {
         text: "text-red-300",
       },
     }
+
     return (
       map[cat] ?? {
         bg: "from-gray-500/20 to-gray-600/20",
@@ -201,22 +212,27 @@ export default function BlogPage() {
         ::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
         }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 1024px) {
+          .glow-card:hover {
+            transform: none;
+          }
+        }
       `}</style>
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-      
-          <Sidebar active="blog" onToggle={setSidebarCollapsed} />
+        {/* Sidebar */}
+        <Sidebar active="blog" onToggle={setSidebarCollapsed} />
 
-        {/* Main content with dynamic margin */}
+        {/* Main content with responsive margin and centering */}
         <main
-          className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
           style={{
-            marginLeft: "40px", // terniery operation
+            marginLeft: isMobile ? "0" : "40px",
           }}
         >
-          <div className="max-w-6xl">
-
-            
+          <div className={`max-w-6xl mx-auto ${isMobile ? "px-4" : "px-6"}`}>
             {/* Header */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
               <Link
@@ -232,17 +248,17 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-12"
+              className="mb-12 text-center"
             >
-              <div className="flex items-center gap-4 mb-4">
+              <div className={`flex items-center gap-4 mb-4 justify-center`}>
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                   <BookOpen size={24} className="text-white" />
                 </div>
-                <h1 className="text-5xl font-extrabold">
+                <h1 className={`font-extrabold ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
                   <span className="text-gradient-enhanced">Blog</span>
                 </h1>
               </div>
-              <p className="text-xl text-gray-300 leading-relaxed">
+              <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
                 Articles and insights on data science and machine learning
               </p>
             </motion.div>
@@ -252,25 +268,27 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="glow-card rounded-2xl p-6 mb-8"
+              className={`glow-card rounded-xl md:rounded-2xl mb-8 ${isMobile ? "p-4" : "p-6"}`}
             >
-              <div className="flex flex-col md:flex-row gap-4">
+              <div className={`flex gap-3 md:gap-4 ${isMobile ? "flex-col" : "flex-col md:flex-row"}`}>
                 <div className="flex-1 relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <Search
+                    className={`absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 ${isMobile ? "w-4 h-4" : "w-5 h-5"}`}
+                  />
                   <input
                     type="text"
                     placeholder="Search articles…"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
+                    className={`w-full pr-3 md:pr-4 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300 ${isMobile ? "pl-10 py-2.5 text-sm" : "pl-12 py-3"}`}
                   />
                 </div>
-                <div className="flex items-center gap-3">
-                  <Filter className="w-5 h-5 text-gray-400" />
+                <div className="flex items-center gap-2 md:gap-3">
+                  <Filter className={`text-gray-400 ${isMobile ? "w-4 h-4" : "w-5 h-5"}`} />
                   <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
+                    className={`bg-slate-800/50 border border-slate-700/50 rounded-xl text-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300 ${isMobile ? "px-3 py-2.5 text-sm" : "px-4 py-3"}`}
                   >
                     {categories.map((cat) => (
                       <option key={cat} value={cat} className="bg-slate-800">
@@ -280,8 +298,8 @@ export default function BlogPage() {
                   </select>
                 </div>
               </div>
-              <div className="mt-4 pt-4 border-t border-white/10">
-                <p className="text-sm text-gray-400">
+              <div className={`border-t border-white/10 ${isMobile ? "mt-3 pt-3" : "mt-4 pt-4"}`}>
+                <p className={`text-gray-400 ${isMobile ? "text-xs" : "text-sm"}`}>
                   Showing {filteredPosts.length} of {blogPosts.length} articles
                 </p>
               </div>
@@ -295,9 +313,11 @@ export default function BlogPage() {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="mb-12"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <TrendingUp className="w-6 h-6 text-yellow-400" />
-                  <h2 className="text-2xl font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
+                <div className={`flex items-center gap-3 mb-6 justify-center`}>
+                  <TrendingUp className={`text-yellow-400 ${isMobile ? "w-5 h-5" : "w-6 h-6"}`} />
+                  <h2
+                    className={`font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent ${isMobile ? "text-lg" : "text-2xl"}`}
+                  >
                     Featured Article
                   </h2>
                 </div>
@@ -307,49 +327,65 @@ export default function BlogPage() {
                     const colors = getCategoryColor(post.category)
                     return (
                       <Link href={`/blog/${post.slug}`} key={post.id}>
-                        <div className="glow-card rounded-2xl overflow-hidden group cursor-pointer">
-                          <div className="p-8">
-                            <div className="flex flex-col lg:flex-row gap-6">
+                        <div className="glow-card rounded-xl md:rounded-2xl overflow-hidden group cursor-pointer">
+                          <div className={isMobile ? "p-4" : "p-6 md:p-8"}>
+                            <div
+                              className={`gap-4 md:gap-6 ${isMobile ? "flex flex-col" : "flex flex-col lg:flex-row"}`}
+                            >
                               <div className="flex-1">
-                                <div className="flex items-center gap-4 mb-4">
+                                <div
+                                  className={`flex gap-3 md:gap-4 mb-3 md:mb-4 ${isMobile ? "flex-col" : "items-center flex-wrap"}`}
+                                >
                                   <span
-                                    className={`inline-flex items-center bg-gradient-to-r ${colors.bg} border ${colors.border} ${colors.text} text-sm font-medium px-4 py-2 rounded-full`}
+                                    className={`inline-flex items-center bg-gradient-to-r ${colors.bg} border ${colors.border} ${colors.text} font-medium rounded-full ${isMobile ? "text-xs px-3 py-1.5 self-start" : "text-sm px-4 py-2"}`}
                                   >
-                                    <Tag size={14} className="mr-1" />
+                                    <Tag size={isMobile ? 12 : 14} className="mr-1" />
                                     {post.category}
                                   </span>
-                                  <div className="flex items-center gap-4 text-gray-400 text-sm">
+                                  <div
+                                    className={`flex gap-3 md:gap-4 text-gray-400 ${isMobile ? "text-xs flex-wrap" : "text-sm"}`}
+                                  >
                                     <div className="flex items-center gap-1">
-                                      <Calendar size={14} />
+                                      <Calendar size={isMobile ? 12 : 14} />
                                       {post.date}
                                     </div>
                                     <div className="flex items-center gap-1">
-                                      <Clock size={14} />
+                                      <Clock size={isMobile ? 12 : 14} />
                                       {post.readTime}
                                     </div>
                                     <div className="flex items-center gap-1">
-                                      <Eye size={14} />
+                                      <Eye size={isMobile ? 12 : 14} />
                                       {post.views}
                                     </div>
                                   </div>
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-indigo-300 transition-colors duration-300">
+
+                                <h3
+                                  className={`font-bold text-white mb-3 md:mb-4 group-hover:text-indigo-300 transition-colors duration-300 ${isMobile ? "text-lg" : "text-2xl"}`}
+                                >
                                   {post.title}
                                 </h3>
-                                <p className="text-gray-300 leading-relaxed mb-6">{post.description}</p>
+                                <p
+                                  className={`text-gray-300 leading-relaxed mb-4 md:mb-6 ${isMobile ? "text-sm" : "text-base"}`}
+                                >
+                                  {post.description}
+                                </p>
+
                                 <div className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium transition-colors group">
-                                  Read article
+                                  <span className={isMobile ? "text-sm" : "text-base"}>Read article</span>
                                   <ArrowRight
-                                    size={16}
+                                    size={isMobile ? 14 : 16}
                                     className="group-hover:translate-x-1 transition-transform duration-300"
                                   />
                                 </div>
                               </div>
-                              <div className="lg:w-48 flex items-center justify-center">
-                                <div className="w-32 h-32 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center border border-indigo-500/20">
-                                  <FileText size={48} className="text-indigo-400" />
+                              {!isMobile && (
+                                <div className="lg:w-48 flex items-center justify-center">
+                                  <div className="w-32 h-32 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center border border-indigo-500/20">
+                                    <FileText size={48} className="text-indigo-400" />
+                                  </div>
                                 </div>
-                              </div>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -365,7 +401,9 @@ export default function BlogPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent mb-6">
+              <h2
+                className={`font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent mb-6 text-center ${isMobile ? "text-lg" : "text-2xl"}`}
+              >
                 All Articles
               </h2>
               <div className="space-y-6">
@@ -379,28 +417,32 @@ export default function BlogPage() {
                       transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
                     >
                       <Link href={`/blog/${post.slug}`}>
-                        <div className="glow-card rounded-2xl overflow-hidden group cursor-pointer">
-                          <div className="flex flex-col md:flex-row">
+                        <div className="glow-card rounded-xl md:rounded-2xl overflow-hidden group cursor-pointer">
+                          <div className={isMobile ? "flex flex-col" : "flex flex-col md:flex-row"}>
                             {/* Meta */}
-                            <div className="md:w-64 p-6 bg-slate-800/30 border-r border-white/10">
-                              <div className="space-y-4">
+                            <div
+                              className={`bg-slate-800/30 ${isMobile ? "p-4 border-b border-white/10" : "md:w-64 p-6 border-r border-white/10"}`}
+                            >
+                              <div className="space-y-3 md:space-y-4">
                                 <span
-                                  className={`inline-flex items-center bg-gradient-to-r ${colors.bg} border ${colors.border} ${colors.text} text-sm font-medium px-3 py-2 rounded-full`}
+                                  className={`inline-flex items-center bg-gradient-to-r ${colors.bg} border ${colors.border} ${colors.text} font-medium rounded-full ${isMobile ? "text-xs px-2.5 py-1.5" : "text-sm px-3 py-2"}`}
                                 >
-                                  <Tag size={14} className="mr-1" />
+                                  <Tag size={isMobile ? 12 : 14} className="mr-1" />
                                   {post.category}
                                 </span>
-                                <div className="space-y-2 text-gray-400 text-sm">
-                                  <div className="flex items-center gap-2">
-                                    <Calendar size={14} />
+                                <div
+                                  className={`text-gray-400 ${isMobile ? "text-xs space-y-1.5 flex flex-wrap gap-3" : "space-y-2 text-sm"}`}
+                                >
+                                  <div className="flex items-center gap-1.5 md:gap-2">
+                                    <Calendar size={isMobile ? 12 : 14} />
                                     {post.date}
                                   </div>
-                                  <div className="flex items-center gap-2">
-                                    <Clock size={14} />
+                                  <div className="flex items-center gap-1.5 md:gap-2">
+                                    <Clock size={isMobile ? 12 : 14} />
                                     {post.readTime}
                                   </div>
-                                  <div className="flex items-center gap-2">
-                                    <Eye size={14} />
+                                  <div className="flex items-center gap-1.5 md:gap-2">
+                                    <Eye size={isMobile ? 12 : 14} />
                                     {post.views} views
                                   </div>
                                 </div>
@@ -408,15 +450,22 @@ export default function BlogPage() {
                             </div>
 
                             {/* Content */}
-                            <div className="flex-1 p-6">
-                              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300">
+                            <div className={`flex-1 ${isMobile ? "p-4" : "p-6"}`}>
+                              <h3
+                                className={`font-bold text-white mb-2 md:mb-3 group-hover:text-indigo-300 transition-colors duration-300 ${isMobile ? "text-base" : "text-xl"}`}
+                              >
                                 {post.title}
                               </h3>
-                              <p className="text-gray-300 leading-relaxed mb-4">{post.description}</p>
+                              <p
+                                className={`text-gray-300 leading-relaxed mb-3 md:mb-4 ${isMobile ? "text-sm" : "text-base"}`}
+                              >
+                                {post.description}
+                              </p>
+
                               <div className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium transition-colors group">
-                                Read article
+                                <span className={isMobile ? "text-sm" : "text-base"}>Read article</span>
                                 <ArrowRight
-                                  size={16}
+                                  size={isMobile ? 14 : 16}
                                   className="group-hover:translate-x-1 transition-transform duration-300"
                                 />
                               </div>
@@ -434,11 +483,13 @@ export default function BlogPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
-                  className="glow-card rounded-2xl p-12 text-center"
+                  className={`glow-card rounded-xl md:rounded-2xl text-center ${isMobile ? "p-8" : "p-12"}`}
                 >
-                  <Search className="w-16 h-16 text-gray-400 mb-4" />
-                  <h3 className="text-xl font-bold text-white mb-2">No articles found</h3>
-                  <p className="text-gray-400">Try adjusting your search terms or category filter.</p>
+                  <Search className={`text-gray-400 mb-3 md:mb-4 mx-auto ${isMobile ? "w-12 h-12" : "w-16 h-16"}`} />
+                  <h3 className={`font-bold text-white mb-2 ${isMobile ? "text-lg" : "text-xl"}`}>No articles found</h3>
+                  <p className={`text-gray-400 ${isMobile ? "text-sm" : "text-base"}`}>
+                    Try adjusting your search terms or category filter.
+                  </p>
                 </motion.div>
               )}
             </motion.section>

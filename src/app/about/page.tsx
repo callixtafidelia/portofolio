@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Sidebar from "@/components/sidebar"
 import { motion } from "framer-motion"
@@ -8,6 +8,17 @@ import { ArrowLeft, Download, GraduationCap, Award, Calendar, MapPin } from "luc
 
 export default function AboutMe() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkIsMobile()
+    window.addEventListener("resize", checkIsMobile)
+    return () => window.removeEventListener("resize", checkIsMobile)
+  }, [])
 
   const coursework = [
     "Machine Learning",
@@ -161,22 +172,27 @@ export default function AboutMe() {
         ::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
         }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+          .glow-card:hover {
+            transform: none;
+          }
+        }
       `}</style>
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-      
-          <Sidebar active="about" onToggle={setSidebarCollapsed} />
+        {/* Sidebar */}
+        <Sidebar active="about" onToggle={setSidebarCollapsed} />
 
-        {/* Main content with dynamic margin */}
+        {/* Main content with responsive margin */}
         <main
-          className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
           style={{
-            marginLeft: "40px", // terniery operation
+            marginLeft: isMobile ? "0" : "40px", // No margin on mobile, fixed 40px on desktop
           }}
         >
-          <div className="max-w-6xl">
-
-
+          <div className={`max-w-6xl mx-auto ${isMobile ? "px-4" : "px-6"}`}>
             {/* Back to Home */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
               <Link
@@ -193,49 +209,56 @@ export default function AboutMe() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-12"
+              className="mb-12 text-center"
             >
-              <h1 className="text-5xl font-extrabold mb-4">
-                About <span className="text-gradient-enhanced">Me</span>
-              </h1>
-              <p className="text-xl text-gray-300 leading-relaxed">
+              <div className={`flex items-center gap-4 mb-4 justify-center`}>
+                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                  <GraduationCap size={24} className="text-white" />
+                </div>
+                <h1 className={`font-extrabold ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
+                  About <span className="text-gradient-enhanced">Me</span>
+                </h1>
+              </div>
+              <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
                 My background, education, and journey in data science
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className={`grid gap-6 md:gap-8 ${isMobile ? "grid-cols-1" : "grid-cols-1 lg:grid-cols-3"}`}>
               {/* Story Section */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="lg:col-span-2"
+                className={isMobile ? "" : "lg:col-span-2"}
               >
-                <div className="glow-card rounded-2xl p-8 space-y-6">
-                  <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
+                <div
+                  className={`glow-card rounded-xl md:rounded-2xl space-y-4 md:space-y-6 ${isMobile ? "p-4" : "p-4 md:p-8"}`}
+                >
+                  <h2
+                    className={`font-bold mb-4 md:mb-6 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent ${isMobile ? "text-xl" : "text-xl md:text-3xl"}`}
+                  >
                     My Story
                   </h2>
-
-                  <div className="space-y-6 text-gray-300 leading-relaxed">
+                  <div
+                    className={`space-y-4 md:space-y-6 text-gray-300 leading-relaxed ${isMobile ? "text-sm" : "text-sm md:text-base"}`}
+                  >
                     <p>
                       I'm a dedicated Data Science student with a passion for transforming complex datasets into
                       actionable insights that drive meaningful business decisions. My journey began with curiosity
                       about how data shapes our world and has evolved into a comprehensive skill set spanning
                       statistical analysis, machine learning, and data visualization.
                     </p>
-
                     <p>
                       Through rigorous coursework and hands-on personal projects, I've developed expertise in Python, R,
                       SQL, and various machine learning frameworks. I particularly enjoy working with predictive
                       modeling and finding patterns in seemingly chaotic data that can inform strategic decisions.
                     </p>
-
                     <p>
                       My approach combines technical rigor with creative problem-solving, always keeping the end user
                       and business impact in mind. I believe that the best data science work not only achieves high
                       accuracy but also tells a compelling story that stakeholders can understand and act upon.
                     </p>
-
                     <p>
                       When I'm not working with data, you can find me exploring new technologies, contributing to
                       open-source projects, or sharing my knowledge through blog posts and community presentations. I'm
@@ -244,55 +267,71 @@ export default function AboutMe() {
                   </div>
 
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={isMobile ? {} : { scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="btn-glow inline-flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-purple-600 px-8 py-4 rounded-xl text-white font-semibold text-lg shadow-2xl shadow-indigo-500/25 transition-all duration-300 hover:shadow-indigo-500/40 mt-8"
+                    className={`btn-glow inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-2xl shadow-indigo-500/25 transition-all duration-300 hover:shadow-indigo-500/40 rounded-xl mt-6 md:mt-8 ${isMobile ? "px-6 py-3 text-base" : "px-6 md:px-8 py-3 md:py-4 text-base md:text-lg"}`}
                   >
-                    <Download size={22} />
+                    <Download size={18} className="md:w-6 md:h-6" />
                     Download Resume
                   </motion.button>
                 </div>
               </motion.div>
 
               {/* Sidebar Info */}
-              <div className="space-y-6">
+              <div className="space-y-4 md:space-y-6">
                 {/* Education */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="glow-card rounded-2xl p-6"
+                  className={`glow-card rounded-xl md:rounded-2xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                 >
-                  <div className="flex items-center mb-6 gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30">
-                      <GraduationCap size={24} className="text-white" />
+                  <div className="flex items-center mb-4 md:mb-6 gap-2 md:gap-3">
+                    <div
+                      className={`bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 ${isMobile ? "w-10 h-10" : "w-10 h-10 md:w-12 md:h-12"}`}
+                    >
+                      <GraduationCap size={20} className="md:w-6 md:h-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                    <h3
+                      className={`font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent ${isMobile ? "text-lg" : "text-lg md:text-xl"}`}
+                    >
                       Education
                     </h3>
                   </div>
-
-                  <div className="space-y-4">
+                  <div className="space-y-3 md:space-y-4">
                     <div>
-                      <h4 className="font-semibold text-white mb-2">Bachelor of Science in Data Science</h4>
-                      <div className="flex items-center gap-2 text-gray-400 text-sm mb-3">
-                        <MapPin size={14} />
-                        <span>University Name</span>
-                        <Calendar size={14} />
-                        <span>Expected 2025</span>
+                      <h4 className={`font-semibold text-white mb-2 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}>
+                        Bachelor of Science in Data Science
+                      </h4>
+                      <div
+                        className={`flex gap-2 md:gap-4 text-gray-400 mb-2 md:mb-3 ${isMobile ? "flex-col text-xs" : "flex-col sm:flex-row sm:items-center text-xs md:text-sm"}`}
+                      >
+                        <div className="flex items-center gap-1">
+                          <MapPin size={12} className="md:w-3.5 md:h-3.5" />
+                          <span>University Name</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Calendar size={12} className="md:w-3.5 md:h-3.5" />
+                          <span>Expected 2025</span>
+                        </div>
                       </div>
-                      <span className="inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 text-xs px-3 py-1 rounded-full">
+                      <span
+                        className={`inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 font-medium rounded-full ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}
+                      >
                         GPA 3.8/4.0
                       </span>
                     </div>
-
-                    <div className="pt-4 border-t border-white/10">
-                      <h5 className="font-medium text-white mb-3">Relevant Coursework</h5>
-                      <div className="flex flex-wrap gap-2">
+                    <div className="pt-3 md:pt-4 border-t border-white/10">
+                      <h5
+                        className={`font-medium text-white mb-2 md:mb-3 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}
+                      >
+                        Relevant Coursework
+                      </h5>
+                      <div className="flex flex-wrap gap-1.5 md:gap-2">
                         {coursework.map((course, i) => (
                           <span
                             key={i}
-                            className="bg-slate-800/50 border border-slate-700/50 text-slate-300 text-xs px-3 py-1 rounded-full hover:bg-slate-700/50 transition-colors duration-300"
+                            className={`bg-slate-800/50 border border-slate-700/50 text-slate-300 font-medium rounded-full hover:bg-slate-700/50 transition-colors duration-300 ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}
                           >
                             {course}
                           </span>
@@ -307,25 +346,32 @@ export default function AboutMe() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
-                  className="glow-card rounded-2xl p-6"
+                  className={`glow-card rounded-xl md:rounded-2xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                 >
-                  <div className="flex items-center mb-6 gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30">
-                      <Award size={24} className="text-white" />
+                  <div className="flex items-center mb-4 md:mb-6 gap-2 md:gap-3">
+                    <div
+                      className={`bg-gradient-to-br from-purple-500 to-purple-700 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30 ${isMobile ? "w-10 h-10" : "w-10 h-10 md:w-12 md:h-12"}`}
+                    >
+                      <Award size={20} className="md:w-6 md:h-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                    <h3
+                      className={`font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent ${isMobile ? "text-lg" : "text-lg md:text-xl"}`}
+                    >
                       Certifications
                     </h3>
                   </div>
-
-                  <div className="space-y-4">
+                  <div className="space-y-3 md:space-y-4">
                     {certifications.map((cert, i) => (
                       <div
                         key={i}
-                        className={`border-l-4 pl-4 ${cert.color === "blue" ? "border-blue-500" : "border-purple-500"}`}
+                        className={`border-l-4 pl-3 md:pl-4 ${cert.color === "blue" ? "border-blue-500" : "border-purple-500"}`}
                       >
-                        <h4 className="font-semibold text-white mb-1">{cert.title}</h4>
-                        <p className="text-gray-400 text-sm">
+                        <h4
+                          className={`font-semibold text-white mb-1 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}
+                        >
+                          {cert.title}
+                        </h4>
+                        <p className={`text-gray-400 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
                           {cert.issuer} • {cert.year}
                         </p>
                       </div>
@@ -338,16 +384,22 @@ export default function AboutMe() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
-                  className="relative overflow-hidden rounded-2xl"
+                  className="relative overflow-hidden rounded-xl md:rounded-2xl"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-500 opacity-90"></div>
-                  <div className="relative p-6 text-white">
-                    <h3 className="text-lg font-bold mb-4">Quick Stats</h3>
-                    <div className="space-y-3">
+                  <div className={`relative text-white ${isMobile ? "p-4" : "p-4 md:p-6"}`}>
+                    <h3 className={`font-bold mb-3 md:mb-4 ${isMobile ? "text-base" : "text-base md:text-lg"}`}>
+                      Quick Stats
+                    </h3>
+                    <div className="space-y-2 md:space-y-3">
                       {quickStats.map((stat, i) => (
                         <div key={i} className="flex justify-between items-center">
-                          <span className="text-indigo-100 text-sm">{stat.label}</span>
-                          <span className="font-bold text-lg">{stat.value}</span>
+                          <span className={`text-indigo-100 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
+                            {stat.label}
+                          </span>
+                          <span className={`font-bold ${isMobile ? "text-base" : "text-base md:text-lg"}`}>
+                            {stat.value}
+                          </span>
                         </div>
                       ))}
                     </div>

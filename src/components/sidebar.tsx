@@ -143,6 +143,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
 
         <div
           className={`
+            neue-montreal
             flex flex-col h-full bg-slate-900/90 backdrop-blur-xl border-r border-white/10 shadow-2xl
             transition-all duration-300 ease-in-out
             overflow-hidden
@@ -166,15 +167,15 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
           <div className="flex-shrink-0 p-6 border-b border-white/10 flex flex-col items-center">
             <div className="profile-avatar w-16 h-16 rounded-xl shadow-xl shadow-indigo-500/40 ring-2 ring-blue-500/50">
               <div className="overflow-hidden rounded-xl w-full h-full">
-                <img src="./photo.jpg" alt="Callixta Fidelia C" className="w-full h-full object-cover" />
+                <img src="./photo.jpg" className="w-full h-full object-cover" />
               </div>
             </div>
             {!collapsed && (
               <>
-                <h2 className="mt-4 text-xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent text-center">
+                <h2 className="neue-montreal mt-4 text-xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent text-center">
                   Callixta Fidelia C
                 </h2>
-                <p className="text-slate-400 text-sm mt-1 text-center">Data Scientist</p>
+                <p className="neue-montreal text-slate-400 text-sm mt-1 text-center">Data Scientist</p>
               </>
             )}
           </div>
@@ -189,7 +190,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
                   href={href}
                   className={`
                     nav-link-glow flex items-center gap-3 px-4 py-3 rounded-xl 
-                    transition-all duration-300 group
+                    transition-all duration-300 group neue-montreal
                     ${collapsed ? "justify-center" : ""}
                     ${
                       isActive
@@ -217,7 +218,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
               href="https://github.com/your-username"
               target="_blank"
               rel="noopener noreferrer"
-              className={`social-link-glow flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group ${
+              className={`social-link-glow flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group neue-montreal ${
                 collapsed ? "justify-center" : ""
               }`}
               title={collapsed ? "GitHub" : undefined}
@@ -229,7 +230,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
               href="https://linkedin.com/in/your-profile"
               target="_blank"
               rel="noopener noreferrer"
-              className={`social-link-glow flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group ${
+              className={`social-link-glow flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group neue-montreal ${
                 collapsed ? "justify-center" : ""
               }`}
               title={collapsed ? "LinkedIn" : undefined}
@@ -242,7 +243,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
           {/* Footer */}
           {!collapsed && (
             <div className="flex-shrink-0 p-4 text-center">
-              <p className="text-slate-500 text-xs">&copy; {new Date().getFullYear()} Callixta Fidelia C</p>
+              <p className="text-slate-500 text-xs neue-montreal">&copy; {new Date().getFullYear()} Callixta Fidelia C</p>
             </div>
           )}
         </div>
@@ -333,17 +334,16 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
       `}</style>
 
       {/* Mobile Top Bar */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-white/10">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-white/10 neue-montreal">
         <div className="flex items-center justify-between px-4 py-3">
           {/* Logo/Name */}
           <Link href="/" className="flex items-center gap-3">
             <div className="profile-avatar-mobile w-10 h-10 rounded-lg shadow-lg shadow-indigo-500/40 ring-2 ring-blue-500/50">
               <div className="overflow-hidden rounded-lg w-full h-full">
-                <img src="./photo.jpg" alt="Callixta Fidelia C" className="w-full h-full object-cover" />
+                <img src="./photo.jpg" className="w-full h-full object-cover" />
               </div>
             </div>
             <span className="text-white bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-              Callixta Fidelia C
             </span>
           </Link>
 
@@ -365,7 +365,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-slate-900/98 backdrop-blur-xl border-l border-white/10 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
+        className={`lg:hidden fixed top-0 right-0 h-full w-80 bg-slate-900/98 backdrop-blur-xl border-l border-white/10 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col neue-montreal ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -379,10 +379,10 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
                 </div>
               </div>
               <div>
-                <h3 className="text-white font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                <h3 className="text-white font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent neue-montreal">
                   Callixta Fidelia C
                 </h3>
-                <p className="text-slate-400 text-sm">Data Scientist</p>
+                <p className="text-slate-400 text-sm neue-montreal">Data Scientist</p>
               </div>
             </div>
             <button
@@ -405,7 +405,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
                 onClick={closeMobileMenu}
                 className={`
                   nav-link-glow-mobile flex items-center gap-3 px-4 py-4 rounded-xl 
-                  transition-all duration-300 group
+                  transition-all duration-300 group neue-montreal
                   ${
                     isActive
                       ? "text-white bg-gradient-to-r from-indigo-500/20 to-blue-500/20 border border-indigo-400/30 shadow-lg shadow-indigo-500/20"
@@ -431,7 +431,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
             href="https://github.com/your-username"
             target="_blank"
             rel="noopener noreferrer"
-            className="social-link-glow-mobile flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group"
+            className="social-link-glow-mobile flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group neue-montreal"
           >
             <Github size={20} className="group-hover:text-blue-400 transition-colors duration-300" />
             <span>GitHub</span>
@@ -440,7 +440,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
             href="https://linkedin.com/in/your-profile"
             target="_blank"
             rel="noopener noreferrer"
-            className="social-link-glow-mobile flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group"
+            className="social-link-glow-mobile flex items-center gap-3 px-4 py-3 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group neue-montreal"
           >
             <Linkedin size={20} className="group-hover:text-blue-400 transition-colors duration-300" />
             <span>LinkedIn</span>
@@ -448,7 +448,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
 
           {/* Mobile Footer */}
           <div className="pt-4 text-center">
-            <p className="text-slate-500 text-sm">&copy; {new Date().getFullYear()} Callixta Fidelia C</p>
+            <p className="text-slate-500 text-sm neue-montreal">&copy; {new Date().getFullYear()} Callixta Fidelia C</p>
           </div>
         </div>
       </div>
