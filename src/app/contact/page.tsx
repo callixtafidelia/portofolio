@@ -1,15 +1,13 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
-import Link from "next/link"
+import { useState, useEffect } from "react"
+import { Mail, Linkedin, Github, MapPin } from "lucide-react"
 import Sidebar from "@/components/sidebar"
-import { motion } from "framer-motion"
-import { Mail, Linkedin, Github, ArrowLeft, Send, MapPin, MessageCircle, ExternalLink } from "lucide-react"
 
 export default function ContactPage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,6 +15,16 @@ export default function ContactPage() {
     message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkIsMobile()
+    window.addEventListener("resize", checkIsMobile)
+    return () => window.removeEventListener("resize", checkIsMobile)
+  }, [])
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -33,7 +41,6 @@ export default function ContactPage() {
     setIsSubmitting(true)
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1000))
-
     console.log("Submitting:", formData)
     alert("Thank you! I'll get back to you soon.")
     setFormData({ name: "", email: "", subject: "", message: "" })
@@ -155,286 +162,128 @@ export default function ContactPage() {
         }
         
         .glow-card:hover {
-          transform: translateY(-4px);
+          transform: translateY(-5px);
           border-color: rgba(102, 126, 234, 0.3);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn-glow {
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .btn-glow::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-          transition: left 0.5s ease;
-        }
-        
-        .btn-glow:hover::before {
-          left: 100%;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-          width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background: rgba(15, 23, 42, 0.5);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
         }
       `}</style>
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-
         <Sidebar active="contact" onToggle={setSidebarCollapsed} />
 
-        {/* Main content with dynamic margin */}
+        {/* Main content with responsive margin and proper mobile spacing */}
         <main
-          className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto relative transition-all duration-300 ease-in-out"
           style={{
-            marginLeft: "40px", // terniery operation
+            marginLeft: isMobile ? "0" : "40px",
+            paddingTop: isMobile ? "80px" : "32px", // Extra top padding on mobile
+            paddingBottom: "32px",
           }}
         >
-          <div className="max-w-6xl">
-
-            
-            {/* Header */}
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-8 transition-all duration-300 hover:translate-x-1 group"
-              >
-                <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform duration-300" />
-                <span>Back to Home</span>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-12"
-            >
-              <div className="flex items-center gap-4 mb-4">
+          <div className={`max-w-6xl mx-auto ${isMobile ? "px-4" : "px-6"}`}>
+            {/* Header with extra mobile spacing */}
+            <div className={`mb-12 text-center ${isMobile ? "mt-4" : ""}`}>
+              <div className={`flex items-center gap-4 mb-4 justify-center`}>
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <MessageCircle size={24} className="text-white" />
+                  <Mail size={24} className="text-white" />
                 </div>
-                <h1 className="text-5xl font-extrabold">
+                <h1 className={`font-extrabold ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
                   <span className="text-gradient-enhanced">Contact Me</span>
                 </h1>
               </div>
-              <p className="text-xl text-gray-300 leading-relaxed">
-                Let's connect and discuss opportunities, collaborations, or just have a chat about data science
+              <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
+                Let's connect and discuss opportunities in data science
               </p>
-            </motion.div>
-
-            <div className="grid lg:grid-cols-2 gap-8">
-              {/* Contact Methods */}
-              <motion.section
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="space-y-6"
-              >
-                <div className="glow-card rounded-2xl p-8">
-                  <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
-                    Get in Touch
-                  </h2>
-                  <div className="space-y-4">
-                    {contactMethods.map((method, index) => {
-                      const Icon = method.icon
-                      return (
-                        <motion.a
-                          key={method.title}
-                          href={method.href}
-                          target={method.href.startsWith("http") ? "_blank" : undefined}
-                          rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                          className="flex items-center p-4 bg-slate-800/30 border border-slate-700/30 rounded-xl hover:bg-slate-700/30 transition-all duration-300 group cursor-pointer"
-                        >
-                          <div
-                            className={`w-12 h-12 bg-gradient-to-br ${method.color} rounded-xl flex items-center justify-center shadow-lg mr-4 group-hover:scale-110 transition-transform duration-300`}
-                            style={{ boxShadow: `0 10px 30px ${method.glowColor}` }}
-                          >
-                            <Icon size={24} className="text-white" />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-white mb-1 group-hover:text-indigo-300 transition-colors duration-300">
-                              {method.title}
-                            </h3>
-                            <p className="text-gray-400 text-sm">{method.value}</p>
-                          </div>
-                          {method.href.startsWith("http") && (
-                            <ExternalLink
-                              size={16}
-                              className="text-gray-400 group-hover:text-indigo-400 transition-colors duration-300"
-                            />
-                          )}
-                        </motion.a>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                {/* Quick Info */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                  className="glow-card rounded-2xl p-8"
-                >
-                  <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
-                    Let's Collaborate
-                  </h3>
-                  <div className="space-y-3 text-gray-300">
-                    <p className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></span>
-                      Available for data science projects and consulting
-                    </p>
-                    <p className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></span>
-                      Open to full-time and freelance opportunities
-                    </p>
-                    <p className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></span>
-                      Interested in machine learning research collaborations
-                    </p>
-                    <p className="flex items-start gap-2">
-                      <span className="w-2 h-2 bg-pink-400 rounded-full mt-2 flex-shrink-0"></span>
-                      Happy to mentor aspiring data scientists
-                    </p>
-                  </div>
-                </motion.div>
-              </motion.section>
-
-              {/* Contact Form */}
-              <motion.section
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="glow-card rounded-2xl p-8"
-              >
-                <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
-                  Send a Message
-                </h2>
-                <div className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={handleInput}
-                      placeholder="Your name"
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInput}
-                      placeholder="your.email@example.com"
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                      Subject
-                    </label>
-                    <input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      value={formData.subject}
-                      onChange={handleInput}
-                      placeholder="What's this about?"
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInput}
-                      rows={5}
-                      placeholder="Tell me about your project or idea..."
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300 resize-none"
-                    />
-                  </div>
-                  <motion.button
-                    onClick={handleSubmit}
-                    disabled={isSubmitting}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`btn-glow w-full flex items-center justify-center gap-3 py-4 px-6 rounded-xl font-semibold text-lg shadow-2xl transition-all duration-300 ${
-                      isSubmitting
-                        ? "bg-gray-600 cursor-not-allowed"
-                        : "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 shadow-indigo-500/25 hover:shadow-indigo-500/40"
-                    }`}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send size={20} />
-                        Send Message
-                      </>
-                    )}
-                  </motion.button>
-                </div>
-              </motion.section>
             </div>
 
-            {/* Footer Message */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="mt-12 text-center"
+            {/* Contact Methods */}
+            <div
+              className={`grid gap-6 mb-12 ${isMobile ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-2 lg:grid-cols-4"}`}
             >
-              <div className="glow-card rounded-2xl p-8">
-                <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
-                  Looking forward to hearing from you!
-                </h3>
-                <p className="text-gray-300 leading-relaxed max-w-2xl">
-                  Whether you have a project in mind, want to discuss data science trends, or just want to connect, I'm
-                  always excited to meet new people and explore interesting opportunities.
-                </p>
+              {contactMethods.map((method, index) => {
+                const IconComponent = method.icon
+                return (
+                  <a
+                    key={index}
+                    href={method.href}
+                    target={method.href.startsWith("http") ? "_blank" : "_self"}
+                    rel={method.href.startsWith("http") ? "noopener noreferrer" : ""}
+                    className="glow-card rounded-2xl p-6 text-center group cursor-pointer block"
+                  >
+                    <div
+                      className={`w-16 h-16 bg-gradient-to-br ${method.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg`}
+                      style={{ boxShadow: `0 10px 30px ${method.glowColor}` }}
+                    >
+                      <IconComponent size={28} className="text-white" />
+                    </div>
+                    <h3 className="font-semibold text-white mb-2 group-hover:text-indigo-300 transition-colors duration-300">
+                      {method.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm break-words">{method.value}</p>
+                  </a>
+                )
+              })}
+            </div>
+
+            {/* Contact Form */}
+            <div className="glow-card rounded-2xl p-8">
+              <h2 className="text-2xl font-bold text-white mb-6 text-center">Send a Message</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInput}
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInput}
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInput}
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
+                    placeholder="What's this about?"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInput}
+                    rows={6}
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 resize-none"
+                    placeholder="Tell me about your project or opportunity..."
+                  />
+                </div>
+                <div className="md:col-span-2 text-center">
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                    className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium rounded-lg shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </button>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </main>
       </div>

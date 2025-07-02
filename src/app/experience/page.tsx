@@ -1,7 +1,6 @@
-// app/experience/page.tsx
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Sidebar from "@/components/sidebar"
 import { motion } from "framer-motion"
@@ -9,6 +8,17 @@ import { MapPin, Calendar, ArrowLeft, Briefcase, Clock, Star } from "lucide-reac
 
 export default function ExperiencePage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkIsMobile()
+    window.addEventListener("resize", checkIsMobile)
+    return () => window.removeEventListener("resize", checkIsMobile)
+  }, [])
 
   const experiences = [
     {
@@ -136,7 +146,6 @@ export default function ExperiencePage() {
           }
         }
         
-        
         @keyframes timelineGlow {
           0%, 100% { 
             box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
@@ -192,7 +201,6 @@ export default function ExperiencePage() {
           animation: timelineGlow 3s ease-in-out infinite;
         }
         
-        
         /* Custom scrollbar */
         ::-webkit-scrollbar {
           width: 8px;
@@ -210,53 +218,61 @@ export default function ExperiencePage() {
         ::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
         }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 1024px) {
+          .glow-card:hover {
+            transform: none;
+          }
+        }
       `}</style>
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-      
+        {/* Sidebar */}
         <Sidebar active="exp" onToggle={setSidebarCollapsed} />
 
-        {/* Main content with dynamic margin */}
+        {/* Main content with responsive margin */}
         <main
-          className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
           style={{
-            marginLeft: "40px", // terniery operation
+            marginLeft: isMobile ? "0" : "40px", // No margin on mobile, fixed 40px on desktop
           }}
         >
-          <div className="max-w-6xl">
+          <div className={`max-w-6xl mx-auto ${isMobile ? "px-4" : "px-6"}`}>
             {/* Header */}
-            <div className="mb-12">
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-6 transition-all duration-300 hover:translate-x-1 group"
-                >
-                  <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform duration-300" />
-                  <span>Back to Home</span>
-                </Link>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 mb-8 transition-all duration-300 hover:translate-x-1 group"
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                    <Briefcase size={24} className="text-white" />
-                  </div>
-                  <h1 className="text-5xl font-extrabold">
-                    <span className="text-gradient-enhanced">Experience</span>
-                  </h1>
+                <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform duration-300" />
+                <span>Back to Home</span>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-12 text-center"
+            >
+              <div className={`flex items-center gap-4 mb-4 justify-center`}>
+                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                  <Briefcase size={24} className="text-white" />
                 </div>
-                <p className="text-xl text-gray-300 leading-relaxed">My professional journey and work experience</p>
-              </motion.div>
-            </div>
+                <h1 className={`font-extrabold ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
+                  <span className="text-gradient-enhanced">Experience</span>
+                </h1>
+              </div>
+              <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
+                My professional journey and work experience
+              </p>
+            </motion.div>
 
             {/* Timeline */}
             <div className="relative">
-              {/* Enhanced Vertical line */}
-              <div className="absolute left-8 top-0 bottom-0 w-1 timeline-line rounded-full"></div>
+              {/* Vertical line - Responsive positioning */}
+              <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 md:w-1 timeline-line rounded-full"></div>
 
               {experiences.map((exp, index) => {
                 const colors = getTypeColor(exp.type)
@@ -266,78 +282,105 @@ export default function ExperiencePage() {
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.2 }}
-                    className="relative mb-12 last:mb-0"
+                    className="relative mb-8 md:mb-12 last:mb-0"
                   >
-                    {/* Enhanced Dot */}
-                    <div className="absolute left-6 w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full border-4 border-slate-900 shadow-2xl shadow-indigo-500/50 z-10"></div>
+                    {/* Timeline Dot - Responsive sizing */}
+                    <div className="absolute left-2.5 md:left-6 w-4 h-4 md:w-6 md:h-6 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full border-2 md:border-4 border-slate-900 shadow-2xl shadow-indigo-500/50 z-10"></div>
 
-                    {/* Enhanced Card */}
-                    <div className="ml-20">
-                      <div className="glow-card rounded-2xl p-8 group cursor-pointer">
-                        {/* Title & Company */}
-                        <div className="flex justify-between items-start mb-6">
-                          <div>
-                            <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors duration-300">
+                    {/* Card - Responsive margins and padding */}
+                    <div className="ml-10 md:ml-20">
+                      <div
+                        className={`glow-card rounded-xl md:rounded-2xl group cursor-pointer ${isMobile ? "p-4" : "p-4 md:p-8"}`}
+                      >
+                        {/* Title & Company - Responsive layout */}
+                        <div
+                          className={`flex gap-3 mb-4 md:mb-6 ${isMobile ? "flex-col" : "flex-col md:flex-row md:justify-between md:items-start"}`}
+                        >
+                          <div className="flex-1">
+                            <h3
+                              className={`font-bold text-white mb-1 md:mb-2 group-hover:text-indigo-300 transition-colors duration-300 leading-tight ${isMobile ? "text-lg" : "text-xl md:text-2xl"}`}
+                            >
                               {exp.title}
                             </h3>
-                            <h4 className="text-xl font-semibold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                            <h4
+                              className={`font-semibold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent ${isMobile ? "text-base" : "text-lg md:text-xl"}`}
+                            >
                               {exp.company}
                             </h4>
                           </div>
-                          <div className="flex gap-2">
+
+                          {/* Tags - Responsive stacking */}
+                          <div className={`flex gap-2 ${isMobile ? "flex-wrap" : "flex-wrap md:flex-nowrap"}`}>
                             {exp.current && (
-                              <span className="inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 text-sm font-medium px-4 py-2 rounded-full">
-                                <Clock size={14} className="mr-1" />
+                              <span
+                                className={`inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 font-medium rounded-full ${isMobile ? "text-xs px-3 py-1.5" : "text-xs md:text-sm px-3 md:px-4 py-1.5 md:py-2"}`}
+                              >
+                                <Clock size={12} className="md:w-3.5 md:h-3.5 mr-1" />
                                 Current
                               </span>
                             )}
                             <span
-                              className={`inline-flex items-center bg-gradient-to-r ${colors.bg} border ${colors.border} ${colors.text} text-sm font-medium px-4 py-2 rounded-full capitalize`}
+                              className={`inline-flex items-center bg-gradient-to-r ${colors.bg} border ${colors.border} ${colors.text} font-medium rounded-full capitalize ${isMobile ? "text-xs px-3 py-1.5" : "text-xs md:text-sm px-3 md:px-4 py-1.5 md:py-2"}`}
                             >
                               {exp.type}
                             </span>
                           </div>
                         </div>
 
-                        {/* Location & Duration */}
-                        <div className="flex flex-wrap gap-6 mb-6 text-gray-400">
+                        {/* Location & Duration - Responsive layout */}
+                        <div
+                          className={`flex gap-3 md:gap-6 mb-4 md:mb-6 text-gray-400 ${isMobile ? "flex-col text-sm" : "flex-col sm:flex-row sm:flex-wrap text-sm md:text-base"}`}
+                        >
                           <div className="flex items-center gap-2">
-                            <MapPin size={16} className="text-indigo-400" />
+                            <MapPin size={14} className="md:w-4 md:h-4 text-indigo-400 flex-shrink-0" />
                             <span>{exp.location}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Calendar size={16} className="text-purple-400" />
+                            <Calendar size={14} className="md:w-4 md:h-4 text-purple-400 flex-shrink-0" />
                             <span>{exp.duration}</span>
                           </div>
                         </div>
 
-                        {/* Description */}
-                        <p className="text-gray-300 mb-6 leading-relaxed text-lg">{exp.description}</p>
+                        {/* Description - Responsive text size */}
+                        <p
+                          className={`text-gray-300 mb-4 md:mb-6 leading-relaxed ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}
+                        >
+                          {exp.description}
+                        </p>
 
-                        {/* Achievements */}
-                        <div className="mb-6">
-                          <h5 className="text-white font-semibold mb-3 flex items-center gap-2">
-                            <Star size={16} className="text-yellow-400" />
+                        {/* Achievements - Responsive spacing */}
+                        <div className="mb-4 md:mb-6">
+                          <h5
+                            className={`text-white font-semibold mb-2 md:mb-3 flex items-center gap-2 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}
+                          >
+                            <Star size={14} className="md:w-4 md:h-4 text-yellow-400" />
                             Key Achievements
                           </h5>
-                          <ul className="space-y-2">
+                          <ul className="space-y-1.5 md:space-y-2">
                             {exp.achievements.map((achievement, i) => (
-                              <li key={i} className="text-gray-300 flex items-start gap-2">
-                                <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full mt-2 flex-shrink-0"></span>
+                              <li
+                                key={i}
+                                className={`text-gray-300 flex items-start gap-2 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}
+                              >
+                                <span className="w-1 h-1 md:w-1.5 md:h-1.5 bg-indigo-400 rounded-full mt-1.5 md:mt-2 flex-shrink-0"></span>
                                 {achievement}
                               </li>
                             ))}
                           </ul>
                         </div>
 
-                        {/* Skills */}
+                        {/* Skills - Responsive grid */}
                         <div>
-                          <h5 className="text-white font-semibold mb-3">Technologies & Skills</h5>
-                          <div className="flex flex-wrap gap-2">
+                          <h5
+                            className={`text-white font-semibold mb-2 md:mb-3 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}
+                          >
+                            Technologies & Skills
+                          </h5>
+                          <div className="flex flex-wrap gap-1.5 md:gap-2">
                             {exp.skills.map((skill, i) => (
                               <span
                                 key={i}
-                                className="bg-slate-800/50 border border-slate-700/50 text-slate-300 text-sm font-medium px-4 py-2 rounded-full hover:bg-slate-700/50 hover:border-indigo-500/30 hover:text-indigo-300 transition-all duration-300"
+                                className={`bg-slate-800/50 border border-slate-700/50 text-slate-300 font-medium rounded-full hover:bg-slate-700/50 hover:border-indigo-500/30 hover:text-indigo-300 transition-all duration-300 ${isMobile ? "text-xs px-2.5 py-1.5" : "text-xs md:text-sm px-2.5 md:px-4 py-1.5 md:py-2"}`}
                               >
                                 {skill}
                               </span>
@@ -351,23 +394,29 @@ export default function ExperiencePage() {
               })}
             </div>
 
-            {/* Enhanced Footer */}
+            {/* Footer - Responsive spacing and text */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="mt-16"
+              className="mt-12 md:mt-16"
             >
-              <div className="glow-card rounded-2xl p-8 text-center">
-                <div className="mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-2xl shadow-indigo-500/40">
-                    <Star size={28} className="text-white" />
+              <div className={`glow-card rounded-xl md:rounded-2xl text-center ${isMobile ? "p-6" : "p-6 md:p-8"}`}>
+                <div className="mb-3 md:mb-4">
+                  <div
+                    className={`bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl md:rounded-2xl flex items-center justify-center mx-auto shadow-2xl shadow-indigo-500/40 ${isMobile ? "w-12 h-12" : "w-12 h-12 md:w-16 md:h-16"}`}
+                  >
+                    <Star size={20} className="md:w-7 md:h-7 text-white" />
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
+                <h3
+                  className={`font-bold mb-3 md:mb-4 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent ${isMobile ? "text-lg" : "text-xl md:text-2xl"}`}
+                >
                   Ready for New Opportunities
                 </h3>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+                <p
+                  className={`text-gray-300 leading-relaxed max-w-2xl mx-auto ${isMobile ? "text-sm" : "text-base md:text-lg"}`}
+                >
                   Looking for new opportunities to grow and contribute to meaningful projects that make a real impact.
                   Let's build something amazing together!
                 </p>
