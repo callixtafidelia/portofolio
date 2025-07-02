@@ -1,29 +1,25 @@
-// src/app/skills/page.tsx
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Sidebar from "@/components/sidebar"
 import { motion } from "framer-motion"
-import {
-  ArrowLeft,
-  Code,
-  Brain,
-  BarChart3,
-  TrendingUp,
-  Database,
-  Cloud,
-  Star,
-  Award,
-  Target,
-  Zap,
-  BookOpen,
-  Lightbulb,
-} from "lucide-react"
+import { ArrowLeft, Code, Brain, BarChart3, TrendingUp, Database, Cloud, Star, Award, Target, Zap } from "lucide-react"
 
 export default function SkillsPage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [hovered, setHovered] = useState<string | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkIsMobile()
+    window.addEventListener("resize", checkIsMobile)
+    return () => window.removeEventListener("resize", checkIsMobile)
+  }, [])
 
   const categories = [
     {
@@ -114,9 +110,9 @@ export default function SkillsPage() {
   ]
 
   const levelIcon = (lvl: string) => {
-    if (lvl === "Advanced") return <Star className="w-3 h-3" />
-    if (lvl === "Intermediate") return <Award className="w-3 h-3" />
-    return <Target className="w-3 h-3" />
+    if (lvl === "Advanced") return <Star className="w-2.5 h-2.5 md:w-3 md:h-3" />
+    if (lvl === "Intermediate") return <Award className="w-2.5 h-2.5 md:w-3 md:h-3" />
+    return <Target className="w-2.5 h-2.5 md:w-3 md:h-3" />
   }
 
   const colorClasses = (c: string) => {
@@ -235,22 +231,27 @@ export default function SkillsPage() {
         ::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
         }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 1024px) {
+          .glow-card:hover {
+            transform: none;
+          }
+        }
       `}</style>
 
       <div className="flex h-screen overflow-hidden bg-[#0a0e1a] text-white">
-            
-                <Sidebar active="skills" onToggle={setSidebarCollapsed} />
-      
-              {/* Main content with dynamic margin */}
-              <main
-                className="flex-1 overflow-y-auto py-8 y-8 relative transition-all duration-300 ease-in-out"
-                style={{
-                  marginLeft: "40px", // terniery operation
-                }}
-              >
-                <div className="max-w-6xl">
-      
+        {/* Sidebar */}
+        <Sidebar active="skills" onToggle={setSidebarCollapsed} />
 
+        {/* Main content with responsive margin */}
+        <main
+          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
+          style={{
+            marginLeft: isMobile ? "0" : "40px", // No margin on mobile, fixed 40px on desktop
+          }}
+        >
+          <div className={`max-w-6xl mx-auto ${isMobile ? "px-4" : "px-6"}`}>
             {/* Header */}
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
               <Link
@@ -266,17 +267,17 @@ export default function SkillsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-12"
+              className="mb-12 text-center"
             >
-              <div className="flex items-center gap-4 mb-4">
+              <div className={`flex items-center gap-4 mb-4 justify-center`}>
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                   <Zap size={24} className="text-white" />
                 </div>
-                <h1 className="text-5xl font-extrabold">
+                <h1 className={`font-extrabold ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
                   <span className="text-gradient-enhanced">Technical Skills</span>
                 </h1>
               </div>
-              <p className="text-xl text-gray-300 leading-relaxed">
+              <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
                 My expertise in data science and machine learning technologies
               </p>
             </motion.div>
@@ -286,7 +287,7 @@ export default function SkillsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+              className={`grid gap-3 md:gap-6 mb-8 md:mb-12 ${isMobile ? "grid-cols-2" : "grid-cols-2 md:grid-cols-4"}`}
             >
               {[
                 {
@@ -319,14 +320,18 @@ export default function SkillsPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  className="glow-card rounded-2xl p-6 text-center group cursor-pointer"
+                  className={`glow-card rounded-xl md:rounded-2xl text-center group cursor-pointer ${isMobile ? "p-3" : "p-3 md:p-6"}`}
                 >
-                  <div className={`text-3xl font-bold mb-2 bg-gradient-to-br ${color} bg-clip-text text-transparent`}>
+                  <div
+                    className={`font-bold mb-1 md:mb-2 bg-gradient-to-br ${color} bg-clip-text text-transparent ${isMobile ? "text-2xl" : "text-2xl md:text-3xl"}`}
+                  >
                     {value}
                   </div>
-                  <div className="text-gray-300 font-medium">{label}</div>
+                  <div className={`text-gray-300 font-medium ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
+                    {label}
+                  </div>
                   <div
-                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10"
+                    className="absolute inset-0 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10"
                     style={{ backgroundColor: glow }}
                   ></div>
                 </motion.div>
@@ -334,44 +339,48 @@ export default function SkillsPage() {
             </motion.div>
 
             {/* Categories & Skills */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div
+              className={`grid gap-4 md:gap-8 mb-8 md:mb-12 ${isMobile ? "grid-cols-1" : "grid-cols-1 lg:grid-cols-2"}`}
+            >
               {categories.map(({ id, title, Icon, color, glowColor, skills }, index) => (
                 <motion.div
                   key={id}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="glow-card rounded-2xl p-8 group"
+                  className={`glow-card rounded-xl md:rounded-2xl group ${isMobile ? "p-4" : "p-4 md:p-8"}`}
                 >
-                  <div className="flex items-center mb-6">
+                  <div className="flex items-center mb-4 md:mb-6">
                     <div
-                      className={`w-12 h-12 bg-gradient-to-br ${color} rounded-xl flex items-center justify-center shadow-lg mr-4`}
+                      className={`bg-gradient-to-br ${color} rounded-xl flex items-center justify-center shadow-lg mr-3 md:mr-4 ${isMobile ? "w-10 h-10" : "w-10 h-10 md:w-12 md:h-12"}`}
                       style={{ boxShadow: `0 10px 30px ${glowColor}` }}
                     >
-                      <Icon size={24} className="text-white" />
+                      <Icon size={20} className="md:w-6 md:h-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
+                    <h3
+                      className={`font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent ${isMobile ? "text-base" : "text-base md:text-xl"}`}
+                    >
                       {title}
                     </h3>
                   </div>
-                  <div className="flex flex-wrap gap-3">
+
+                  <div className="flex flex-wrap gap-2 md:gap-3">
                     {skills.map((skill, i) => {
                       const key = `${id}-${i}`
                       return (
                         <div
                           key={key}
-                          onMouseEnter={() => setHovered(key)}
-                          onMouseLeave={() => setHovered(null)}
+                          onMouseEnter={() => !isMobile && setHovered(key)}
+                          onMouseLeave={() => !isMobile && setHovered(null)}
                           className={`
-                            inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border
+                            inline-flex items-center rounded-full border transition-all duration-300 cursor-pointer
                             ${colorClasses(skill.color)}
-                            ${hovered === key ? "transform scale-105 shadow-lg" : ""}
-                            transition-all duration-300 cursor-default
+                            ${hovered === key && !isMobile ? "scale-105 shadow-lg" : ""}
+                            font-medium ${isMobile ? "text-xs px-2.5 py-1.5" : "text-xs md:text-sm px-2.5 md:px-4 py-1.5 md:py-2"}
                           `}
                         >
-                          <span className="mr-2">{levelIcon(skill.level)}</span>
-                          <span className="mr-2">{skill.name}</span>
-                          <span className="text-xs opacity-75">{skill.level}</span>
+                          {levelIcon(skill.level)}
+                          <span className="ml-1.5 md:ml-2">{skill.name}</span>
                         </div>
                       )
                     })}
@@ -380,100 +389,37 @@ export default function SkillsPage() {
               ))}
             </div>
 
-            {/* Legend */}
+            {/* Skills Legend */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="glow-card rounded-2xl p-8 mb-12"
+              className={`glow-card rounded-xl md:rounded-2xl text-center ${isMobile ? "p-4" : "p-4 md:p-8"}`}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <BookOpen className="w-6 h-6 text-indigo-400" />
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
-                  Proficiency Levels
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="flex items-center p-4 bg-gradient-to-r from-green-500/10 to-green-600/10 border border-green-500/20 rounded-xl">
-                  <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center mr-4">
-                    <Star className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-green-300 mb-1">Advanced</div>
-                    <div className="text-sm text-gray-400">Expert level, can teach others</div>
-                  </div>
+              <h3
+                className={`font-bold mb-4 md:mb-6 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent ${isMobile ? "text-lg" : "text-lg md:text-2xl"}`}
+              >
+                Skill Levels
+              </h3>
+              <div className={`flex justify-center gap-4 md:gap-8 ${isMobile ? "flex-col space-y-3" : "flex-wrap"}`}>
+                <div className="flex items-center gap-2">
+                  <Star className="w-4 h-4 md:w-5 md:h-5 text-green-400" />
+                  <span className={`text-gray-300 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}>
+                    Advanced - Professional proficiency
+                  </span>
                 </div>
-                <div className="flex items-center p-4 bg-gradient-to-r from-blue-500/10 to-blue-600/10 border border-blue-500/20 rounded-xl">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center mr-4">
-                    <Award className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-blue-300 mb-1">Intermediate</div>
-                    <div className="text-sm text-gray-400">Proficient, comfortable using</div>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <Award className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
+                  <span className={`text-gray-300 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}>
+                    Intermediate - Working knowledge
+                  </span>
                 </div>
-                <div className="flex items-center p-4 bg-gradient-to-r from-gray-500/10 to-gray-600/10 border border-gray-500/20 rounded-xl">
-                  <div className="w-10 h-10 bg-gradient-to-br from-gray-500 to-gray-700 rounded-lg flex items-center justify-center mr-4">
-                    <Target className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-gray-300 mb-1">Basic</div>
-                    <div className="text-sm text-gray-400">Familiar, can work with guidance</div>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <Target className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
+                  <span className={`text-gray-300 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}>
+                    Basic - Foundational understanding
+                  </span>
                 </div>
-              </div>
-            </motion.div>
-
-            {/* Learning Goals */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              className="glow-card rounded-2xl p-8"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <Lightbulb className="w-6 h-6 text-yellow-400" />
-                <h3 className="text-2xl font-bold bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent">
-                  Currently Learning
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  {
-                    title: "Deep Learning (PyTorch)",
-                    desc: "Advancing from intermediate to advanced",
-                    color: "from-red-500 to-red-700",
-                  },
-                  {
-                    title: "MLOps & Deployment",
-                    desc: "Docker, Kubernetes, model serving",
-                    color: "from-blue-500 to-blue-700",
-                  },
-                  {
-                    title: "Apache Spark",
-                    desc: "Big data processing",
-                    color: "from-orange-500 to-orange-700",
-                  },
-                  {
-                    title: "Cloud Architecture",
-                    desc: "AWS/GCP data engineering",
-                    color: "from-purple-500 to-purple-700",
-                  },
-                ].map((goal, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 1.0 + i * 0.1 }}
-                    className="flex items-center p-4 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/20 rounded-xl hover:bg-yellow-500/20 transition-all duration-300"
-                  >
-                    <div className={`w-3 h-3 bg-gradient-to-br ${goal.color} rounded-full mr-4 animate-pulse`} />
-                    <div>
-                      <div className="font-semibold text-white mb-1">{goal.title}</div>
-                      <div className="text-sm text-gray-400">{goal.desc}</div>
-                    </div>
-                  </motion.div>
-                ))}
               </div>
             </motion.div>
           </div>
