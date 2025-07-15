@@ -22,13 +22,13 @@ export default function ProjectsList() {
   }, [])
 
    const getProjectImage = (slug: string) => {
-    switch(slug) {
-      case 'nhl': return './nhl.png'
-      case 'flight': return './map.png'
-      case 'readmap': return './readmap.png'
-      case 'rebirdth': return './rebirdth.png'
-    }
+  switch(slug) {
+    case 'nhl': return 'nhl.png'          
+    case 'flight': return 'map.png'
+    case 'readmap': return 'readmap.png'
+    case 'rebirdth': return 'rebirdth.png'
   }
+}
   const getGitHubUrl = (slug: string) => {
   switch(slug) {
     case 'nhl': return 'https://github.com/callixtafidelia/hockey-skill-interactions-analysis'
