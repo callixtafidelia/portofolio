@@ -189,7 +189,7 @@ export default function PCAArticle() {
                   Machine Learning
                 </span>
                 <h1
-                  className={`font-extrabold mb-6 ${isMobile ? "text-2xl sm:text-3xl" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl"}`}
+                  className={`font-bold mb-6 ${isMobile ? "text-2xl sm:text-3xl" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl"}`}
                 >
                   <span className="text-gradient-enhanced">Understanding Principal Component Analysis</span>
                 </h1>
