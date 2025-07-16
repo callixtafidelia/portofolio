@@ -21,23 +21,35 @@ export default function ProjectsList() {
     return () => window.removeEventListener("resize", checkIsMobile)
   }, [])
 
-   const getProjectImage = (slug: string) => {
-  switch(slug) {
-    case 'nhl': return 'nhl.png'          
-    case 'flight': return 'map.png'
-    case 'readmap': return 'readmap.png'
-    case 'rebirdth': return 'rebirdth.png'
+  const getProjectImage = (slug: string) => {
+    switch(slug) {
+      case 'nhl': return 'nhl.png'          
+      case 'flight': return 'map.png'
+      case 'readmap': return 'readmap.png'
+      case 'rebirdth': return 'rebirdth.png'
+    }
   }
-}
+
   const getGitHubUrl = (slug: string) => {
-  switch(slug) {
-    case 'nhl': return 'https://github.com/callixtafidelia/hockey-skill-interactions-analysis'
-    case 'flight': return 'https://github.com/callixtafidelia/flight-no2-impact-study'
-    case 'readmap': return 'https://github.com/gatahcha/readmap-ai'
-    case 'rebirdth': return 'https://github.com/callixtafidelia/rebirdth'
-    default: return 'https://github.com/callixtafidelia/'
+    switch(slug) {
+      case 'nhl': return 'https://github.com/callixtafidelia/hockey-skill-interactions-analysis'
+      case 'flight': return 'https://github.com/callixtafidelia/flight-no2-impact-study'
+      case 'readmap': return 'https://github.com/gatahcha/readmap-ai'
+      case 'rebirdth': return 'https://github.com/callixtafidelia/rebirdth'
+      default: return 'https://github.com/callixtafidelia/'
+    }
   }
-}
+
+  // New function to get external project URLs
+  const getProjectUrl = (slug: string) => {
+    switch(slug) {
+      case 'nhl': return 'https://rpubs.com/callixta/hockey-skill-interaction-analysis'
+      case 'flight': return 'https://www.dropbox.com/scl/fi/mvip5hainds8raij0usq5/Assessing-the-Impact-of-Flight-Activity-on-Urban-NO-Pollution-During-The-COVID-19-Pandemic-in-China.pdf?rlkey=ggh0032hf7z58rwj16gvserpz&st=vb5qllav&dl=0'
+      case 'readmap': return 'https://readmap-ai.com/'
+      case 'rebirdth': return 'https://callixtafidelia.github.io/rebirdth/'
+      default: return '#'
+    }
+  }
 
   const featured = [
     {
@@ -53,7 +65,7 @@ export default function ProjectsList() {
       id: 2,
       slug: "flight",
       title: "COVID-19 NO₂ Impact Analysis",
-      description: "Analyzed flight trajectories from 58 major Chinese airports (Jan 2019–Dec 2020) alongside Sentinel‑5P TROPOMI satellite data to quantify changes in urban NO₂ pollution across pre‑COVID, disruption, and recovery phases. Applied two‑way fixed‑effects OLS controlling for wind and weather to isolate aviation’s impact on air quality.",
+      description: "Analyzed flight trajectories from 58 major Chinese airports (Jan 2019–Dec 2020) alongside Sentinel‑5P TROPOMI satellite data to quantify changes in urban NO₂ pollution across pre‑COVID, disruption, and recovery phases. Applied two‑way fixed‑effects OLS controlling for wind and weather to isolate aviation's impact on air quality.",
       skills: ["Remote Sensing", "R", "Spatial Regression", "Data Visualization"],
       category: "Spatial Analysis & Remote Sensing",
       imageUrl: "./public/map.png",
@@ -118,6 +130,26 @@ export default function ProjectsList() {
           animation: gradientShift 5s ease infinite;
         }
         
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+          background: rgba(15, 23, 42, 0.5);
+          border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          border-radius: 5px;
+          border: 2px solid rgba(15, 23, 42, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
+        
         .glow-card {
           position: relative;
           background: rgba(15, 23, 42, 0.6);
@@ -179,63 +211,64 @@ export default function ProjectsList() {
             <section className="mb-16">
               <div className={`grid gap-8 ${isMobile ? "grid-cols-1" : "grid-cols-1 lg:grid-cols-2"}`}>
                 {featured.map((proj, index) => (
-                  <Link href={`/projects?project=${proj.slug}`} key={proj.id}>
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                      className="glow-card rounded-2xl overflow-hidden group cursor-pointer block font-neue-montreal"
-                      onMouseEnter={() => setHovered(proj.id)}
-                      onMouseLeave={() => setHovered(null)}
-                    >
-                      {/* Real Image */}
-                        <div className="relative h-48 overflow-hidden border-b border-white/10">
-                        <img 
-                            src={getProjectImage(proj.slug)} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"> 
-                        </div>
-                        </div>
+                  <motion.div
+                    key={proj.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                    className="glow-card rounded-2xl overflow-hidden group font-neue-montreal"
+                    onMouseEnter={() => setHovered(proj.id)}
+                    onMouseLeave={() => setHovered(null)}
+                  >
+                    {/* Real Image */}
+                    <div className="relative h-48 overflow-hidden border-b border-white/10">
+                      <img 
+                        src={getProjectImage(proj.slug)} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        alt={proj.title}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    </div>
 
-                        
-
-                      <div className={`p-6 ${isMobile ? "p-4" : "p-6"}`}>
-                        <div className="mb-4">
-                          <h3 className={`font-bold text-white mb-3 transition-colors duration-300 font-neue-montreal ${isMobile ? "text-lg" : "text-xl"}`}>
-                            {proj.title}
-                          </h3>
-                          <span className="text-sm text-indigo-400 font-medium font-neue-montreal">{proj.category}</span>
-                        </div>
-                        <p className="text-gray-300 text-sm leading-relaxed mb-6 font-neue-montreal">{proj.description}</p>
-
-                        <div className="flex flex-wrap gap-2 mb-6">
-                          {proj.skills.map((skill, i) => (
-                            <span key={i} className={`bg-slate-800/50 border border-slate-700/50 text-slate-300 text-xs font-medium font-neue-montreal rounded-full hover:bg-slate-700/50 hover:border-indigo-500/30 hover:text-indigo-300 transition-all duration-300 ${isMobile ? "px-2 py-1" : "px-3 py-1"}`}>
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-
-                        <div className={`flex gap-3 ${isMobile ? "flex-col" : ""}`}>
-                          <span className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium font-neue-montreal rounded-lg shadow-lg shadow-indigo-500/25 ${isMobile ? "justify-center" : ""}`}>
-                            <ExternalLink size={16} />
-                            View Details
-                          </span>
-                          <a 
-                            href={getGitHubUrl(proj.slug)} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className={`flex items-center gap-2 px-4 py-2 bg-slate-900/50 hover:bg-slate-800/50 text-slate-300 hover:text-white text-sm font-medium font-neue-montreal rounded-lg border border-slate-700/50 hover:border-purple-500/30 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
-                            >
-                            <Github size={16} />
-                            GitHub
-                            </a>
-                        </div>
+                    <div className={`p-6 ${isMobile ? "p-4" : "p-6"}`}>
+                      <div className="mb-4">
+                        <h3 className={`font-bold text-white mb-3 transition-colors duration-300 font-neue-montreal ${isMobile ? "text-lg" : "text-xl"}`}>
+                          {proj.title}
+                        </h3>
+                        <span className="text-sm text-indigo-400 font-medium font-neue-montreal">{proj.category}</span>
                       </div>
-                    </motion.div>
-                  </Link>
+                      <p className="text-gray-300 text-sm leading-relaxed mb-6 font-neue-montreal">{proj.description}</p>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {proj.skills.map((skill, i) => (
+                          <span key={i} className={`bg-slate-800/50 border border-slate-700/50 text-slate-300 text-xs font-medium font-neue-montreal rounded-full hover:bg-slate-700/50 hover:border-indigo-500/30 hover:text-indigo-300 transition-all duration-300 ${isMobile ? "px-2 py-1" : "px-3 py-1"}`}>
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className={`flex gap-3 ${isMobile ? "flex-col" : ""}`}>
+                        <a 
+                          href={getProjectUrl(proj.slug)} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium font-neue-montreal rounded-lg shadow-lg shadow-indigo-500/25 hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
+                        >
+                          <ExternalLink size={16} />
+                          View Details
+                        </a>
+                        <a 
+                          href={getGitHubUrl(proj.slug)} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className={`flex items-center gap-2 px-4 py-2 bg-slate-900/50 hover:bg-slate-800/50 text-slate-300 hover:text-white text-sm font-medium font-neue-montreal rounded-lg border border-slate-700/50 hover:border-purple-500/30 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
+                        >
+                          <Github size={16} />
+                          GitHub
+                        </a>
+                      </div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </section>

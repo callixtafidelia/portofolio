@@ -216,7 +216,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
           {/* Social Links */}
           <div className="flex-shrink-0 p-4 border-t border-white/10 space-y-2">
             <Link
-              href="https://github.com/your-username"
+              href="https://github.com/callixtafidelia"
               target="_blank"
               rel="noopener noreferrer"
               className={`social-link-glow flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group neue-montreal ${
@@ -228,7 +228,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
               {!collapsed && <span className="text-sm">GitHub</span>}
             </Link>
             <Link
-              href="https://linkedin.com/in/your-profile"
+              href="https://linkedin.com/in/callixta-fidelia-cahyaningrum"
               target="_blank"
               rel="noopener noreferrer"
               className={`social-link-glow flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-all duration-300 hover:translate-x-1 group neue-montreal ${

@@ -166,6 +166,26 @@ export default function NHLAnalysis() {
           border-color: rgba(102, 126, 234, 0.3);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
+        
+        /* Enhanced scrollbar */
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+          background: rgba(15, 23, 42, 0.5);
+          border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          border-radius: 5px;
+          border: 2px solid rgba(15, 23, 42, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
 
         @media (max-width: 1024px) {
           .glow-card:hover {
