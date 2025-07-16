@@ -1,13 +1,13 @@
-//src/app/blog/pca.tsx
+//src/app/blog/dataviz.tsx
 "use client"
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Sidebar from "@/components/sidebar"
 import { motion } from "framer-motion"
-import { ArrowLeft, Calendar, Clock, Tag, BookOpen } from "lucide-react"
+import { ArrowLeft, Calendar, Clock, Tag, BarChart3 } from "lucide-react"
 
-export default function PCAArticle() {
+export default function DataVizArticle() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -183,21 +183,21 @@ export default function PCAArticle() {
                 className="mb-12 text-center"
               >
                 <span
-                  className={`inline-flex items-center bg-gradient-to-r from-blue-500/20 to-blue-600/20 border border-blue-500/30 text-blue-300 font-medium rounded-full mb-6 ${isMobile ? "text-xs px-3 py-1.5" : "text-sm px-4 py-2"}`}
+                  className={`inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 font-medium rounded-full mb-6 ${isMobile ? "text-xs px-3 py-1.5" : "text-sm px-4 py-2"}`}
                 >
-                  <BookOpen size={14} className="mr-2" />
-                  Machine Learning
+                  <BarChart3 size={14} className="mr-2" />
+                  Data Visualization
                 </span>
                 <h1
                   className={`font-bold mb-6 ${isMobile ? "text-2xl sm:text-3xl" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl"}`}
                 >
-                  <span className="text-gradient-enhanced">Understanding Principal Component Analysis</span>
+                  <span className="text-gradient-enhanced">Data Visualization Best Practices</span>
                 </h1>
                 <p
                   className={`text-gray-300 leading-relaxed mb-6 max-w-3xl mx-auto ${isMobile ? "text-base" : "text-base md:text-xl"}`}
                 >
-                  A comprehensive guide to PCA, one of the most fundamental techniques in data science for
-                  dimensionality reduction and data visualization.
+                  Master the art and science of creating compelling visualizations that tell powerful stories with your data, 
+                  using modern tools and evidence-based design principles.
                 </p>
 
                 {/* Article Metadata */}
@@ -206,10 +206,11 @@ export default function PCAArticle() {
                 >
                   <div className="flex items-center gap-1.5 md:gap-2">
                     <Calendar size={16} />
-                    July 12, 2025
+                    July 15, 2024
                   </div>
                   <div className="flex items-center gap-1.5 md:gap-2">
-                    <Clock size={16} />8 min read
+                    <Clock size={16} />
+                    6 min read
                   </div>
                   <div className="flex items-center gap-1.5 md:gap-2">
                     <Tag size={16} />
@@ -234,64 +235,69 @@ export default function PCAArticle() {
                     className={`space-y-3 md:space-y-4 text-gray-300 leading-relaxed ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}
                   >
                     <p>
-                      Principal Component Analysis (PCA) is one of the most fundamental techniques in data science and
-                      machine learning. It's a powerful dimensionality reduction technique that helps us understand and
-                      visualize high-dimensional data by finding the most important patterns while preserving essential
-                      information.
+                      In an era where data drives decision-making, the ability to create clear, compelling visualizations 
+                      has become a critical skill for data scientists and analysts. Great visualizations don't just present 
+                      data—they tell stories, reveal insights, and inspire action.
                     </p>
                     <p>
-                      In this comprehensive guide, we'll explore what PCA is, how it works mathematically, and when to
-                      use it in your data science projects. Whether you're handling images, financial datasets, or other
-                      high-dimensional data, PCA will become an invaluable tool in your analytical toolkit.
+                      This guide explores evidence-based principles for creating effective data visualizations that 
+                      communicate clearly, engage audiences, and drive meaningful insights. From choosing the right 
+                      chart types to designing for accessibility, we'll cover the essential practices that separate 
+                      good visualizations from truly exceptional ones.
                     </p>
                   </div>
                 </motion.section>
 
                 <motion.section
-                  id="what-is-pca"
+                  id="principles"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className={`glow-card rounded-xl md:rounded-2xl ${isMobile ? "p-4" : "p-4 md:p-6 lg:p-8"}`}
                 >
                   <h2 className={`font-bold text-white mb-4 md:mb-6 ${isMobile ? "text-xl" : "text-xl md:text-3xl"}`}>
-                    What is PCA?
+                    Core Design Principles
                   </h2>
                   <div className="space-y-4 md:space-y-6">
                     <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
-                      PCA is an unsupervised technique that transforms data into a lower-dimensional space while
-                      retaining most of the variance. It finds new axes—called principal components—that capture the
-                      maximum variance in the data.
+                      Effective data visualization is built on fundamental design principles that enhance clarity, 
+                      reduce cognitive load, and guide the viewer's attention to key insights.
                     </p>
 
                     <div
-                      className={`bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                      className={`bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                     >
                       <h3
                         className={`font-bold text-white mb-3 md:mb-4 flex items-center gap-2 ${isMobile ? "text-base" : "text-base md:text-xl"}`}
                       >
-                        <BookOpen size={20} className="text-blue-400" />
-                        Key Benefits of PCA
+                        <BarChart3 size={20} className="text-green-400" />
+                        Essential Design Principles
                       </h3>
                       <ul
                         className={`space-y-2 md:space-y-3 text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm md:text-base"}`}
                       >
                         <li className="flex items-start gap-2 md:gap-3">
                           <div
-                            className={`bg-blue-400 rounded-full flex-shrink-0 ${isMobile ? "w-1.5 h-1.5 mt-1.5" : "w-1.5 h-1.5 mt-1.5 md:w-2 md:h-2 md:mt-2"}`}
+                            className={`bg-green-400 rounded-full flex-shrink-0 ${isMobile ? "w-1.5 h-1.5 mt-1.5" : "w-1.5 h-1.5 mt-1.5 md:w-2 md:h-2 md:mt-2"}`}
                           ></div>
                           <div>
-                            <strong className="text-white">Dimensionality Reduction:</strong> Reduces the number of
-                            features while preserving essential information
+                            <strong className="text-white">Clarity:</strong> Make the data's meaning immediately apparent to viewers
                           </div>
                         </li>
                         <li className="flex items-start gap-2 md:gap-3">
                           <div
-                            className={`bg-purple-400 rounded-full flex-shrink-0 ${isMobile ? "w-1.5 h-1.5 mt-1.5" : "w-1.5 h-1.5 mt-1.5 md:w-2 md:h-2 md:mt-2"}`}
+                            className={`bg-emerald-400 rounded-full flex-shrink-0 ${isMobile ? "w-1.5 h-1.5 mt-1.5" : "w-1.5 h-1.5 mt-1.5 md:w-2 md:h-2 md:mt-2"}`}
                           ></div>
                           <div>
-                            <strong className="text-white">Noise Reduction:</strong> Filters out less important
-                            variations and noise in the data
+                            <strong className="text-white">Accuracy:</strong> Represent data truthfully without distortion or bias
+                          </div>
+                        </li>
+                        <li className="flex items-start gap-2 md:gap-3">
+                          <div
+                            className={`bg-teal-400 rounded-full flex-shrink-0 ${isMobile ? "w-1.5 h-1.5 mt-1.5" : "w-1.5 h-1.5 mt-1.5 md:w-2 md:h-2 md:mt-2"}`}
+                          ></div>
+                          <div>
+                            <strong className="text-white">Efficiency:</strong> Maximize the data-to-ink ratio by removing unnecessary elements
                           </div>
                         </li>
                         <li className="flex items-start gap-2 md:gap-3">
@@ -299,17 +305,7 @@ export default function PCAArticle() {
                             className={`bg-green-400 rounded-full flex-shrink-0 ${isMobile ? "w-1.5 h-1.5 mt-1.5" : "w-1.5 h-1.5 mt-1.5 md:w-2 md:h-2 md:mt-2"}`}
                           ></div>
                           <div>
-                            <strong className="text-white">Visualization:</strong> Enables 2D/3D plotting of
-                            high-dimensional data
-                          </div>
-                        </li>
-                        <li className="flex items-start gap-2 md:gap-3">
-                          <div
-                            className={`bg-blue-400 rounded-full flex-shrink-0 ${isMobile ? "w-1.5 h-1.5 mt-1.5" : "w-1.5 h-1.5 mt-1.5 md:w-2 md:h-2 md:mt-2"}`}
-                          ></div>
-                          <div>
-                            <strong className="text-white">Computational Efficiency:</strong> Speeds up downstream
-                            machine learning algorithms
+                            <strong className="text-white">Aesthetics:</strong> Create visually appealing designs that engage the audience
                           </div>
                         </li>
                       </ul>
@@ -318,60 +314,60 @@ export default function PCAArticle() {
                 </motion.section>
 
                 <motion.section
-                  id="how-pca-works"
+                  id="chart-selection"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className={`glow-card rounded-xl md:rounded-2xl ${isMobile ? "p-4" : "p-4 md:p-6 lg:p-8"}`}
                 >
                   <h2 className={`font-bold text-white mb-4 md:mb-6 ${isMobile ? "text-xl" : "text-xl md:text-3xl"}`}>
-                    How PCA Works
+                    Choosing the Right Chart Type
                   </h2>
                   <div className="space-y-4 md:space-y-6">
                     <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
-                      PCA works through a series of mathematical steps to identify the directions of maximum variance in
-                      your data:
+                      The choice of visualization type should be driven by your data structure and the story you want to tell. 
+                      Different chart types excel at highlighting different relationships and patterns.
                     </p>
 
                     <div className="grid gap-3 md:gap-4">
                       <div
-                        className={`bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                        className={`bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                       >
                         <h4 className={`font-bold text-white mb-2 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
-                          Step 1: Standardization
+                          Comparisons: Bar Charts & Column Charts
                         </h4>
                         <p className={`text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm md:text-base"}`}>
-                          Scale all features to have zero mean and unit variance to ensure equal contribution.
+                          Perfect for comparing values across categories. Use horizontal bars for long category names.
                         </p>
                       </div>
                       <div
-                        className={`bg-gradient-to-r from-green-500/10 to-teal-500/10 border border-green-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                        className={`bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                       >
                         <h4 className={`font-bold text-white mb-2 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
-                          Step 2: Covariance Matrix
+                          Trends: Line Charts & Area Charts
                         </h4>
                         <p className={`text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm md:text-base"}`}>
-                          Compute the covariance matrix to understand how features vary together.
+                          Ideal for showing changes over time and identifying patterns in continuous data.
                         </p>
                       </div>
                       <div
-                        className={`bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                        className={`bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                       >
                         <h4 className={`font-bold text-white mb-2 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
-                          Step 3: Eigendecomposition
+                          Relationships: Scatter Plots & Bubble Charts
                         </h4>
                         <p className={`text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm md:text-base"}`}>
-                          Extract eigenvalues and eigenvectors from the covariance matrix.
+                          Excellent for exploring correlations and identifying outliers in your data.
                         </p>
                       </div>
                       <div
-                        className={`bg-gradient-to-r from-red-500/10 to-blue-500/10 border border-red-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                        className={`bg-gradient-to-r from-orange-500/10 to-amber-500/10 border border-orange-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                       >
                         <h4 className={`font-bold text-white mb-2 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
-                          Step 4: Component Selection
+                          Distributions: Histograms & Box Plots
                         </h4>
                         <p className={`text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm md:text-base"}`}>
-                          Choose the top k components that explain the most variance in your data.
+                          Best for understanding data distributions, quartiles, and identifying statistical outliers.
                         </p>
                       </div>
                     </div>
@@ -386,44 +382,92 @@ export default function PCAArticle() {
                   className={`glow-card rounded-xl md:rounded-2xl ${isMobile ? "p-4" : "p-4 md:p-6 lg:p-8"}`}
                 >
                   <h2 className={`font-bold text-white mb-4 md:mb-6 ${isMobile ? "text-xl" : "text-xl md:text-3xl"}`}>
-                    Implementation
+                    Tools and Implementation
                   </h2>
                   <div className="space-y-4 md:space-y-6">
                     <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
-                      Here's how to implement PCA using scikit-learn in Python:
+                      Modern data visualization requires choosing the right tools for your needs. Here's a practical example 
+                      using Python's matplotlib and seaborn libraries:
                     </p>
 
                     <div
                       className={`bg-slate-900/50 border border-slate-700/50 rounded-xl overflow-x-auto ${isMobile ? "p-3" : "p-3 md:p-6"}`}
                     >
                       <pre className={`text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
-                        <code>{`from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
+                        <code>{`import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 
-# Sample data
-X = np.random.randn(1000, 10)  # 1000 samples, 10 features
+# Set the aesthetic style
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set_palette("husl")
 
-# Step 1: Standardize the data
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+# Create sample data
+np.random.seed(42)
+data = pd.DataFrame({
+    'month': pd.date_range('2023-01', periods=12, freq='M'),
+    'sales': np.random.normal(100, 20, 12).cumsum(),
+    'marketing_spend': np.random.normal(50, 10, 12),
+    'category': np.random.choice(['A', 'B', 'C'], 12)
+})
 
-# Step 2: Apply PCA
-pca = PCA(n_components=2)  # Reduce to 2 dimensions
-X_pca = pca.fit_transform(X_scaled)
+# Create a comprehensive dashboard
+fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 10))
+fig.suptitle('Sales Performance Dashboard', fontsize=16, fontweight='bold')
 
-# Step 3: Analyze results
-print(f"Explained variance ratio: {pca.explained_variance_ratio_}")
-print(f"Total variance explained: {pca.explained_variance_ratio_.sum():.2%}")
+# 1. Time series line chart
+ax1.plot(data['month'], data['sales'], marker='o', linewidth=2.5, markersize=6)
+ax1.set_title('Sales Trend Over Time', fontweight='bold')
+ax1.set_ylabel('Sales ($000s)')
+ax1.tick_params(axis='x', rotation=45)
+ax1.grid(True, alpha=0.3)
 
-# Step 4: Visualize
-plt.figure(figsize=(10, 6))
-plt.scatter(X_pca[:, 0], X_pca[:, 1], alpha=0.6)
-plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%} variance)')
-plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%} variance)')
-plt.title('PCA Visualization')
-plt.show()`}</code>
+# 2. Scatter plot with correlation
+ax2.scatter(data['marketing_spend'], data['sales'], 
+           alpha=0.7, s=100, c=data.index, cmap='viridis')
+ax2.set_title('Sales vs Marketing Spend', fontweight='bold')
+ax2.set_xlabel('Marketing Spend ($000s)')
+ax2.set_ylabel('Sales ($000s)')
+
+# Add correlation coefficient
+corr = data['sales'].corr(data['marketing_spend'])
+ax2.text(0.05, 0.95, f'Correlation: {corr:.2f}', 
+         transform=ax2.transAxes, bbox=dict(boxstyle="round", facecolor='white'))
+
+# 3. Bar chart by category
+category_sales = data.groupby('category')['sales'].mean()
+bars = ax3.bar(category_sales.index, category_sales.values, 
+               color=['#ff9999', '#66b3ff', '#99ff99'])
+ax3.set_title('Average Sales by Category', fontweight='bold')
+ax3.set_ylabel('Average Sales ($000s)')
+
+# Add value labels on bars
+for bar in bars:
+    height = bar.get_height()
+    ax3.text(bar.get_x() + bar.get_width()/2., height + 1,
+             f'{height:.1f}', ha='center', va='bottom')
+
+# 4. Distribution histogram
+ax4.hist(data['sales'], bins=8, alpha=0.7, color='skyblue', edgecolor='black')
+ax4.set_title('Sales Distribution', fontweight='bold')
+ax4.set_xlabel('Sales ($000s)')
+ax4.set_ylabel('Frequency')
+ax4.axvline(data['sales'].mean(), color='red', linestyle='--', 
+            label=f'Mean: {data["sales"].mean():.1f}')
+ax4.legend()
+
+plt.tight_layout()
+plt.show()
+
+# Best practices applied:
+# ✓ Clear, descriptive titles
+# ✓ Appropriate chart types for data
+# ✓ Consistent color scheme
+# ✓ Grid lines for easier reading
+# ✓ Value labels where helpful
+# ✓ Statistical annotations
+# ✓ Proper axis labels and units`}</code>
                       </pre>
                     </div>
 
@@ -431,85 +475,138 @@ plt.show()`}</code>
                       className={`bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                     >
                       <h4 className={`font-bold text-white mb-2 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
-                        💡 Pro Tips
+                        🎨 Color and Design Tips
                       </h4>
                       <ul
                         className={`space-y-1.5 md:space-y-2 text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm md:text-base"}`}
                       >
-                        <li>• Always standardize your data before applying PCA</li>
-                        <li>• Use the explained variance ratio to choose the number of components</li>
-                        <li>• Consider the elbow method for optimal component selection</li>
+                        <li>• Use color purposefully—don't just make things "pretty"</li>
+                        <li>• Ensure sufficient contrast for accessibility</li>
+                        <li>• Limit your color palette to 3-5 distinct colors</li>
+                        <li>• Consider colorblind-friendly palettes</li>
+                        <li>• Use white space effectively to reduce clutter</li>
                       </ul>
                     </div>
                   </div>
                 </motion.section>
 
                 <motion.section
-                  id="use-cases"
+                  id="common-mistakes"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.6 }}
                   className={`glow-card rounded-xl md:rounded-2xl ${isMobile ? "p-4" : "p-4 md:p-6 lg:p-8"}`}
                 >
                   <h2 className={`font-bold text-white mb-4 md:mb-6 ${isMobile ? "text-xl" : "text-xl md:text-3xl"}`}>
-                    Use Cases
+                    Common Mistakes to Avoid
                   </h2>
                   <div className="space-y-4 md:space-y-6">
                     <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
-                      PCA is particularly useful in several scenarios across different domains:
+                      Even experienced practitioners can fall into visualization traps that mislead audiences or obscure insights. 
+                      Here are the most critical mistakes to avoid:
                     </p>
 
                     <div className={`grid gap-3 md:gap-6 ${isMobile ? "grid-cols-1" : "grid-cols-1 md:grid-cols-2"}`}>
                       <div
-                        className={`bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                        className={`bg-gradient-to-br from-red-500/10 to-rose-500/10 border border-red-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                       >
                         <h4
                           className={`font-bold text-white mb-2 md:mb-3 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}
                         >
-                          Image Processing
+                          ❌ Misleading Scales
                         </h4>
                         <p className={`text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
-                          Compress images, face recognition, and computer vision applications where pixel data needs
-                          dimensionality reduction.
+                          Truncated y-axes, inconsistent scales, and 3D effects that distort data perception.
                         </p>
                       </div>
                       <div
-                        className={`bg-gradient-to-br from-green-500/10 to-teal-500/10 border border-green-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                        className={`bg-gradient-to-br from-orange-500/10 to-amber-500/10 border border-orange-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                       >
                         <h4
                           className={`font-bold text-white mb-2 md:mb-3 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}
                         >
-                          Finance
+                          ❌ Chart Junk
                         </h4>
                         <p className={`text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
-                          Portfolio optimization, risk management, and identifying key factors driving market movements.
+                          Unnecessary decorations, excessive gradients, and distracting visual elements.
                         </p>
                       </div>
                       <div
-                        className={`bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                        className={`bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                       >
                         <h4
                           className={`font-bold text-white mb-2 md:mb-3 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}
                         >
-                          Genomics
+                          ❌ Wrong Chart Types
                         </h4>
                         <p className={`text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
-                          Analyzing gene expression data and identifying patterns in high-dimensional biological
-                          datasets.
+                          Using pie charts for comparisons or line charts for categorical data.
                         </p>
                       </div>
                       <div
-                        className={`bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                        className={`bg-gradient-to-br from-purple-500/10 to-violet-500/10 border border-purple-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
                       >
                         <h4
                           className={`font-bold text-white mb-2 md:mb-3 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}
                         >
-                          Marketing
+                          ❌ Poor Color Choices
                         </h4>
                         <p className={`text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
-                          Customer segmentation, market research, and understanding consumer behavior patterns.
+                          Rainbow color schemes, insufficient contrast, and ignoring colorblind accessibility.
                         </p>
                       </div>
+                    </div>
+                  </div>
+                </motion.section>
+
+                <motion.section
+                  id="advanced-techniques"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.7 }}
+                  className={`glow-card rounded-xl md:rounded-2xl ${isMobile ? "p-4" : "p-4 md:p-6 lg:p-8"}`}
+                >
+                  <h2 className={`font-bold text-white mb-4 md:mb-6 ${isMobile ? "text-xl" : "text-xl md:text-3xl"}`}>
+                    Advanced Techniques
+                  </h2>
+                  <div className="space-y-4 md:space-y-6">
+                    <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
+                      Once you've mastered the fundamentals, these advanced techniques can elevate your visualizations 
+                      and create more engaging, interactive experiences:
+                    </p>
+
+                    <div
+                      className={`bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                    >
+                      <h4 className={`font-bold text-white mb-3 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
+                        📊 Interactive Dashboards
+                      </h4>
+                      <p className={`text-gray-300 mb-3 ${isMobile ? "text-xs" : "text-xs md:text-sm md:text-base"}`}>
+                        Tools like Plotly Dash, Streamlit, and D3.js enable interactive exploration:
+                      </p>
+                      <ul className={`space-y-1 text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
+                        <li>• Hover effects and tooltips for additional context</li>
+                        <li>• Filtering and brushing for data exploration</li>
+                        <li>• Linked views that update together</li>
+                        <li>• Animation for showing changes over time</li>
+                      </ul>
+                    </div>
+
+                    <div
+                      className={`bg-gradient-to-r from-green-500/10 to-teal-500/10 border border-green-500/20 rounded-xl ${isMobile ? "p-4" : "p-4 md:p-6"}`}
+                    >
+                      <h4 className={`font-bold text-white mb-3 ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}>
+                        🎯 Storytelling with Data
+                      </h4>
+                      <p className={`text-gray-300 mb-3 ${isMobile ? "text-xs" : "text-xs md:text-sm md:text-base"}`}>
+                        Structure your visualizations to guide the viewer through a narrative:
+                      </p>
+                      <ul className={`space-y-1 text-gray-300 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
+                        <li>• Start with context and end with a call to action</li>
+                        <li>• Use annotations to highlight key insights</li>
+                        <li>• Create a visual hierarchy with size and color</li>
+                        <li>• Progressive disclosure for complex information</li>
+                      </ul>
                     </div>
                   </div>
                 </motion.section>
@@ -518,7 +615,7 @@ plt.show()`}</code>
                   id="conclusion"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
                   className={`glow-card rounded-xl md:rounded-2xl ${isMobile ? "p-4" : "p-4 md:p-6 lg:p-8"}`}
                 >
                   <h2 className={`font-bold text-white mb-4 md:mb-6 ${isMobile ? "text-xl" : "text-xl md:text-3xl"}`}>
@@ -528,15 +625,15 @@ plt.show()`}</code>
                     className={`space-y-3 md:space-y-4 text-gray-300 leading-relaxed ${isMobile ? "text-sm" : "text-sm md:text-lg"}`}
                   >
                     <p>
-                      PCA offers an elegant solution to the curse of dimensionality, providing a mathematically sound
-                      approach to data compression and visualization. By mastering its principles and applications,
-                      you'll be able to extract richer insights from complex datasets and build more efficient machine
-                      learning models.
+                      Effective data visualization is both an art and a science, requiring technical skill, design 
+                      sensibility, and deep understanding of your audience's needs. By following these evidence-based 
+                      practices, you'll create visualizations that not only look great but truly communicate insights 
+                      and drive action.
                     </p>
                     <p>
-                      Remember that PCA is just one tool in your data science toolkit. Consider your specific use case,
-                      data characteristics, and interpretability requirements when deciding whether to apply PCA to your
-                      projects.
+                      Remember that the best visualization is often the simplest one that effectively answers your 
+                      audience's questions. Start with clarity, add beauty thoughtfully, and always prioritize 
+                      your reader's understanding over visual complexity.
                     </p>
                   </div>
                 </motion.section>

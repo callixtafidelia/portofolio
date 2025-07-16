@@ -36,7 +36,7 @@ export default function BlogList() {
       title: "Understanding Principal Component Analysis",
       description:
         "A deep dive into how PCA works and when to use it for dimensionality reduction in your data science projects. Learn the mathematical foundations and practical applications.",
-      date: "May 15, 2024",
+      date: "July 12, 2025",
       category: "Machine Learning",
       readTime: "8 min read",
       slug: "understanding-pca",
@@ -46,7 +46,7 @@ export default function BlogList() {
       title: "Time Series Forecasting with LSTM",
       description:
         "Explore how Long Short-Term Memory networks can be used for accurate time series predictions in financial and business applications.",
-      date: "April 28, 2024",
+      date: "July 15, 2025",
       category: "Deep Learning",
       readTime: "12 min read",
       slug: "lstm-time-series",
@@ -56,7 +56,7 @@ export default function BlogList() {
       title: "Data Visualization Best Practices",
       description:
         "Learn how to create compelling and informative visualizations that tell a story with your data using modern tools and techniques.",
-      date: "April 10, 2024",
+      date: "July 15, 2025",
       category: "Data Visualization",
       readTime: "6 min read",
       slug: "data-viz-best-practices",
