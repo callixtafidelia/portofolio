@@ -143,7 +143,7 @@ export default function Home() {
                     Download Resume
                   </motion.a>
 
-                  <Link href="/projects">
+                  <Link href="./projects">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
