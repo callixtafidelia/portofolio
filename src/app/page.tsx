@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useRef, useEffect, useState, Suspense } from 'react'
+import Link from 'next/link'
 import Sidebar from '@/components/sidebar'
 import { motion } from 'framer-motion'
 import { Download, ArrowRight } from 'lucide-react'
@@ -142,15 +143,16 @@ export default function Home() {
                     Download Resume
                   </motion.a>
 
-                  <motion.a
-                    href="/projects"
+                  <Link href="/projects">
+                  <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center justify-center gap-3 rounded-xl border border-gray-600/50 px-6 lg:px-8 py-3 lg:py-4 text-gray-200 font-semibold text-base lg:text-lg bg-white/5 backdrop-blur-sm neue-montreal"
+                    className="inline-flex items-center justify-center gap-3 rounded-xl border border-gray-600/50 px-6 lg:px-8 py-3 lg:py-4 text-gray-200 font-semibold text-base lg:text-lg bg-white/5 backdrop-blur-sm neue-montreal cursor-pointer"
                   >
                     View Projects
                     <ArrowRight size={20} />
-                  </motion.a>
+                  </motion.div>
+                </Link>
                 </div>
               </motion.div>
             </div>
