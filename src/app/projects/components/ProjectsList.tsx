@@ -83,7 +83,7 @@ export default function ProjectsList() {
       id: 4,
       slug: "rebirdth",
       title: "Rebirdth Educational Platform",
-      description: "Co‑founded and developed Rebirdth, a Next.js/TypeScript site that delivers research tutorials, peer‑mentoring events, and interactive articles for Indonesian students. Designed a responsive UI, content‑management workflows, and event pages that have onboarded dozens of learners into a supportive, student‑led research community.",
+      description: "Co‑founded and am currently developing Rebirdth, a student‑led community platform that empowers Indonesian students through research tutorials, peer‑mentoring events, and interactive articles. I design the website concept along with Instagram posts and reels to engage our audience. While the website is still under development, our community is actively sharing updates and educational content on Instagram @rebirdth.id.",
       skills: ["Next.js", "Three.js", "TypeScript", "React", "Tailwind CSS"],
       category: "Community Education Platform",
       imageUrl: "./public/rebirdth.png",
