@@ -311,11 +311,7 @@ export default function AboutMe() {
                       >
                         Statistics and Biology Concentration 
                       </span>
-                      <span
-                        className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/30 text-orange-300 font-medium rounded-full ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}
-                      >
-                        Minor in Food and Resource Economics
-                      </span>
+                     
                     </div>
                     </div>
                     <div className="pt-3 md:pt-4 border-t border-white/10">
