@@ -120,18 +120,12 @@ export default function NHLAnalysis() {
         }
         
         @keyframes gradientShift {
-          0%, 100% { 
-            background-position: 0% 50%;
-            filter: hue-rotate(0deg);
-          }
-          50% { 
-            background-position: 100% 50%;
-            filter: hue-rotate(45deg);
-          }
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
-        
+
         .text-gradient-enhanced {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          background: linear-gradient(to right, #7dd3fe 0%, #818cf8 50%, #c084fc 100%);
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -151,7 +145,7 @@ export default function NHLAnalysis() {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(240, 147, 251, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(192, 132, 252, 0.1) 100%);
           opacity: 0;
           transition: opacity 0.3s ease;
           border-radius: inherit;
@@ -200,7 +194,7 @@ export default function NHLAnalysis() {
 
         {/* Main content with responsive margin */}
         <main
-          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 relative z-10 transition-all duration-300 ease-in-out"
           style={{
             marginLeft: isMobile ? "0" : "40px",
           }}
@@ -225,7 +219,7 @@ export default function NHLAnalysis() {
               className="mb-6 text-center"
             >
               <div className="flex items-center gap-4 mb-4 justify-center">
-                <h1 className={`font-bold font-neue-montreal ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
+                <h1 className={`font-semibold playfair ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
                   <span className="text-gradient-enhanced">NHL Hockey Skill Interactions Analysis</span>
                 </h1>
               </div>

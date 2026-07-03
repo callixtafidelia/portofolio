@@ -1,31 +1,31 @@
 // src/app/blog/BlogContent.tsx
+//
+// DEPRECATED / UNUSED: the blog now uses the dynamic route /blog/[slug] and a
+// Server Component /blog/page.tsx that reads from Keystatic. This old
+// ?article=<slug> query-router is no longer wired into any route. It is kept in
+// place (per request) but neutralized so the production build type-checks.
+// Safe to delete along with the PCA/LSTM/DataViz article components.
 "use client"
 
 import { useSearchParams } from "next/navigation"
 import BlogList from "./components/BlogList"
 import PCAArticle from "./components/PCAArticle"
-import LSTMArticle from "./components/LSTMArticle"  // Changed: Capitalized the import name
-import DataVizArticle from "./components/DataVizArticle"  // Added: Import for data viz article
+import LSTMArticle from "./components/LSTMArticle"
+import DataVizArticle from "./components/DataVizArticle"
 
 export default function BlogContent() {
   const searchParams = useSearchParams()
   const article = searchParams.get('article')
-  
-  // Add some debugging
-  console.log('Current article param:', article)
-  
+
   switch (article) {
     case 'understanding-pca':
-      console.log('Rendering PCAArticle')
       return <PCAArticle />
     case 'lstm-time-series':
-      console.log('Rendering LSTMArticle')
-      return <LSTMArticle />  // Changed: Using proper component name
+      return <LSTMArticle />
     case 'data-viz-best-practices':
-      console.log('Rendering DataVizArticle')
-      return <DataVizArticle />  // Changed: Using proper component instead of BlogList
+      return <DataVizArticle />
     default:
-      console.log('Rendering BlogList (default)')
-      return <BlogList />
+      // Old hardcoded list retired; the live list lives at /blog/page.tsx.
+      return <BlogList posts={[]} />
   }
 }

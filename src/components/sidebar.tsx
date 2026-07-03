@@ -2,7 +2,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, User, Briefcase, Zap, FolderOpen, FileText, Mail, Github, Linkedin, Home } from "lucide-react"
+import { Menu, X, User, Briefcase, Zap, FolderOpen, FileText, Mail, Github, Linkedin, Home, Camera } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
 interface NavItem {
@@ -56,6 +56,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
     { key: "skills", label: "Skills", href: "/skills", Icon: Zap },
     { key: "projects", label: "Projects", href: "/projects", Icon: FolderOpen },
     { key: "blog", label: "Blog", href: "/blog", Icon: FileText },
+    { key: "photography", label: "Photography", href: "/photography", Icon: Camera },
     { key: "contact", label: "Contact", href: "/contact", Icon: Mail },
   ]
 
@@ -72,7 +73,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
             content: '';
             position: absolute;
             inset: -2px;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background: linear-gradient(135deg, #7dd3fc, #818cf8, #a78bfa, #c084fc);
             border-radius: 22px;
             z-index: -1;
             animation: rotate 3s linear infinite;
@@ -144,7 +145,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
 
         <div
           className={`
-            neue-montreal
+            neue-montreal relative z-30
             flex flex-col h-full bg-slate-900/90 backdrop-blur-xl border-r border-white/10 shadow-2xl
             transition-all duration-300 ease-in-out
             overflow-hidden
@@ -168,7 +169,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
           <div className="flex-shrink-0 p-6 border-b border-white/10 flex flex-col items-center">
             <div className="profile-avatar w-16 h-16 rounded-xl shadow-xl shadow-indigo-500/40 ring-2 ring-blue-500/50">
               <div className="overflow-hidden rounded-xl w-full h-full">
-                <img src="./photo.jpg" className="w-full h-full object-cover" />
+                <img src="/photo.jpg" alt="Callixta Fidelia C" className="w-full h-full object-cover" />
               </div>
             </div>
             {!collapsed && (
@@ -341,7 +342,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
           <Link href="/" className="flex items-center gap-3">
             <div className="profile-avatar-mobile w-10 h-10 rounded-lg shadow-lg shadow-indigo-500/40 ring-2 ring-blue-500/50">
               <div className="overflow-hidden rounded-lg w-full h-full">
-                <img src="./photo.jpg" className="w-full h-full object-cover" />
+                <img src="/photo.jpg" alt="Callixta Fidelia C" className="w-full h-full object-cover" />
               </div>
             </div>
             <span className="text-white bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
@@ -376,14 +377,14 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
             <div className="flex items-center gap-3">
               <div className="profile-avatar-mobile w-12 h-12 rounded-lg shadow-lg shadow-indigo-500/40 ring-2 ring-blue-500/50">
                 <div className="overflow-hidden rounded-lg w-full h-full">
-                  <img src="./photo.jpg" alt="Callixta Fidelia C" className="w-full h-full object-cover" />
+                  <img src="/photo.jpg" alt="Callixta Fidelia C" className="w-full h-full object-cover" />
                 </div>
               </div>
               <div>
                 <h3 className="neue-montreal text-white font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
                   Callixta Fidelia C
                 </h3>
-                <p className="neue-montreal text-slate-400 text-sm">Biostatistics @UBC</p>
+                <p className="neue-montreal text-slate-400 text-sm">Data Enthusiast @UBC</p>
               </div>
             </div>
             <button

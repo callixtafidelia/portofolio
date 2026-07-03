@@ -15,7 +15,16 @@ import {
   BookOpen,
 } from "lucide-react"
 
-export default function BlogList() {
+export interface BlogPost {
+  slug: string
+  title: string
+  description: string
+  date: string
+  category: string
+  readTime: string
+}
+
+export default function BlogList({ posts }: { posts: BlogPost[] }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [searchTerm, setSearchTerm] = useState<string>("")
   const [isMobile, setIsMobile] = useState(false)
@@ -30,38 +39,7 @@ export default function BlogList() {
     return () => window.removeEventListener("resize", checkIsMobile)
   }, [])
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Understanding Principal Component Analysis",
-      description:
-        "A deep dive into how PCA works and when to use it for dimensionality reduction in your data science projects. Learn the mathematical foundations and practical applications.",
-      date: "July 12, 2025",
-      category: "Machine Learning",
-      readTime: "8 min read",
-      slug: "understanding-pca",
-    },
-    {
-      id: 2,
-      title: "Time Series Forecasting with LSTM",
-      description:
-        "Explore how Long Short-Term Memory networks can be used for accurate time series predictions in financial and business applications.",
-      date: "July 15, 2025",
-      category: "Deep Learning",
-      readTime: "12 min read",
-      slug: "lstm-time-series",
-    },
-    {
-      id: 3,
-      title: "Data Visualization Best Practices",
-      description:
-        "Learn how to create compelling and informative visualizations that tell a story with your data using modern tools and techniques.",
-      date: "July 15, 2025",
-      category: "Data Visualization",
-      readTime: "6 min read",
-      slug: "data-viz-best-practices",
-    },
-  ]
+  const blogPosts = posts
 
   const getCategoryColor = (cat: string) => {
     const map: Record<string, any> = {
@@ -136,18 +114,12 @@ export default function BlogList() {
         }
         
         @keyframes gradientShift {
-          0%, 100% { 
-            background-position: 0% 50%;
-            filter: hue-rotate(0deg);
-          }
-          50% { 
-            background-position: 100% 50%;
-            filter: hue-rotate(45deg);
-          }
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
-        
+
         .text-gradient-enhanced {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          background: linear-gradient(to right, #7dd3fe 0%, #818cf8 50%, #c084fc 100%);
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -167,7 +139,7 @@ export default function BlogList() {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(240, 147, 251, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(192, 132, 252, 0.1) 100%);
           opacity: 0;
           transition: opacity 0.3s ease;
           border-radius: inherit;
@@ -215,7 +187,7 @@ export default function BlogList() {
 
         {/* Main content with responsive margin and centering */}
         <main
-          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 relative z-10 transition-all duration-300 ease-in-out"
           style={{
             marginLeft: isMobile ? "0" : "40px",
           }}
@@ -242,8 +214,8 @@ export default function BlogList() {
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                   <BookOpen size={24} className="text-white" />
                 </div>
-                <h1 className={`font-bold font-neue-montreal ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
-                  <span className="text-gradient-enhanced">Blog</span>
+                <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
+                  Latest <span className="text-gradient-enhanced italic">Posts</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed font-neue-montreal ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
@@ -258,17 +230,20 @@ export default function BlogList() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className={`glow-card rounded-xl md:rounded-2xl mb-8 ${isMobile ? "p-4" : "p-6"}`}
             >
-              <div className="flex-1 relative">
-                <Search
-                  className={`absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 ${isMobile ? "w-4 h-4" : "w-5 h-5"}`}
-                />
-                <input
-                  type="text"
-                  placeholder="Search articles…"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className={`w-full pr-3 md:pr-4 bg-slate-800/50 border border-slate-700/50 rounded-xl text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300 font-neue-montreal ${isMobile ? "pl-10 py-2.5 text-sm" : "pl-12 py-3"}`}
-                />
+              <div className="search-glow">
+                <span className="search-shimmer" aria-hidden="true" />
+                <div className="relative">
+                  <Search
+                    className={`absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 z-10 ${isMobile ? "w-4 h-4" : "w-5 h-5"}`}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Search articles…"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className={`w-full pr-3 md:pr-4 bg-slate-900/80 rounded-[0.72rem] text-white placeholder-gray-400 outline-none border-none transition-all duration-300 font-neue-montreal ${isMobile ? "pl-10 py-2.5 text-sm" : "pl-12 py-3"}`}
+                  />
+                </div>
               </div>
             </motion.div>
 
@@ -283,12 +258,12 @@ export default function BlogList() {
                   const colors = getCategoryColor(post.category)
                   return (
                     <motion.article
-                      key={post.id}
+                      key={post.slug}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                     >
-                      <Link href={`/blog?article=${post.slug}`}>
+                      <Link href={`/blog/${post.slug}`}>
                         <div className="glow-card rounded-xl md:rounded-2xl overflow-hidden group cursor-pointer">
                           <div className={isMobile ? "flex flex-col" : "flex flex-col md:flex-row"}>
                             {/* Meta */}

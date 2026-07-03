@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Sidebar from "@/components/sidebar"
 import { motion } from "framer-motion"
-import { ArrowLeft, Star, ExternalLink, Github, FolderOpen } from "lucide-react"
+import { ArrowLeft, Star, ExternalLink, Github, FolderOpen, LineChart } from "lucide-react"
 
 export default function ProjectsList() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
@@ -32,6 +32,7 @@ export default function ProjectsList() {
 
   const getGitHubUrl = (slug: string) => {
     switch(slug) {
+      case 'tariff': return 'https://github.com/callixtafidelia/'
       case 'nhl': return 'https://github.com/callixtafidelia/hockey-skill-interactions-analysis'
       case 'flight': return 'https://github.com/callixtafidelia/flight-no2-impact-study'
       case 'readmap': return 'https://github.com/gatahcha/readmap-ai'
@@ -52,6 +53,15 @@ export default function ProjectsList() {
   }
 
   const featured = [
+    {
+      id: 5,
+      slug: "tariff",
+      title: "Tariff & Stock Market Attention After the 2024 U.S. Election",
+      description: "An interactive computational notebook analyzing Google Trends data (Jan 2022–Jan 2026). Raced five forecasting models to define \"normal,\" then measured how post‑election tariff attention overshot its forecast by +55.12% (vs. +8.36% for stocks) and how the two searches went from uncorrelated (r=0.02) to tightly coupled (r=0.81). Told through stacked code‑and‑output cells with live charts and a US choropleth.",
+      skills: ["R", "Python", "Time Series", "Forecasting", "Google Trends", "Choropleth"],
+      category: "Interactive Notebook · Time-Series & Attention Analysis",
+      imageUrl: "",
+    },
     {
       id: 1,
       slug: "nhl",
@@ -122,7 +132,7 @@ export default function ProjectsList() {
         }
         
         .text-gradient-enhanced {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          background: linear-gradient(to right, #7dd3fe 0%, #818cf8 50%, #c084fc 100%);
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -171,7 +181,7 @@ export default function ProjectsList() {
 
         {/* Main content with responsive margin */}
         <main
-          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 relative z-10 transition-all duration-300 ease-in-out"
           style={{
             marginLeft: isMobile ? "0" : "40px",
           }}
@@ -198,8 +208,8 @@ export default function ProjectsList() {
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                   <FolderOpen size={24} className="text-white" />
                 </div>
-                <h1 className={`font-bold font-neue-montreal ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
-                  <span className="text-gradient-enhanced">Projects</span>
+                <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
+                  My <span className="text-gradient-enhanced italic">Projects</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed font-neue-montreal ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
@@ -220,13 +230,20 @@ export default function ProjectsList() {
                     onMouseEnter={() => setHovered(proj.id)}
                     onMouseLeave={() => setHovered(null)}
                   >
-                    {/* Real Image */}
+                    {/* Real Image (or gradient placeholder for the interactive notebook) */}
                     <div className="relative h-48 overflow-hidden border-b border-white/10">
-                      <img 
-                        src={getProjectImage(proj.slug)} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        alt={proj.title}
-                      />
+                      {getProjectImage(proj.slug) ? (
+                        <img
+                          src={getProjectImage(proj.slug)}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          alt={proj.title}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-[#0b1020] relative overflow-hidden">
+                          <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 30% 40%, rgba(129,140,248,0.25), transparent 55%), radial-gradient(circle at 75% 70%, rgba(192,132,252,0.22), transparent 55%)" }} />
+                          <LineChart size={54} className="text-indigo-300/70 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     </div>
 
@@ -248,15 +265,25 @@ export default function ProjectsList() {
                       </div>
 
                       <div className={`flex gap-3 ${isMobile ? "flex-col" : ""}`}>
-                        <a 
-                          href={getProjectUrl(proj.slug)} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium font-neue-montreal rounded-lg shadow-lg shadow-indigo-500/25 hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
-                        >
-                          <ExternalLink size={16} />
-                          View Details
-                        </a>
+                        {proj.slug === "tariff" ? (
+                          <Link
+                            href="/projects?project=tariff"
+                            className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium font-neue-montreal rounded-lg shadow-lg shadow-indigo-500/25 hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
+                          >
+                            <LineChart size={16} />
+                            Open Notebook
+                          </Link>
+                        ) : (
+                          <a
+                            href={getProjectUrl(proj.slug)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium font-neue-montreal rounded-lg shadow-lg shadow-indigo-500/25 hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
+                          >
+                            <ExternalLink size={16} />
+                            View Details
+                          </a>
+                        )}
                         <a 
                           href={getGitHubUrl(proj.slug)} 
                           target="_blank" 
