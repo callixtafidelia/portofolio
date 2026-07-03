@@ -57,8 +57,8 @@ export default function SkillsPage() {
       id: "viz",
       title: "Data Visualization",
       Icon: BarChart3,
-      color: "from-green-500 to-green-700",
-      glowColor: "rgba(16, 185, 129, 0.3)",
+      color: "from-teal-500 to-cyan-600",
+      glowColor: "rgba(45, 212, 191, 0.3)",
       skills: [
         { name: "Matplotlib", level: "Advanced", color: "gray", logoUrl: "./dataviz/matplotlib.png" },
         { name: "Seaborn", level: "Advanced", color: "gray", logoUrl: "./dataviz/seaborn.png" },
@@ -71,8 +71,8 @@ export default function SkillsPage() {
   id: "design",
   title: "Graphic Design",
   Icon: Layers,
-  color: "from-pink-500 to-rose-700",
-  glowColor: "rgba(236, 72, 153, 0.3)",
+  color: "from-fuchsia-500 to-violet-700",
+  glowColor: "rgba(217, 70, 239, 0.3)",
   skills: [
     { name: "Figma", level: "Basic", color: "gray", logoUrl: "./design/figma.png" },
     { name: "Canva", level: "Basic", color: "gray", logoUrl: "./design/canva.png" },
@@ -123,7 +123,7 @@ export default function SkillsPage() {
   const colorClasses = (c: string) => {
     switch (c) {
       case "green":
-        return "bg-gradient-to-r from-green-500/20 to-green-600/20 border-green-500/30 text-green-300"
+        return "bg-gradient-to-r from-teal-500/20 to-cyan-600/20 border-teal-500/30 text-teal-300"
       case "blue":
         return "bg-gradient-to-r from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-300"
       default:
@@ -207,18 +207,12 @@ export default function SkillsPage() {
         }
         
         @keyframes gradientShift {
-          0%, 100% { 
-            background-position: 0% 50%;
-            filter: hue-rotate(0deg);
-          }
-          50% { 
-            background-position: 100% 50%;
-            filter: hue-rotate(45deg);
-          }
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
-        
+
         .text-gradient-enhanced {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          background: linear-gradient(to right, #7dd3fe 0%, #818cf8 50%, #c084fc 100%);
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -239,7 +233,7 @@ export default function SkillsPage() {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(240, 147, 251, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(192, 132, 252, 0.1) 100%);
           opacity: 0;
           transition: opacity 0.4s ease;
           border-radius: inherit;
@@ -397,7 +391,7 @@ export default function SkillsPage() {
 
         {/* Main content with responsive margin */}
         <main
-          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 relative z-10 transition-all duration-300 ease-in-out"
           style={{
             marginLeft: isMobile ? "0" : "40px",
           }}
@@ -424,8 +418,8 @@ export default function SkillsPage() {
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                   <Zap size={24} className="text-white" />
                 </div>
-                <h1 className={`font-bold font-neue-montreal ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
-                  <span className="text-gradient-enhanced">Technical Skills</span>
+                <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
+                  Technical <span className="text-gradient-enhanced italic">Skills</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed font-neue-montreal ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>

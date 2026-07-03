@@ -230,7 +230,7 @@ export default function ExperiencePage() {
               {/* Tags */}
               <div className={`flex gap-2 ${isMobile ? "flex-wrap" : "flex-wrap md:flex-nowrap"}`}>
                 {exp.current && (
-                  <span className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 font-medium rounded-full ${isMobile ? "text-xs px-3 py-1.5" : "text-xs md:text-sm px-3 md:px-4 py-1.5 md:py-2"}`}>
+                  <span className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-teal-500/20 to-cyan-600/20 border border-teal-500/30 text-teal-300 font-medium rounded-full ${isMobile ? "text-xs px-3 py-1.5" : "text-xs md:text-sm px-3 md:px-4 py-1.5 md:py-2"}`}>
                     <Clock size={12} className="md:w-3.5 md:h-3.5 mr-1" />
                     Current
                   </span>
@@ -309,16 +309,10 @@ export default function ExperiencePage() {
         }
         
         @keyframes gradientShift {
-          0%, 100% { 
-            background-position: 0% 50%;
-            filter: hue-rotate(0deg);
-          }
-          50% { 
-            background-position: 100% 50%;
-            filter: hue-rotate(45deg);
-          }
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
-        
+
         @keyframes timelineGlow {
           0%, 100% { 
             box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
@@ -329,7 +323,7 @@ export default function ExperiencePage() {
         }
         
         .text-gradient-enhanced {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          background: linear-gradient(to right, #7dd3fe 0%, #818cf8 50%, #c084fc 100%);
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -349,7 +343,7 @@ export default function ExperiencePage() {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(240, 147, 251, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(192, 132, 252, 0.1) 100%);
           opacity: 0;
           transition: opacity 0.3s ease;
           border-radius: inherit;
@@ -369,7 +363,7 @@ export default function ExperiencePage() {
           background: linear-gradient(180deg, 
             rgba(102, 126, 234, 0.8) 0%, 
             rgba(139, 92, 246, 0.8) 50%, 
-            rgba(240, 147, 251, 0.8) 100%
+            rgba(192, 132, 252, 0.8) 100%
           );
           animation: timelineGlow 3s ease-in-out infinite;
         }
@@ -410,7 +404,7 @@ export default function ExperiencePage() {
 
         {/* Main content with responsive margin */}
         <main
-          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 relative z-10 transition-all duration-300 ease-in-out"
           style={{
             marginLeft: isMobile ? "0" : "40px",
           }}
@@ -437,8 +431,8 @@ export default function ExperiencePage() {
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                   <Briefcase size={24} className="text-white" />
                 </div>
-                <h1 className={`font-neue-montreal font-bold ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
-                  <span className="text-gradient-enhanced">Experience</span>
+                <h1 className={`playfair font-semibold ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
+                  My <span className="text-gradient-enhanced italic">Experience</span>
                 </h1>
               </div>
               <p className={`font-neue-montreal text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
@@ -477,10 +471,10 @@ export default function ExperiencePage() {
               className="mb-16"
             >
               <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/30">
+              <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/30">
                   <Heart size={20} className="text-white" />
                 </div>
-                <h2 className={`font-neue-montreal font-bold bg-gradient-to-r from-white via-green-200 to-emerald-200 bg-clip-text text-transparent ${isMobile ? "text-xl" : "text-2xl md:text-3xl"}`}>
+                <h2 className={`font-neue-montreal font-bold bg-gradient-to-r from-white via-teal-200 to-cyan-200 bg-clip-text text-transparent ${isMobile ? "text-xl" : "text-2xl md:text-3xl"}`}>
                   Volunteer & Community Work 
                 </h2>
               </div>
@@ -504,12 +498,12 @@ export default function ExperiencePage() {
                             <h3 className={`font-neue-montreal font-bold text-white mb-1 leading-tight ${isMobile ? "text-base" : "text-lg md:text-xl"}`}>
                               {exp.title}
                             </h3>
-                            <h4 className={`font-neue-montreal font-semibold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent ${isMobile ? "text-sm" : "text-base md:text-lg"}`}>
+                            <h4 className={`font-neue-montreal font-semibold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent ${isMobile ? "text-sm" : "text-base md:text-lg"}`}>
                               {exp.company}
                             </h4>
                           </div>
                           {exp.current && (
-                            <span className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 font-medium rounded-full ${isMobile ? "text-xs px-2 py-1" : "text-xs px-3 py-1.5"}`}>
+                            <span className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-teal-500/20 to-cyan-600/20 border border-teal-500/30 text-teal-300 font-medium rounded-full ${isMobile ? "text-xs px-2 py-1" : "text-xs px-3 py-1.5"}`}>
                               <Clock size={10} className="mr-1" />
                               Current
                             </span>
@@ -518,7 +512,7 @@ export default function ExperiencePage() {
 
                         {/* Duration */}
                         <div className="flex items-center gap-2 mb-3 text-gray-400">
-                          <Calendar size={12} className="md:w-3.5 md:h-3.5 text-green-400 flex-shrink-0" />
+                          <Calendar size={12} className="md:w-3.5 md:h-3.5 text-teal-400 flex-shrink-0" />
                           <span className={`font-neue-montreal ${isMobile ? "text-xs" : "text-sm"}`}>{exp.duration}</span>
                         </div>
 

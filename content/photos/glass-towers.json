@@ -1,0 +1,12 @@
+{
+  "title": "Glass Towers",
+  "location": "Coal Harbour, Vancouver",
+  "date": "May 2024",
+  "camera": "Sony A7III",
+  "lens": "50mm f/1.8",
+  "editingNotes": "Geometric crop, blue-channel boost, reflection cleanup. (Sample entry.)",
+  "beforeImage": "_sample-before.jpg",
+  "afterImage": "_sample-4.png",
+  "featured": false,
+  "order": 5
+}

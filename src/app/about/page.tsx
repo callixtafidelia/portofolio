@@ -71,23 +71,17 @@ export default function AboutMe() {
         }
         
         @keyframes gradientShift {
-          0%, 100% { 
-            background-position: 0% 50%;
-            filter: hue-rotate(0deg);
-          }
-          50% { 
-            background-position: 100% 50%;
-            filter: hue-rotate(45deg);
-          }
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
-        
+
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
         }
         
         .text-gradient-enhanced {
-          background: linear-gradient(135deg,rgb(13, 27, 88) 0%,rgb(3, 53, 138) 50%,rgb(2, 131, 151) 100%);
+          background: linear-gradient(to right, #7dd3fe 0%, #818cf8 50%, #c084fc 100%);
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -107,7 +101,7 @@ export default function AboutMe() {
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(240, 147, 251, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(192, 132, 252, 0.1) 100%);
           opacity: 0;
           transition: opacity 0.3s ease;
           border-radius: inherit;
@@ -165,11 +159,6 @@ export default function AboutMe() {
         @media (max-width: 768px) {
           .glow-card:hover {
             transform: none;
-
-        .font-neue-montreal {
-            font-family: 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-          }
-          
           }
         }
       `}</style>
@@ -180,7 +169,7 @@ export default function AboutMe() {
 
         {/* Main content with responsive margin */}
         <main
-          className="flex-1 overflow-y-auto py-8 relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto py-8 relative z-10 transition-all duration-300 ease-in-out"
           style={{
             marginLeft: isMobile ? "0" : "40px", // No margin on mobile, fixed 40px on desktop
           }}
@@ -208,8 +197,8 @@ export default function AboutMe() {
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                   <GraduationCap size={24} className="text-white" />
                 </div>
-                <h1 className={`font-bold font-neue-montreal ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
-                  About <span className="text-gradient-enhanced">Me</span>
+                <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
+                  About <span className="text-gradient-enhanced italic">Me</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed font-neue-montreal ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
@@ -307,7 +296,7 @@ export default function AboutMe() {
                       </div>
                       <div className="flex flex-wrap gap-2">
                       <span
-                        className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/30 text-green-300 font-medium rounded-full ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}
+                        className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-teal-500/20 to-cyan-600/20 border border-teal-500/30 text-teal-300 font-medium rounded-full ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}
                       >
                         Statistics and Biology Concentration 
                       </span>

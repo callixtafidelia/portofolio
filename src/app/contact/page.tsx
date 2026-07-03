@@ -85,8 +85,8 @@ ${email}`
       title: "Location",
       value: "Available for Remote Work",
       href: "#",
-      color: "from-green-500 to-green-700",
-      glowColor: "rgba(16, 185, 129, 0.3)",
+      color: "from-teal-500 to-cyan-600",
+      glowColor: "rgba(45, 212, 191, 0.3)",
     },
   ]
 
@@ -94,12 +94,6 @@ ${email}`
     <>
       {/* Enhanced Global Styles */}
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Neue+Montreal:wght@300;400;500;600;700;800&display=swap');
-        
-        * {
-          font-family: 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-        }
-        
         body {
           margin: 0;
           padding: 0;
@@ -129,23 +123,17 @@ ${email}`
         }
         
         @keyframes gradientShift {
-          0%, 100% { 
-            background-position: 0% 50%;
-            filter: hue-rotate(0deg);
-          }
-          50% { 
-            background-position: 100% 50%;
-            filter: hue-rotate(45deg);
-          }
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
-        
+
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.5; }
         }
         
         .text-gradient-enhanced {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+          background: linear-gradient(to right, #7dd3fe 0%, #818cf8 50%, #c084fc 100%);
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -166,7 +154,7 @@ ${email}`
           content: '';
           position: absolute;
           inset: 0;
-          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(240, 147, 251, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 50%, rgba(192, 132, 252, 0.1) 100%);
           opacity: 0;
           transition: opacity 0.3s ease;
           border-radius: inherit;
@@ -223,7 +211,7 @@ ${email}`
 
         {/* Main content with responsive margin and proper mobile spacing */}
         <main
-          className="flex-1 overflow-y-auto relative transition-all duration-300 ease-in-out"
+          className="flex-1 overflow-y-auto relative z-10 transition-all duration-300 ease-in-out"
           style={{
             marginLeft: isMobile ? "0" : "40px",
             paddingTop: isMobile ? "80px" : "32px", // Extra top padding on mobile
@@ -237,8 +225,8 @@ ${email}`
                 <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
                   <Mail size={24} className="text-white" />
                 </div>
-                <h1 className={`font-bold ${isMobile ? "text-3xl sm:text-4xl" : "text-5xl"}`}>
-                  <span className="text-gradient-enhanced">Contact Me</span>
+                <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
+                  Contact <span className="text-gradient-enhanced italic">Me</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>

@@ -61,7 +61,7 @@ export default function Home() {
 
         {/* Main content - adjusted for responsive sidebar */}
         <main
-          className={`transition-all duration-300 ease-in-out pt-16 lg:pt-0 ${
+          className={`relative z-10 transition-all duration-300 ease-in-out pt-16 lg:pt-0 ${
             isMobile ? '' : sidebarCollapsed ? 'lg:ml-[120px]' : 'lg:ml-[288px]'
           }`}
         >
@@ -117,9 +117,9 @@ export default function Home() {
                 </div>
 
                 {/* Title - Responsive text sizing */}
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight neue-montreal">
+                <h1 className="playfair text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] font-semibold">
                   Hey, I'm{' '}
-                  <span className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                  <span className="playfair-italic bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
                     Callixta Fidelia C
                   </span>
                 </h1>

@@ -9,21 +9,35 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@keystatic/core": "^0.5.50",
+    "@keystatic/next": "^5.0.4",
     "@react-three/drei": "^10.3.0",
     "@react-three/fiber": "^9.1.2",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.0",
+    "d3-geo": "^3.1.1",
     "framer-motion": "^12.18.1",
+    "image-size": "^2.0.2",
     "lucide-react": "^0.518.0",
     "next": "15.3.4",
+    "next-mdx-remote": "^6.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "three": "^0.177.0"
+    "react-photo-album": "^3.6.0",
+    "rehype-pretty-code": "^0.14.3",
+    "shiki": "^4.3.1",
+    "three": "^0.177.0",
+    "topojson-client": "^3.1.0",
+    "us-atlas": "^3.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/d3-geo": "^3.1.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.177.0",
+    "@types/topojson-client": "^3.1.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
