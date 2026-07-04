@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ChevronLeft, ChevronRight, Camera, MapPin, Heart, Trophy } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, Camera, MapPin, Heart, Trophy, Images } from "lucide-react"
 import { RowsPhotoAlbum, MasonryPhotoAlbum, type Photo as AlbumPhoto } from "react-photo-album"
 import "react-photo-album/rows.css"
 import "react-photo-album/masonry.css"
@@ -103,7 +103,7 @@ function LikeButton({
       >
         <Heart size={icon} className={liked ? "fill-rose-400 text-rose-400" : "group-hover/like:text-rose-300"} />
       </motion.span>
-      <span className="text-xs font-mono-accent tabular-nums">{count}</span>
+      <span className="text-xs font-body tabular-nums">{count}</span>
     </button>
   )
 }
@@ -215,7 +215,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                 <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="mb-14">
                   <div className="flex items-center gap-2.5 mb-5">
                     <Trophy size={18} className="text-amber-400" />
-                    <h2 className="font-mono-accent text-xs tracking-[0.25em] uppercase text-gray-300">Most Loved</h2>
+                    <h2 className="font-body text-xs tracking-[0.25em] uppercase text-gray-300">Most Loved</h2>
                     <span className="flex-1 h-px bg-white/10 ml-2" />
                   </div>
                   <div className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-3"}`}>
@@ -231,16 +231,15 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                         <img src={photo.afterSrc} alt={photo.title} loading="lazy" className="photo-img absolute inset-0 w-full h-full object-cover" />
                         <div className="photo-overlay absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
 
-                        <span className={`absolute top-3 left-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border font-mono-accent text-[11px] tracking-wider ${rankStyles[i]}`}>
+                        <span className={`absolute top-3 left-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border font-body text-[11px] tracking-wider ${rankStyles[i]}`}>
                           #{i + 1}
                         </span>
                         <div className="absolute top-3 right-3">
                           <LikeButton liked={liked.has(photo.id)} count={countFor(photo.id)} onToggle={() => toggle(photo.id)} />
                         </div>
                         <div className="absolute bottom-0 inset-x-0 p-4">
-                          <h3 className="playfair text-xl text-white leading-tight">{photo.title}</h3>
-                          <p className="font-mono-accent text-[10px] tracking-[0.2em] uppercase text-white/60 mt-1 flex items-center gap-1.5">
-                            <MapPin size={9} />{photo.location}
+                          <p className="font-body text-base text-white/90 flex items-center gap-1.5">
+                            <MapPin size={13} className="text-white/50" />{photo.location}
                           </p>
                         </div>
                       </motion.div>
@@ -250,9 +249,10 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
 
                 {/* The Collection — justified rows via react-photo-album */}
                 <div className="flex items-center gap-2.5 mb-5">
-                  <h2 className="font-mono-accent text-xs tracking-[0.25em] uppercase text-gray-300">The Collection</h2>
+                  <Images size={18} className="text-amber-400" />
+                  <h2 className="font-body text-xs tracking-[0.25em] uppercase text-gray-300">The Collection</h2>
                   <span className="flex-1 h-px bg-white/10 ml-2" />
-                  <span className="font-mono-accent text-[11px] tracking-widest text-gray-500">{String(photos.length).padStart(2, "0")}</span>
+                  <span className="font-body text-[11px] tracking-widest text-gray-500">{String(photos.length).padStart(2, "0")}</span>
                 </div>
 
                 <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}>
@@ -278,16 +278,15 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                               className="photo-img absolute inset-0 w-full h-full object-cover"
                             />
                             <div className="photo-overlay absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
-                            <span className="absolute top-4 left-4 font-mono-accent text-[11px] tracking-widest text-white/70 mix-blend-difference">
+                            <span className="absolute top-4 left-4 font-body text-[11px] tracking-widest text-white/70 mix-blend-difference">
                               {String(index + 1).padStart(2, "0")}
                             </span>
                             <div className="absolute top-3.5 right-3.5">
                               <LikeButton liked={liked.has(p.id)} count={countFor(p.id)} onToggle={() => toggle(p.id)} />
                             </div>
                             <div className="photo-caption absolute bottom-0 inset-x-0 p-5">
-                              <h3 className="playfair text-2xl text-white leading-tight">{p.title}</h3>
-                              <p className="font-mono-accent text-[10px] tracking-[0.2em] uppercase text-white/60 mt-1.5 flex items-center gap-1.5">
-                                <MapPin size={9} />{p.location}
+                              <p className="font-body text-lg text-white/90 flex items-center gap-1.5">
+                                <MapPin size={14} className="text-white/50" />{p.location}
                               </p>
                             </div>
                           </div>
@@ -339,19 +338,18 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                 </button>
 
                 <div className="flex-1 bg-slate-900/80 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/10">
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-3">
-                    <h2 className="playfair text-2xl sm:text-3xl text-white">{selectedPhoto.title}</h2>
-                    <p className="font-mono-accent text-[10px] tracking-[0.2em] uppercase text-indigo-400/90 flex items-center gap-1.5">
-                      <MapPin size={10} />{selectedPhoto.location}
+                  <div className="mb-3">
+                    <p className="font-body text-xl sm:text-2xl text-white flex items-center gap-2">
+                      <MapPin size={16} className="text-indigo-400/90" />{selectedPhoto.location}
                     </p>
                   </div>
                   <div className={`grid gap-x-6 gap-y-2 ${isMobile ? "grid-cols-2" : "grid-cols-3"} border-t border-white/10 pt-3`}>
                     <Meta label="Date" value={selectedPhoto.date} />
                     <Meta label="Camera" value={selectedPhoto.camera} />
-                    <Meta label="Lens" value={selectedPhoto.lens} />
+                    <Meta label="Editor" value={selectedPhoto.lens} />
                   </div>
                   <div className="mt-3 pt-3 border-t border-white/10">
-                    <p className="font-mono-accent text-[9px] tracking-[0.25em] uppercase text-gray-600 mb-1">Post-Processing</p>
+                    <p className="font-body text-[9px] tracking-[0.25em] uppercase text-gray-600 mb-1">Description</p>
                     <p className="text-gray-300 text-[13px] leading-relaxed">{selectedPhoto.editingNotes}</p>
                   </div>
                 </div>
@@ -371,7 +369,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
 function Meta({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="font-mono-accent text-[9px] tracking-[0.25em] uppercase text-gray-600 mb-0.5">{label}</p>
+      <p className="font-body text-[9px] tracking-[0.25em] uppercase text-gray-600 mb-0.5">{label}</p>
       <p className="text-white text-[13px] leading-snug">{value}</p>
     </div>
   )

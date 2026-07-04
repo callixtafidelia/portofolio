@@ -34,7 +34,7 @@ export default function BeforeAfterHold({ beforeSrc, afterSrc }: Props) {
       <img
         src={afterSrc}
         alt="Edited"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-contain"
         draggable={false}
       />
 
@@ -42,14 +42,14 @@ export default function BeforeAfterHold({ beforeSrc, afterSrc }: Props) {
       <img
         src={beforeSrc}
         alt="Original"
-        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-150 ease-out"
+        className="absolute inset-0 w-full h-full object-contain transition-opacity duration-150 ease-out"
         style={{ opacity: holding ? 1 : 0 }}
         draggable={false}
       />
 
       {/* State label */}
       <div
-        className={`absolute top-4 left-4 px-3 py-1 rounded-full backdrop-blur-sm border text-xs font-mono-accent tracking-widest uppercase transition-colors duration-150 ${
+        className={`absolute top-4 left-4 px-3 py-1 rounded-full backdrop-blur-sm border text-xs font-body tracking-widest uppercase transition-colors duration-150 ${
           holding
             ? "bg-amber-500/20 border-amber-400/40 text-amber-200"
             : "bg-black/60 border-white/20 text-white"
