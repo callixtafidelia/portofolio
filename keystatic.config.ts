@@ -6,7 +6,14 @@ import { wrapper } from "@keystatic/core/content-components"
 // dev or a build without secrets — it falls back to local mode so the build
 // still succeeds and you can edit offline. Both modes read the same committed
 // content, so the public site is identical either way.
-const useGitHubStorage = !!process.env.KEYSTATIC_GITHUB_CLIENT_ID
+//
+// IMPORTANT: this file is imported by BOTH the server API route AND the
+// browser-side Keystatic admin bundle. Next.js only inlines NEXT_PUBLIC_-
+// prefixed env vars into client code, so the gate MUST use a NEXT_PUBLIC_ var
+// (not e.g. KEYSTATIC_GITHUB_CLIENT_ID) — otherwise the server resolves
+// 'github' while the browser silently resolves 'local', causing every
+// collection to 404 on GET /api/keystatic/tree in production.
+const useGitHubStorage = !!process.env.NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG
 
 export default config({
   storage: useGitHubStorage
