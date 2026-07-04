@@ -6,8 +6,9 @@
 //   BLOB_READ_WRITE_TOKEN=vercel_blob_rw_xxx node scripts/upload-resume-to-blob.mjs ./resume.pdf
 //
 // Get BLOB_READ_WRITE_TOKEN from Vercel → Storage → your Blob store → tokens.
-// After it prints a URL, set that as RESUME_BLOB_URL in Vercel → Project →
-// Settings → Environment Variables (Production + Preview). Never commit it.
+// No further setup needed — /api/resume always serves whichever blob under
+// "private/resume*" was uploaded most recently, so this script alone is
+// enough to swap resumes.
 
 import { put } from "@vercel/blob"
 import { readFile } from "fs/promises"
@@ -26,14 +27,15 @@ if (!process.env.BLOB_READ_WRITE_TOKEN) {
 const file = await readFile(filePath)
 
 // addRandomSuffix (default true) makes the path unguessable; the URL is
-// never sent to the client — only the server-side /api/resume route (via
-// RESUME_BLOB_URL) ever fetches it.
+// never sent to the client — only the server-side /api/resume route ever
+// looks it up (via `list()`, picking the most recently uploaded match).
 const blob = await put(`private/resume-${Date.now()}.pdf`, file, {
   access: "public",
   addRandomSuffix: true,
   contentType: "application/pdf",
 })
 
-console.log("\nUploaded. Set this as RESUME_BLOB_URL in Vercel (Production + Preview):\n")
+console.log("\nUploaded:\n")
 console.log(blob.url)
-console.log("\nThen remove any old blob you no longer need from the Vercel Blob dashboard.")
+console.log("\n/api/resume will serve this one automatically on the next request (no env var to update).")
+console.log("You can now delete any older resume blob from the Vercel Blob dashboard.")
