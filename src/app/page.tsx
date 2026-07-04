@@ -3,8 +3,9 @@
 import React, { useRef, useEffect, useState, Suspense } from 'react'
 import Link from 'next/link'
 import Sidebar from '@/components/sidebar'
+import ResumeDownload from '@/components/ResumeDownload'
 import { motion } from 'framer-motion'
-import { Download, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useGLTF, Environment } from '@react-three/drei'
 
@@ -132,16 +133,10 @@ export default function Home() {
 
                 {/* Buttons - Responsive layout */}
                 <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center lg:justify-start">
-                  <motion.a
-                    href="./resume.pdf"
-                    download = "Callixta_Fidelia_Resume.pdf"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                  <ResumeDownload
                     className="inline-flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-6 lg:px-8 py-3 lg:py-4 text-white font-semibold text-base lg:text-lg shadow-2xl neue-montreal"
-                  >
-                    <Download size={20} />
-                    Download Resume
-                  </motion.a>
+                    iconSize={20}
+                  />
 
                   <Link href="./projects">
                   <motion.div

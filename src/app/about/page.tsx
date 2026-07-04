@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Sidebar from "@/components/sidebar"
+import ResumeDownload from "@/components/ResumeDownload"
 import { motion } from "framer-motion"
-import { ArrowLeft, Download, GraduationCap, Award, Calendar, MapPin } from "lucide-react"
+import { ArrowLeft, GraduationCap, Award, Calendar, MapPin } from "lucide-react"
 
 export default function AboutMe() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
@@ -238,22 +239,11 @@ export default function AboutMe() {
                     </p>
                   </div>
 
-                  <motion.button
-                     whileHover={isMobile ? {} : { scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    const link = document.createElement('a');
-                    link.href = './resume.pdf'; // Path to your resume in public folder
-                    link.download = 'Callixta_Fidelia_Resume.pdf'; // Name for downloaded file
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }}
-                  className={`btn-glow inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-2xl shadow-indigo-500/25 transition-all duration-300 hover:shadow-indigo-500/40 rounded-xl mt-6 md:mt-8 ${isMobile ? "px-6 py-3 text-base" : "px-6 md:px-8 py-3 md:py-4 text-base md:text-lg"}`}
-                >
-                  <Download size={18} className="md:w-6 md:h-6" />
-                  Download Resume
-                  </motion.button>
+                  <ResumeDownload
+                    className={`btn-glow inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-2xl shadow-indigo-500/25 transition-all duration-300 hover:shadow-indigo-500/40 rounded-xl mt-6 md:mt-8 ${isMobile ? "px-6 py-3 text-base" : "px-6 md:px-8 py-3 md:py-4 text-base md:text-lg"}`}
+                    iconSize={18}
+                    iconClassName="md:w-6 md:h-6"
+                  />
                 </div>
               </motion.div>
 
