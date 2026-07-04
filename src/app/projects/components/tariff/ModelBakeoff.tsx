@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { table1, Series, Metric } from "./data"
-import { Toggle, useInViewOnce } from "./primitives"
+import { Toggle, useInViewOnce } from "@/components/case-study/primitives"
 
 export default function ModelBakeoff() {
   const [series, setSeries] = useState<Series>("stock")

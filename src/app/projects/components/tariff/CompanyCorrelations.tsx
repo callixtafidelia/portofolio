@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { companies, sectorColors } from "./data"
-import { useInViewOnce } from "./primitives"
+import { useInViewOnce } from "@/components/case-study/primitives"
 
 const MAX = 0.8 // axis extent for ±
 

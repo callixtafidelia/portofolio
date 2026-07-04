@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { monthly, ELECTION_IDX } from "./data"
-import { usePrefersReducedMotion } from "./primitives"
+import { usePrefersReducedMotion } from "@/components/case-study/primitives"
 
 const N = monthly.length
 const Y_MAX = 50 // RSV scale headroom (tariff peaks ~42)

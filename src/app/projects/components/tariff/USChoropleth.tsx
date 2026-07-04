@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react"
 import { states, StateRow, Series } from "./data"
-import { Toggle } from "./primitives"
+import { Toggle } from "@/components/case-study/primitives"
 
 interface Feat { name: string; d: string }
 

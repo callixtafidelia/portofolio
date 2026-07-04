@@ -6,7 +6,7 @@ import Sidebar from "@/components/sidebar"
 import { motion } from "framer-motion"
 import { ArrowLeft, Github, Users, Wrench, UserCircle } from "lucide-react"
 import { meta } from "./data"
-import { Cell, CodeCell } from "./primitives"
+import { Cell, CodeCell, PageHeadline } from "@/components/case-study/primitives"
 import OpenerChart from "./OpenerChart"
 import ModelBakeoff from "./ModelBakeoff"
 import RevealChart from "./RevealChart"
@@ -62,9 +62,7 @@ export default function TariffAnalysis() {
               <p className="font-mono-accent text-[11px] uppercase tracking-[0.3em] text-indigo-400/80 mb-4">
                 Interactive Notebook · Google Trends · R + Python
               </p>
-              <h1 className={`font-semibold playfair leading-[1.05] ${isMobile ? "text-3xl" : "text-5xl"}`}>
-                <span className="text-gradient-enhanced">{meta.title}</span>
-              </h1>
+              <PageHeadline className={isMobile ? "text-3xl" : "text-5xl"}>{meta.title}</PageHeadline>
               <p className={`text-gray-300 leading-relaxed mt-4 ${isMobile ? "text-base" : "text-lg"}`}>{meta.subtitle}</p>
             </motion.div>
 

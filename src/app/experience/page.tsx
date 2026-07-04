@@ -368,10 +368,6 @@ export default function ExperiencePage() {
           animation: timelineGlow 3s ease-in-out infinite;
         }
 
-        .font-neue-montreal {
-          font-family: 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        
         /* Custom scrollbar */
         ::-webkit-scrollbar {
           width: 8px;

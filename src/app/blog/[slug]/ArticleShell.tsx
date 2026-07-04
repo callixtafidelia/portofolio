@@ -5,6 +5,7 @@ import Link from "next/link"
 import Sidebar from "@/components/sidebar"
 import { motion } from "framer-motion"
 import { ArrowLeft, Calendar, Clock, Tag, BookOpen, BarChart3, Brain } from "lucide-react"
+import { PageHeadline } from "@/components/case-study/primitives"
 
 interface Props {
   title: string
@@ -57,29 +58,24 @@ export default function ArticleShell({ title, category, excerpt, date, readTime,
           -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
           animation: gradientShift 5s ease infinite;
         }
-        .glow-card {
-          position: relative; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;
-        }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
         ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 4px; }
 
-        /* ── Article body — Medium-style reading (MDX renders through these) ── */
+        /* ── Article body — case-study typography (MDX renders through these) ── */
         .prose-article {
           color: #dfe4ec;
-          font-family: Georgia, Cambria, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+          font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
           font-size: 1.14rem; line-height: 1.85; letter-spacing: 0.003em;
         }
         @media (min-width: 768px) { .prose-article { font-size: 1.25rem; line-height: 1.9; } }
         .prose-article > *:first-child { margin-top: 0; }
-        /* Headings use the sans display font for that clean Medium contrast */
-        .prose-article h2, .prose-article h3, .prose-article h4 {
+        /* h2 renders through the Eyebrow component (mdxComponents.tsx) instead
+           of a plain heading — only h3/h4 still use this display styling. */
+        .prose-article h3, .prose-article h4 {
           font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           color: #fff; letter-spacing: -0.01em;
         }
-        .prose-article h2 { font-weight: 700; font-size: 1.5rem; line-height: 1.25; margin: 2.5rem 0 1rem; }
-        @media (min-width: 768px) { .prose-article h2 { font-size: 1.9rem; } }
         .prose-article h3 { font-weight: 700; font-size: 1.2rem; margin: 2rem 0 0.65rem; }
         @media (min-width: 768px) { .prose-article h3 { font-size: 1.4rem; } }
         .prose-article h4 { font-weight: 600; font-size: 1.05rem; margin: 1.4rem 0 0.5rem; }
@@ -113,21 +109,13 @@ export default function ArticleShell({ title, category, excerpt, date, readTime,
           padding: 0.12rem 0.4rem; border-radius: 0.35rem; font-size: 0.82em;
           font-family: var(--font-mono), 'SF Mono', 'Fira Code', monospace;
         }
+        /* Code-block surface (background/border/dots/lang badge/filename) now
+           comes entirely from CodeShell, rendered via the pre/figcaption
+           overrides in mdxComponents.tsx — just reset the figure's default
+           browser margin/indentation here. */
         .prose-article figure[data-rehype-pretty-code-figure] { margin: 1.5rem 0; }
-        .prose-article pre {
-          background: #0b1020; border: 1px solid rgba(129,140,248,0.16);
-          border-radius: 0.85rem; overflow-x: auto; padding: 1rem 1.15rem; margin: 0;
-          box-shadow: 0 8px 30px rgba(0,0,0,0.28);
-        }
-        @media (min-width: 768px) { .prose-article pre { padding: 1.35rem 1.5rem; } }
-        .prose-article pre code {
-          display: grid; background: none; padding: 0; font-size: 0.82rem; line-height: 1.7;
-          font-family: var(--font-mono), 'SF Mono', 'Fira Code', monospace;
-          counter-reset: line;
-        }
-        @media (min-width: 768px) { .prose-article pre code { font-size: 0.9rem; } }
+        .prose-article pre code { display: grid; counter-reset: line; }
         .prose-article pre code [data-line] { padding: 0 0.1rem; }
-        .prose-article [data-rehype-pretty-code-figure] [data-line] { color: #cbd5e1; }
 
         /* ── Medium-style callouts (Note / Highlight) ── */
         .article-callout {
@@ -171,24 +159,23 @@ export default function ArticleShell({ title, category, excerpt, date, readTime,
                   <CatIcon size={14} className="mr-2" />
                   {category}
                 </span>
-                <h1 className={`font-bold mb-6 ${isMobile ? "text-2xl sm:text-3xl" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl"}`}>
-                  <span className="text-gradient-enhanced italic">{title}</span>
-                </h1>
+                <PageHeadline className={`mb-6 ${isMobile ? "text-2xl sm:text-3xl" : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl"}`}>
+                  {title}
+                </PageHeadline>
                 {excerpt && (
                   <p className={`text-gray-300 leading-relaxed mb-6 max-w-3xl mx-auto ${isMobile ? "text-base" : "text-base md:text-xl"}`}>
                     {excerpt}
                   </p>
                 )}
-                <div className={`flex gap-4 md:gap-6 text-gray-400 justify-center ${isMobile ? "text-xs flex-wrap" : "text-xs flex-wrap md:text-sm"}`}>
-                  {date && <div className="flex items-center gap-1.5 md:gap-2"><Calendar size={16} />{date}</div>}
-                  {readTime && <div className="flex items-center gap-1.5 md:gap-2"><Clock size={16} />{readTime}</div>}
-                  {author && <div className="flex items-center gap-1.5 md:gap-2"><Tag size={16} />{author}</div>}
+                <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-gray-400 border-y border-white/10 py-4">
+                  {date && <span className="flex items-center gap-1.5"><Calendar size={14} className="text-indigo-400" />{date}</span>}
+                  {readTime && <span className="flex items-center gap-1.5"><Clock size={14} className="text-indigo-400" />{readTime}</span>}
+                  {author && <span className="flex items-center gap-1.5"><Tag size={14} className="text-indigo-400" />{author}</span>}
                 </div>
               </motion.header>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
-                className={`glow-card rounded-xl md:rounded-2xl ${isMobile ? "p-5" : "p-6 md:p-8 lg:p-10"}`}
               >
                 <div className="prose-article">{children}</div>
               </motion.div>

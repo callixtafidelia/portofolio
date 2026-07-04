@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { sectors, sectorColors } from "./data"
-import { Toggle, useInViewOnce } from "./primitives"
+import { Toggle, useInViewOnce } from "@/components/case-study/primitives"
 
 type Sort = "change" | "post" | "name"
 

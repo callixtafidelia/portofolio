@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { correlation } from "./data"
-import { AnimatedNumber, useInViewOnce, usePrefersReducedMotion } from "./primitives"
+import { AnimatedNumber, useInViewOnce, usePrefersReducedMotion } from "@/components/case-study/primitives"
 
 function mulberry32(seed: number) {
   return function () {

@@ -84,23 +84,29 @@ function highlight(code: string, lang: "r" | "python") {
     .join("\n")
 }
 
-export function CodeCell({ lang, code, caption }: { lang: "r" | "python"; code: string; caption?: string }) {
+/* ── Terminal-style code chrome: traffic-light dots + optional lang badge
+   and filename footer. Shared shell — CodeCell (raw string + hand-rolled
+   highlighting) and the blog MDX code-block override both render through
+   this so the two systems can't visually drift apart. ──────────────────── */
+export function CodeShell({
+  langLabel, filename, className = "", children,
+}: { langLabel?: string; filename?: string; className?: string; children: ReactNode }) {
   return (
-    <div className="code-cell rounded-xl overflow-hidden border border-white/10 bg-[#0b1020]/80 backdrop-blur-sm my-4">
+    <div className={`code-cell rounded-xl overflow-hidden border border-white/10 bg-[#0b1020]/80 backdrop-blur-sm ${className}`}>
       <div className="flex items-center gap-2 px-4 py-2 border-b border-white/10 bg-white/[0.03]">
         <span className="flex gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-rose-400/60" />
           <span className="w-2.5 h-2.5 rounded-full bg-amber-400/60" />
           <span className="w-2.5 h-2.5 rounded-full bg-teal-400/60" />
         </span>
-        <span className="ml-auto text-[11px] font-mono-accent uppercase tracking-widest text-indigo-300/90 px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-400/20">
-          {lang === "r" ? "R" : "Python"}
-        </span>
+        {langLabel && (
+          <span className="ml-auto text-[11px] font-mono-accent uppercase tracking-widest text-indigo-300/90 px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-400/20">
+            {langLabel}
+          </span>
+        )}
       </div>
-      <pre className="overflow-x-auto p-4 text-[12.5px] leading-relaxed">
-        <code className="font-mono-accent" dangerouslySetInnerHTML={{ __html: highlight(code, lang) }} />
-      </pre>
-      {caption && <div className="px-4 pb-3 text-[11px] text-gray-500 font-mono-accent">{caption}</div>}
+      {children}
+      {filename && <div className="px-4 pb-3 text-[11px] text-gray-500 font-mono-accent">{filename}</div>}
       <style jsx global>{`
         .code-cell .tok-kw { color: #c084fc; }
         .code-cell .tok-str { color: #7dd3fc; }
@@ -113,10 +119,42 @@ export function CodeCell({ lang, code, caption }: { lang: "r" | "python"; code: 
   )
 }
 
+export function CodeCell({ lang, code, caption }: { lang: "r" | "python"; code: string; caption?: string }) {
+  return (
+    <CodeShell langLabel={lang === "r" ? "R" : "Python"} filename={caption} className="my-4">
+      <pre className="overflow-x-auto p-4 text-[12.5px] leading-relaxed">
+        <code className="font-mono-accent" dangerouslySetInnerHTML={{ __html: highlight(code, lang) }} />
+      </pre>
+    </CodeShell>
+  )
+}
+
+/* ── Mono, small-caps eyebrow label — with or without a leading number.
+   Case studies pass `number` for their fixed 01/02/03 sequence; blog posts
+   (not part of a numbered sequence) omit it and get just the label. ────── */
+export function Eyebrow({ children, number }: { children?: ReactNode; number?: string }) {
+  if (!number && !children) return null
+  return (
+    <div className="flex items-baseline gap-3 mb-4">
+      {number && <span className="font-mono-accent text-sm text-indigo-400/80 tabular-nums">{number}</span>}
+      {children && <span className="font-mono-accent text-[11px] uppercase tracking-[0.25em] text-gray-500">{children}</span>}
+    </div>
+  )
+}
+
+/* ── Page/section headline: Playfair serif + animated gradient, no italic ─ */
+export function PageHeadline({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return (
+    <h1 className={`font-semibold playfair leading-[1.05] ${className}`}>
+      <span className="text-gradient-enhanced">{children}</span>
+    </h1>
+  )
+}
+
 /* ── Notebook cell: number + title, narrative, then children (code+output) ─ */
 export function Cell({
   index, kicker, title, children,
-}: { index: string; kicker?: string; title: string; children: ReactNode }) {
+}: { index?: string; kicker?: string; title: string; children: ReactNode }) {
   const { ref, inView } = useInViewOnce("-10%")
   return (
     <motion.section
@@ -126,10 +164,7 @@ export function Cell({
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="mb-20 md:mb-28 scroll-mt-8"
     >
-      <div className="flex items-baseline gap-3 mb-4">
-        <span className="font-mono-accent text-sm text-indigo-400/80 tabular-nums">{index}</span>
-        {kicker && <span className="font-mono-accent text-[11px] uppercase tracking-[0.25em] text-gray-500">{kicker}</span>}
-      </div>
+      <Eyebrow number={index}>{kicker}</Eyebrow>
       <h2 className="playfair text-3xl sm:text-4xl md:text-5xl font-semibold mb-5 leading-tight">
         <span className="text-gradient-enhanced">{title}</span>
       </h2>

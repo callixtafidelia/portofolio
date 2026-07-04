@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { forecastData, excess, Series } from "./data"
-import { Toggle, usePrefersReducedMotion, useInViewOnce } from "./primitives"
+import { Toggle, usePrefersReducedMotion, useInViewOnce } from "@/components/case-study/primitives"
 import { Eye } from "lucide-react"
 
 export default function RevealChart() {
