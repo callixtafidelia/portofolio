@@ -111,17 +111,55 @@ export default function StarCursor() {
 
     resize()
     window.addEventListener("resize", resize)
-    window.addEventListener("mousemove", onMove)
+    // Use capture phase to ensure we catch mousemove events even when iframe is in focus
+    document.addEventListener("mousemove", onMove, true)
     window.addEventListener("mouseleave", onLeave)
     document.addEventListener("visibilitychange", onVisibility)
+    
+    // For iframes: listen to their mousemove events as well
+    const forwardIframeEvents = () => {
+      const iframes = document.querySelectorAll('iframe')
+      iframes.forEach(iframe => {
+        try {
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
+          if (iframeDoc) {
+            iframeDoc.addEventListener('mousemove', onMove, true)
+            iframeDoc.addEventListener('mouseleave', onLeave, true)
+          }
+        } catch (e) {
+          // Silently fail if we can't access iframe (cross-origin, etc.)
+        }
+      })
+    }
+    
+    // Forward iframe events on initial load and when DOM changes
+    forwardIframeEvents()
+    const observer = new MutationObserver(forwardIframeEvents)
+    observer.observe(document.body, { childList: true, subtree: true })
+    
     draw()
 
     return () => {
       cancelAnimationFrame(animId)
       window.removeEventListener("resize", resize)
-      window.removeEventListener("mousemove", onMove)
+      document.removeEventListener("mousemove", onMove, true)
       window.removeEventListener("mouseleave", onLeave)
       document.removeEventListener("visibilitychange", onVisibility)
+      observer.disconnect()
+      
+      // Cleanup iframe listeners
+      const iframes = document.querySelectorAll('iframe')
+      iframes.forEach(iframe => {
+        try {
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
+          if (iframeDoc) {
+            iframeDoc.removeEventListener('mousemove', onMove, true)
+            iframeDoc.removeEventListener('mouseleave', onLeave, true)
+          }
+        } catch (e) {
+          // Silently fail
+        }
+      })
     }
   }, [])
 

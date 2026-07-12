@@ -29,7 +29,7 @@ export const mdxComponents = {
   ),
   // ## heading — same mono/small-caps eyebrow as case-study sections, just
   // without the leading 01/02 number (blog posts aren't a numbered sequence).
-  h2: ({ children }: ComponentPropsWithoutRef<"h2">) => <Eyebrow>{children}</Eyebrow>,
+  h2: ({ children }: ComponentPropsWithoutRef<"h2">) => <Eyebrow size="lg">{children}</Eyebrow>,
   // Fenced code block — rehype-pretty-code already did the Shiki syntax
   // highlighting; this just swaps the surrounding chrome for the terminal
   // shell (traffic-light dots + language badge) instead of default <pre>.

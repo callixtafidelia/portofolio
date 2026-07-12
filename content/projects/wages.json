@@ -1,0 +1,16 @@
+{
+  "title": "Forecasting Canadian Average Hourly Wages Using Time Series Models",
+  "contentSource": "quarto-html",
+  "excerpt": "Modeled monthly average hourly wages in Canada (Jan 1997–Nov 2024) using three \nforecasting frameworks — seasonal decomposition with an ARMA-fitted remainder, \nSARIMA (Box-Jenkins), and Holt-Winters exponential smoothing — training on \npre-pandemic data (1997–2018) and evaluating on a 2019 holdout period via Mean \nSquared Prediction Error. The decomposition-based model was most accurate \n(MSPE = 0.0135), ahead of SARIMA (0.0321) and Holt-Winters (0.0327).",
+  "cardImage": "/images/projects/wages/cardImage.png",
+  "category": "Time Series Forecasting & Economic Analysis",
+  "skills": [
+    "R",
+    "Time Series",
+    "Forecasting",
+    "SARIMA",
+    "Holt-Winters"
+  ],
+  "githubUrl": "https://github.com/callixtafidelia/canadian-wage-forecasting-timeseries-analysis",
+  "htmlFile": "/content/projects-html/wages/htmlFile.html"
+}

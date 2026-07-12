@@ -110,25 +110,19 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="flex-1 space-y-6 lg:space-y-8 text-center lg:text-left order-1 lg:order-2"
               >
-                {/* Badge */}
-                <div className="relative inline-flex items-center">
-                  <span className="inline-flex items-center rounded-full border border-indigo-500/50 bg-indigo-900/30 px-4 py-2 sm:px-6 sm:py-2 text-sm font-medium text-indigo-300 backdrop-blur-sm neue-montreal font-light">
-                    Welcome to My Portfolio Website!
-                  </span>
-                </div>
+               
 
                 {/* Title - Responsive text sizing */}
-                <h1 className="playfair text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.05] font-semibold">
-                  Hey, I'm{' '}
+                <h1 className="playfair text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.15] font-semibold">
+                  Nice to meet you, I'm {' '}
                   <span className="playfair-italic bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                    Callixta Fidelia C
+                    Callixta 
                   </span>
                 </h1>
 
                 {/* Description - Responsive text sizing */}
                 <p className="text-base sm:text-lg lg:text-xl text-gray-300 neue-montreal leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                  Like crystals forming from chaos, I shape raw information into structured, meaningful outcomes through
-                  thoughtful analysis and design.
+                  Did you know crystals grow one layer at a time? I believe insights from data do too, and I love making them visible to everyone!
                 </p>
 
                 {/* Buttons - Responsive layout */}

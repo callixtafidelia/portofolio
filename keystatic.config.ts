@@ -100,6 +100,68 @@ export default config({
       },
     }),
 
+    projects: collection({
+      label: "Project notebooks",
+      // The entry's on-disk key (folder/file name) is the URL slug, used as
+      // ?project=<slug> on /projects.
+      slugField: "title",
+      path: "content/projects/*",
+      format: { data: "json" },
+      columns: ["title", "contentSource"],
+      schema: {
+        title: fields.slug({ name: { label: "Title" } }),
+        // Only "quarto-html" is wired up today — a pre-rendered Quarto HTML
+        // upload, rendered directly in an iframe. The old hardcoded
+        // component-block case studies (Tariff, NHL) were removed in favor
+        // of this collection.
+        contentSource: fields.select({
+          label: "Content source",
+          options: [{ label: "Quarto HTML upload", value: "quarto-html" }],
+          defaultValue: "quarto-html",
+        }),
+        excerpt: fields.text({
+          label: "Short description (optional)",
+          multiline: true,
+        }),
+        cardImage: fields.image({
+          label: "Card image",
+          description:
+            "Shown on the /projects grid. If left empty, the card falls back to a gradient placeholder.",
+          directory: "public/images/projects",
+          publicPath: "/images/projects/",
+        }),
+        category: fields.text({
+          label: "Category",
+          description: "Short tag shown under the title on the card, e.g. \"Sports Analytics & Statistical Modeling\".",
+        }),
+        skills: fields.array(
+          fields.text({ label: "Skill" }),
+          {
+            label: "Skills",
+            description: "Tags shown on the card, e.g. R, Python, Regression.",
+            itemLabel: (props) => props.value || "Skill",
+          }
+        ),
+        githubUrl: fields.url({
+          label: "GitHub URL (optional)",
+          description: "Linked from the card's GitHub button.",
+        }),
+        order: fields.integer({
+          label: "Manual order on /projects (optional)",
+          description: "Lower numbers appear first. Leave empty to sort after ordered projects.",
+          validation: { isRequired: false },
+        }),
+        htmlFile: fields.file({
+          label: "Rendered Quarto HTML",
+          description:
+            "Upload the .html file produced by `quarto render` (use embed-resources: true in the .qmd YAML so images/CSS are inlined into one file).",
+          directory: "public/content/projects-html",
+          publicPath: "/content/projects-html/",
+          validation: { isRequired: true },
+        }),
+      },
+    }),
+
     photos: collection({
       label: "Photography",
       slugField: "title",

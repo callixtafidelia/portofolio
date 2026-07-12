@@ -11,8 +11,8 @@ interface Particle {
 }
 
 const PARTICLE_DENSITY = 1 / 11000 // particles per px² of viewport
-const MAX_PARTICLES = 165
-const LINK_DISTANCE = 125
+const MAX_PARTICLES = 150
+const LINK_DISTANCE = 130
 const MOUSE_RADIUS = 190
 
 export default function ParticleField() {
@@ -124,7 +124,7 @@ export default function ParticleField() {
           const midY = (a.y + b.y) / 2
           const mouseDist = Math.hypot(mouse.x - midX, mouse.y - midY)
           const nearMouse = Math.max(0, 1 - mouseDist / (MOUSE_RADIUS * 1.4))
-          const alpha = (1 - dist / LINK_DISTANCE) * (0.10 + nearMouse * 0.45)
+          const alpha = (1 - dist / LINK_DISTANCE) * (0.10 + nearMouse * 0.15) //here
 
           ctx.strokeStyle = `rgba(129, 140, 248, ${alpha})`
           ctx.lineWidth = 0.8
@@ -138,7 +138,7 @@ export default function ParticleField() {
       for (const p of particles) {
         const mouseDist = Math.hypot(mouse.x - p.x, mouse.y - p.y)
         const nearMouse = Math.max(0, 1 - mouseDist / MOUSE_RADIUS)
-        ctx.fillStyle = `rgba(165, 180, 252, ${0.35 + nearMouse * 0.65})`
+        ctx.fillStyle = `rgba(165, 180, 252, ${0.35 + nearMouse * 0.25})` //here
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.radius + nearMouse * 1.2, 0, Math.PI * 2)
         ctx.fill()

@@ -124,8 +124,8 @@ export default function ArticleShell({ title, category, excerpt, date, readTime,
         }
         .article-callout__label {
           display: flex; align-items: center; gap: 0.4rem;
-          font-family: var(--font-mono), monospace; font-size: 0.68rem;
-          letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.55rem;
+          font-family: var(--font-body), -apple-system, sans-serif; font-size: 0.78rem;
+          letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; margin-bottom: 0.55rem;
         }
         .article-callout__body { font-size: 1rem; line-height: 1.7; color: #dfe4ec; }
         .article-callout__body > *:last-child { margin-bottom: 0; }

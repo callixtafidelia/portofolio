@@ -21,151 +21,230 @@ export default function ExperiencePage() {
   }, [])
 
   // Main professional experiences
-  const professionalExperiences = [
-    {
-      id: 1,
-      title: "Senior Orientation Leader",
-      company: "Vantage College, University of British Columbia",
-      location: "Vancouver, BC",
-      duration: "May 2025 - Present",
-      description:
-        "Facilitated small-group activities and debrief sessions for 180+ Orientation Leader candidates while leading training programs for 16 Senior Orientation Leaders, supporting UBC's largest orientation event through asset-based evaluation and inclusive facilitation.",
-      skills: ["Leadership", "Event Management", "Training", "Facilitation", "Team Coordination"],
-      current: true,
-      type: "leadership",
-    },
-    {
-      id: 2,
-      title: "Undergraduate Research Assistant",
-      company: "Gaynor Lab, UBC & UC Santa Barbara",
-      location: "Vancouver, BC",
-      duration: "May 2025 - Present",
-      description:
-        "Process camera trap data to identify wildlife species for predator-prey research in California, contributing to collaborative ecological studies using Wildlife Insights datasets.",
-      skills: ["Wildlife Research", "Data Processing", "Species Identification", "Ecological Analysis", "Camera Trap Technology"],
-      current: true,
-      type: "research",
-    },
-    {
-      id: 3,
-      title: "Undergraduate Research Assistant",
-      company: "Moore Inclusive Conservation Lab, University of British Columbia",
-      location: "Vancouver, BC",
-      duration: "September 2023 - April 2024",
-      description:
-        "Assisted Dr. Alex Moore in conducting comprehensive meta-analysis literature review for wetland restoration project, involving collection and synthesis of research articles from various academic databases.",
-      skills: ["Research", "Literature Review", "Data Analysis", "Academic Writing", "Conservation Biology"],
-      current: false,
-      type: "research",
-    },
-    {
-      id: 4,
-      title: "Peer Mentor",
-      company: "Vantage College, University of British Columbia",
-      location: "Vancouver, BC",
-      duration: "September 2023 - April 2024",
-      description:
-        "Provided comprehensive peer support to 100+ ESL students by collaborating with staff to organize academic and social events, achieving 80% overall satisfaction while developing leadership and logistics management skills.",
-      skills: ["Mentoring", "Event Planning", "Cross-cultural Communication", "Leadership", "Student Support"],
-      current: false,
-      type: "leadership",
-    },
-    {
-      id: 5,
-      title: "Fundraising Executive Team",
-      company: "Best Buddies Club, University of British Columbia",
-      location: "Vancouver, BC",
-      duration: "March 2023 - April 2024",
-      description:
-        "Developed and led fundraising initiatives for the Best Buddies Club at UBC, using innovative strategies and donor engagement to successfully reach fundraising targets.",
-      skills: ["Fundraising", "Strategic Planning", "Donor Engagement", "Team Leadership", "Event Coordination"],
-      current: false,
-      type: "leadership",
-    },
-    {
-      id: 6,
-      title: "Community Engagement Coordinator",
-      company: "Indonesian Young Researchers Association (APMI)",
-      location: "Remote",
-      duration: "February 2023 - February 2024",
-      description:
-        "Planned and hosted impactful online events for association members by understanding unique needs and aspirations to enhance research skills, developing digital community engagement strategies.",
-      skills: ["Community Engagement", "Event Planning", "Digital Strategy", "Research Coordination", "Cross-cultural Communication"],
-      current: false,
-      type: "leadership",
-    },
- {
-      id: 7,
-      title: "Vantage College Representative",
-      company: "Science Undergraduate Society of UBC Vancouver",
-      location: "Vancouver, BC",
-      duration: "November 2022 - March 2023",
-      description:
-        "Represent the Vantage One Science student to convey the aspiration for the student's development through the Science Undergraduate Society at the University of British Columbia (UBC).",
-      skills: ["Student Representation", "Advocacy", "Communication", "Policy Development", "Student Affairs"],
-      current: false,
-      type: "leadership",
-    }
-  ]
+const professionalExperiences = [
+  {
+    id: 1,
+    title: "Research Assistant",
+    company: "Moutouama Lab, University of British Columbia",
+    location: "Vancouver, BC",
+    duration: "September 2025 - Present",
+    description:
+      "Developing a global riparian forest map and building R-based spatial workflows that integrate river networks, ecoregions, and land cover datasets to investigate long-term drivers of forest degradation.",
+    skills: [
+      "R",
+      "Spatial Analysis",
+      "Remote Sensing",
+      "Geospatial Modeling", 
+      "Google Earth Engine",
+    ],
+    current: true,
+    type: "research",
+  },
+  {
+    id: 2,
+    title: "Project Assistant",
+    company: "Gaynor Lab, University of British Columbia",
+    location: "Vancouver, BC",
+    duration: "July 2025 - May 2026",
+    description:
+      "Developing Google Earth Engine workflows to analyze wildfire impacts on wildlife habitat while managing over 300,000 camera trap records for ecological research.",
+    skills: [
+      "Google Earth Engine",
+      "Spatial Analysis",
+      "Data Cleaning",
+      "Metadata Management",
+      "Species Identification",
+    ],
+    current: false,
+    type: "research",
+  },
+  {
+    id: 3,
+    title: "Research Assistant",
+    company: "Moore Inclusive Conservation Lab, University of British Columbia",
+    location: "Vancouver, BC",
+    duration: "September 2023 - April 2024",
+    description:
+      "Conducted a systematic meta-analysis for wetland restoration by screening literature, extracting metadata, and synthesizing research findings across multiple scientific databases.",
+    skills: [
+      "Meta Analysis",
+      "Literature Review",
+      "Data Extraction",
+      "Scientific Writing",
+    ],
+    current: false,
+    type: "research",
+  },
+  {
+    id: 4,
+    title: "Communications Manager",
+    company: "AI Summit Vancouver",
+    location: "Vancouver, BC",
+    duration: "July 2025 - October 2025",
+    description:
+      "Managed communications between 30+ sponsorship and partnership stakeholders and 100+ enterprise participants, contributing to smooth event operations and a positive attendee experience.",
+    skills: [
+      "Stakeholder Management",
+      "Project Coordination",
+      "Partnership Management",
+      "Event Operations",
+    ],
+    current: false,
+    type: "leadership",
+  },
+  {
+    id: 5,
+    title: "Senior Orientation Leader",
+    company: "Vantage College, University of British Columbia",
+    location: "Vancouver, BC",
+    duration: "May 2025 - September 2025",
+    description:
+      "Recruited and facilitated debrief sessions for 50+ Orientation Leader candidates before training 16 selected Orientation Leaders, supporting UBC's largest orientation program.",
+    skills: [
+      "Leadership",
+      "Mentorship",
+      "Public Speaking",
+      "Team Coordination",
+    ],
+    current: false,
+    type: "leadership",
+  },
+  {
+    id: 6,
+    title: "Peer Mentor",
+    company: "Vantage College, University of British Columbia",
+    location: "Vancouver, BC",
+    duration: "September 2023 - April 2024",
+    description:
+      "Mentored over 100 first-year international students while organizing academic and community events that fostered student engagement and success.",
+    skills: [
+      "Mentorship",
+      "Student Support",
+      "Community Building",
+      "Event Planning",
+    ],
+    current: false,
+    type: "leadership",
+  },
+  {
+    id: 7,
+    title: "Fundraising Executive",
+    company: "Best Buddies Club, University of British Columbia",
+    location: "Vancouver, BC",
+    duration: "May 2023 - May 2024",
+    description:
+      "Collaborated with community partners and executive members to organize fundraising initiatives supporting club programs and increasing fundraising revenue.",
+    skills: [
+      "Fundraising",
+      "Community Outreach",
+      "Strategic Planning",
+      "Event Coordination",
+    ],
+    current: false,
+    type: "leadership",
+  },
+  {
+    id: 8,
+    title: "Community Engagement Coordinator",
+    company: "Indonesian Young Researchers Association (APMI)",
+    location: "Remote",
+    duration: "February 2023 - February 2024",
+    description:
+      "Organized online research events and community initiatives that connected aspiring researchers while strengthening digital engagement across the organization.",
+    skills: [
+      "Research Communication",
+      "Digital Events",
+      "Project Coordination",
+      "Public Speaking",
+    ],
+    current: false,
+    type: "leadership",
+  },
+  {
+    id: 9,
+    title: "Vantage College Representative",
+    company: "Science Undergraduate Society of UBC Vancouver",
+    location: "Vancouver, BC",
+    duration: "November 2022 - March 2023",
+    description:
+      "Represented Vantage One Science students by communicating student feedback and collaborating with the Science Undergraduate Society to improve the student experience.",
+    skills: [
+      "Student Advocacy",
+      "Leadership",
+      "Representation",
+      "Collaboration",
+    ],
+    current: false,
+    type: "leadership",
+  },
+];
 
-  // Volunteer experiences - UPDATED WITH REAL EXPERIENCES
-  const volunteerExperiences = [
-    {
-      id: 7,
-      title: "Community Manager",
-      company: "AI Summit Vancouver (VanAI Summit)",
-      location: "Vancouver, BC",
-      duration: "July 2025 - Present",
-      description:
-        "Grow community engagement through LinkedIn outreach, email communication, and on-site interactions, helping shape Western Canada's largest volunteer-led AI conference for 4,000+ members.",
-      skills: ["Community Management", "Social Media Marketing", "Event Coordination", "Networking"],
-      current: true,
-    },
-    {
-      id: 8,
-      title: "Event Volunteer",
-      company: "Google Developer Group Vancouver - Build with AI 2025",
-      location: "Vancouver, BC",
-      duration: "March 2025",
-      description:
-        "Supported attendee engagement and community networking at GDG Vancouver's Build with AI event, fostering connections and learning around Google's latest Generative AI tools.",
-      skills: ["Event Support", "Community Networking", "Technical Events", "Attendee Engagement"],
-      current: false,
-    },
-    {
-      id: 9,
-      title: "Undergraduate First Year Mentor",
-      company: "SUS UBC",
-      location: "Vancouver, BC",
-      duration: "October 2024 - March 2025",
-      description:
-        "Provided academic and personal guidance to first-year mentees through regular check-ins, study advice, and effective communication to foster supportive learning environment.",
-      skills: ["Academic Mentoring", "Student Support", "Communication", "Guidance Counseling"],
-      current: false,
-    },
-    {
-      id: 10,
-      title: "Capstone Conference Committee",
-      company: "UBC Vantage College",
-      location: "Vancouver, BC",
-      duration: "May 2023 - July 2023",
-      description:
-        "Collaborated with the team to plan and organize the 9th Vantage Capstone Conference, an annual event showcasing student research projects, including event planning and logo design.",
-      skills: ["Event Planning", "Conference Organization", "Graphic Design", "Team Collaboration"],
-      current: false,
-    },
-    {
-      id: 11,
-      title: "Community Partner",
-      company: "Gado-Gado Indonesian Students Association of UBC (GISAU)",
-      location: "Vancouver, BC",
-      duration: "February 2023 - March 2023",
-      description:
-        "Volunteered in the FIESTA 2023, a bazaar event consisting of traditional Indonesian foods, games, and performances as a collaboration between Indonesian communities in Vancouver (PERMIKA Vancouver, GISAU UBC, and SFU Indonesian Association).",
-      skills: ["Event Management", "Cultural Outreach", "Community Collaboration", "Cross-cultural Communication"],
-      current: false,
-    }
-  ]
+// Volunteer experiences
+const volunteerExperiences = [
+  {
+    id: 10,
+    title: "Event Volunteer",
+    company: "Google Developer Group Vancouver - Build with AI 2025",
+    location: "Vancouver, BC",
+    duration: "March 2025",
+    description:
+      "Supported attendee engagement and community networking during Google's Build with AI event, helping create an engaging learning environment for participants.",
+    skills: [
+      "Event Support",
+      "Community Engagement",
+      "Networking",
+      "Technical Events",
+    ],
+    current: false,
+  },
+  {
+    id: 11,
+    title: "Undergraduate First-Year Mentor",
+    company: "Science Undergraduate Society (SUS UBC)",
+    location: "Vancouver, BC",
+    duration: "October 2024 - March 2025",
+    description:
+      "Provided academic guidance, study strategies, and regular mentorship to first-year undergraduate students throughout their transition to university.",
+    skills: [
+      "Academic Mentoring",
+      "Student Support",
+      "Communication",
+      "Guidance",
+    ],
+    current: false,
+  },
+  {
+    id: 12,
+    title: "Capstone Conference Committee",
+    company: "UBC Vantage College",
+    location: "Vancouver, BC",
+    duration: "May 2023 - July 2023",
+    description:
+      "Collaborated in planning the 9th Vantage Capstone Conference by supporting event organization, logistics, and conference branding.",
+    skills: [
+      "Conference Organization",
+      "Event Planning",
+      "Graphic Design",
+      "Team Collaboration",
+    ],
+    current: false,
+  },
+  {
+    id: 13,
+    title: "Community Partner",
+    company: "Gado-Gado Indonesian Students Association of UBC (GISAU)",
+    location: "Vancouver, BC",
+    duration: "February 2023 - March 2023",
+    description:
+      "Volunteered at FIESTA 2023, supporting cultural activities that brought together Indonesian communities across Vancouver through food, performances, and games.",
+    skills: [
+      "Community Outreach",
+      "Cultural Events",
+      "Team Collaboration",
+    ],
+    current: false,
+  },
+];
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -291,21 +370,24 @@ export default function ExperiencePage() {
         body::before {
           content: '';
           position: fixed;
-          top: 0;
-          left: 0;
+          inset: 0;
           width: 100%;
           height: 100%;
-          background: 
-            radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.15) 0%, transparent 50%);
+          background:
+            radial-gradient(circle at 15% 20%, rgba(129, 140, 248, 0.38) 0%, transparent 28%),
+            radial-gradient(circle at 85% 12%, rgba(236, 72, 153, 0.34) 0%, transparent 24%),
+            radial-gradient(circle at 70% 78%, rgba(56, 189, 248, 0.32) 0%, transparent 26%),
+            radial-gradient(circle at 30% 62%, rgba(192, 132, 252, 0.28) 0%, transparent 20%),
+            radial-gradient(circle at 52% 36%, rgba(255, 255, 255, 0.09) 0%, transparent 14%);
+          filter: blur(20px);
+          transform: scale(1.04);
           z-index: -1;
-          animation: backgroundShift 20s ease-in-out infinite;
+          animation: backgroundShift 18s ease-in-out infinite;
         }
         
         @keyframes backgroundShift {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.8; }
+          0%, 100% { opacity: 1; transform: scale(1.04) translate3d(0, 0, 0); }
+          50% { opacity: 0.9; transform: scale(1.08) translate3d(2%, -1%, 0); }
         }
         
         @keyframes gradientShift {
@@ -424,15 +506,12 @@ export default function ExperiencePage() {
               className="mb-12 text-center"
             >
               <div className={`flex items-center gap-4 mb-4 justify-center`}>
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <Briefcase size={24} className="text-white" />
-                </div>
                 <h1 className={`playfair font-semibold ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
                   My <span className="text-gradient-enhanced italic">Experience</span>
                 </h1>
               </div>
               <p className={`font-neue-montreal text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
-                My professional journey and community contributions
+                work experiences, leadership roles, and community contributions
               </p>
             </motion.div>
 

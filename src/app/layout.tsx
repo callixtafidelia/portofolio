@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Playfair_Display, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import GlobalCanvases from "@/components/GlobalCanvases";
@@ -27,16 +28,16 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Callixta Fidelia C — Data Science Portfolio",
+    default: "Callixta's Portfolio",
     template: "%s | Callixta Fidelia C",
   },
   description:
-    "Data science student at UBC. Statistical modeling, machine learning, and data visualization projects — plus photography and writing.",
+    "A collection of my projects in data science, research, photography, and writing.",
   keywords: ["data science", "statistics", "machine learning", "UBC", "portfolio", "Callixta Fidelia"],
   openGraph: {
-    title: "Callixta Fidelia C — Data Science Portfolio",
+    title: "Callixta's Portfolio",
     description:
-      "Data science student at UBC. Statistical modeling, machine learning, and data visualization projects.",
+      "A collection of my projects in data science, research, photography, and writing.",
     type: "website",
   },
 };
@@ -50,8 +51,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${playfair.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} antialiased`}
+        suppressHydrationWarning
       >
-        <GlobalCanvases />
+        <Suspense fallback={null}>
+          <GlobalCanvases />
+        </Suspense>
         {children}
       </body>
     </html>

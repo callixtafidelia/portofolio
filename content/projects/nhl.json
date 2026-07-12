@@ -1,0 +1,16 @@
+{
+  "title": "Panel Data Analysis of Interactive Effects between High-Danger Shots, Rebounds, and Secondary Skills on NHL Goal Production",
+  "contentSource": "quarto-html",
+  "excerpt": "Analyzed five seasons of NHL player performance data (22,117 observations across 1,460 players) using fixed-effects panel regression in R to quantify how interactions between player skills influence goal production.",
+  "cardImage": "/images/projects/nhl/cardImage.png",
+  "category": "Sports Analytics & Statistical Modeling",
+  "skills": [
+    "R",
+    "Panel Data Analysis",
+    "Regression",
+    "Data Visualization"
+  ],
+  "githubUrl": "https://github.com/callixtafidelia/hockey-skill-interactions-analysis",
+  "order": 2,
+  "htmlFile": "/content/projects-html/nhl/htmlFile.html"
+}

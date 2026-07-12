@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import Sidebar from "@/components/sidebar"
 import ResumeDownload from "@/components/ResumeDownload"
@@ -10,6 +10,56 @@ import { ArrowLeft, GraduationCap, Award, Calendar, MapPin } from "lucide-react"
 export default function AboutMe() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
+  const courseworkRows: Array<{ courses: string[] }> = [
+    {
+      courses: [
+        "STAT 300: Intermediate Statistics for Applications",
+        "STAT 302: Introduction to Probability",
+        "STAT 305: Introduction to Statistical Inference",
+        "STAT 306: Finding Relationships in Data",
+        "STAT 404: Design and Analysis of Experiments",
+        "STAT 406: Methods for Statistical Learning",
+        "STAT 443: Time Series and Forecasting",
+      ],
+    },
+    {
+      courses: [
+        "BIOL 300: Fundamentals of Biostatistics",
+        "ISCI 320: Research Development Project",
+        "FRST 399: Introduction to Research Methods",
+        "ISCI 300: Interdisciplinary Seminar",
+        "ISCI 360: Systems Approaches to Regional Sustainability",
+      ],
+    },
+    {
+      courses: [
+        "FRE 326: Empirical Methods for Food and Resource Economics",
+        "FRE 385: Quantitative Methods for Business and Resource Management",
+        "FRE 302: Small Business Management in Agri-food Industries",
+        "FRE 490: Current Issues in Food and Resource Economics",
+      ],
+    },
+  ]
+  const [courseworkDisplay, setCourseworkDisplay] = useState(
+    courseworkRows.map((row) => ({
+      text: row.courses[0],
+      isVisible: true,
+    }))
+  )
+  const currentIndexes = useRef<number[]>(courseworkRows.map(() => 0))
+  const fadeTimeouts = useRef<Array<number | null>>([null, null, null])
+
+  useEffect(() => {
+    return () => {
+      fadeTimeouts.current.forEach((timeoutId, index) => {
+        if (timeoutId) {
+          window.clearTimeout(timeoutId)
+          fadeTimeouts.current[index] = null
+        }
+      })
+    }
+  }, [])
 
   // Check if device is mobile
   useEffect(() => {
@@ -21,20 +71,66 @@ export default function AboutMe() {
     return () => window.removeEventListener("resize", checkIsMobile)
   }, [])
 
-  const coursework = [
-    "Data Visualization",
-    "Statistical Modeling",
-    "Deep Learning",
-    "Econometrics",
-    "Time Series Analysis",
-    "Remote Sensing",
-  ]
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const handleReducedMotionChange = () => setReducedMotion(mediaQuery.matches)
+
+    handleReducedMotionChange()
+    mediaQuery.addEventListener("change", handleReducedMotionChange)
+
+    return () => mediaQuery.removeEventListener("change", handleReducedMotionChange)
+  }, [])
+
+  useEffect(() => {
+    if (reducedMotion) return
+
+    const intervals = courseworkRows.map((row, index) => {
+      const intervalId = window.setInterval(() => {
+        setCourseworkDisplay((prev) => {
+          const next = [...prev]
+          next[index] = { ...next[index], isVisible: false }
+          return next
+        })
+
+        const fadeTimeoutId = window.setTimeout(() => {
+          setCourseworkDisplay((prev) => {
+            const next = [...prev]
+            const currentIndex = currentIndexes.current[index]
+            const nextIndex = (currentIndex + 1) % row.courses.length
+            currentIndexes.current[index] = nextIndex
+            next[index] = {
+              ...next[index],
+              text: row.courses[nextIndex],
+              isVisible: true,
+            }
+            return next
+          })
+        }, 420)
+
+        fadeTimeouts.current[index] = fadeTimeoutId
+      }, 2600 + index * 900)
+
+      return intervalId
+    })
+
+    return () => {
+      intervals.forEach((intervalId) => window.clearInterval(intervalId))
+      fadeTimeouts.current.forEach((timeoutId, index) => {
+        if (timeoutId) {
+          window.clearTimeout(timeoutId)
+          fadeTimeouts.current[index] = null
+        }
+      })
+    }
+  }, [reducedMotion])
 
   const publications = [
     {
       title: "The Implementation of Deep Learning Algorithm with Gaussian Blur Data Preprocessing in Circular RNA Classification and Detection",
       issuer: "Undergraduate Research in Natural and Clinical Science and Technology (URNCST) Journal",
-      year: "2024",
+      doiUrl: "https://doi.org/10.26685/urncst.601",
       color: "blue",
     },
   ]
@@ -195,15 +291,12 @@ export default function AboutMe() {
               className="mb-12 text-center"
             >
               <div className={`flex items-center gap-4 mb-4 justify-center`}>
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <GraduationCap size={24} className="text-white" />
-                </div>
                 <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
                   About <span className="text-gradient-enhanced italic">Me</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed font-neue-montreal ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
-                My background, education, and journey in data science
+                a little about the person behind the work
               </p>
             </motion.div>
 
@@ -221,21 +314,31 @@ export default function AboutMe() {
                   <h2
                     className={`font-bold mb-4 md:mb-6 bg-gradient-to-r from-white via-indigo-200 to-purple-200 bg-clip-text text-transparent font-neue-montreal  ${isMobile ? "text-xl" : "text-xl md:text-3xl"}`}
                   >
-                    My Story
+                    Where did it all begin?
                   </h2>
                   <div
                     className={`space-y-4 md:space-y-6 text-gray-300 leading-relaxed font-neue-montreal ${isMobile ? "text-sm" : "text-sm md:text-base"}`}
                   >
                     <p>
-                     As an Integrated Science student at UBC, I bridge the worlds of statistics, biology, and web development to tackle complex challenges with innovative solutions. My technical foundation spans from statistical modeling and machine learning to full-stack development with modern frameworks.
+                    I think it started earlier than I could name it. Back in high school, I spent most of my time in the lab, mixing solutions and running experiments, especially to prepare for KoPSI, the Indonesian National Student Research Competition.
                     </p>
                     <p>
-                     What truly drives me is the intersection of data science and design. I'm deeply passionate about graphic design, statistical modelling, and data visualization, finding joy in creating thoughtful experiences that blend aesthetics with functionality. I explore creative approaches using various tools to tell compelling visual stories with data.                    </p>
-                    <p>
-                    My approach combines scientific rigor with creative problem-solving, I believe excellent analysis isn't just about achieving high accuracy, but about communicating results in ways that inspire action. Beyond technical work, I'm passionate about creating meaningful social impact through mentoring, research collaboration, and community projects.
+                    This was where I first applied statistical methods to my experimental data, something I had not really encountered before. In high school, we mostly learned the basics like mean, median, and mode, just simple ways to summarize data. It was useful, but it always felt like there was something deeper that I was not seeing.
                     </p>
                     <p>
-                    When I'm not analyzing data or building something new, you'll find me experimenting with emerging technologies, connecting with people over coffee (I'm always down for it!), or brainstorming my next project.
+                    At that time, I used ANOVA to analyze my lab data. It was a basic statistical test, but this was also the moment where I started to look at statistics differently, not just as calculations, but as something that can actually reveal patterns and structure hidden in data.
+                    </p>
+                    <p>
+                    Going into my university journey at the UBC, I started to explore this more deeply, including taking BIOL 300: Biostatistics as my first formal statistics course. I found myself constantly amazed by how statistics could reveal patterns and complexity across ecological systems. I enjoyed it far more than I expected.
+                    </p>
+                    <p>
+                    That led me to choose Integrated Science as my major, where I can integrate Biology and Statistics together as my main focus. Interestingly, at the same time I also got drawn into Macroeconomics, since research and data not only describe what is happening in nature, but also shape policy decisions. They influence how resources are used and how ecosystems are managed.
+                    </p>
+                    <p>
+                    This interest brought me to Food and Resource Economics as a concentration that I also explore alongside biology and statistics in the Faculty of Science, to extend my thinking beyond pure science into systems where science, society, and policy intersect.
+                    </p>
+                    <p>
+                    For me, it all connects back to one thing. I am interested in how data reveals patterns, and how those patterns can be used to understand and possibly improve the systems we live in.
                     </p>
                   </div>
 
@@ -270,43 +373,47 @@ export default function AboutMe() {
                   </div>
                   <div className="space-y-3 md:space-y-4">
                     <div>
-                      <h4 className={`font-neue-montreal font-semibold text-white mb-2 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}>
+                      <h4 className={`font-neue-montreal font-semibold text-white mb-1 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}>
                         Bsc in Integrated Science                      </h4>
                       <div
-                        className={`font-neue-montreal flex gap-2 md:gap-4 text-gray-400 mb-2 md:mb-3 ${isMobile ? "flex-col text-xs" : "flex-col sm:flex-row sm:items-center text-xs md:text-sm"}`}
+                        className={`font-neue-montreal flex flex-col gap-1 text-gray-400 mb-4 ${isMobile ? "text-xs" : "text-xs md:text-sx"}`}
                       >
                         <div className="flex items-center gap-1">
                           <MapPin size={12} className="md:w-3.5 md:h-3.5" />
-                          <span>UBC </span>
+                          <span>University of British Columbia</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Calendar size={12} className="md:w-3.5 md:h-3.5" />
-                          <span>May 2026</span>
+                          <span>Sep 2022 - May 2026</span>
                         </div>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                      <span
-                        className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-teal-500/20 to-cyan-600/20 border border-teal-500/30 text-teal-300 font-medium rounded-full ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}
-                      >
-                        Statistics and Biology Concentration 
-                      </span>
-                     
+                      <span className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-teal-500/20 to-cyan-600/20 border border-teal-500/30 text-teal-300 font-medium rounded-full ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}>Statistics</span>
+                      <span className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-teal-500/20 to-cyan-600/20 border border-teal-500/30 text-teal-300 font-medium rounded-full ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}>Biology</span>
+                      <span className={`font-neue-montreal inline-flex items-center bg-gradient-to-r from-teal-500/20 to-cyan-600/20 border border-teal-500/30 text-teal-300 font-medium rounded-full ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}>Food & Resource Economics</span>
                     </div>
                     </div>
                     <div className="pt-3 md:pt-4 border-t border-white/10">
                       <h5
-                        className={`font-neue-montreal font-medium text-white mb-2 md:mb-3 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}
+                        className={`font-neue-montreal font-medium text-white mb-4 ${isMobile ? "text-sm" : "text-sm md:text-base"}`}
                       >
                         Relevant Coursework
                       </h5>
-                      <div className="flex flex-wrap gap-1.5 md:gap-2">
-                        {coursework.map((course, i) => (
-                          <span
-                            key={i}
-                            className={`bg-slate-800/50 border border-slate-700/50 text-slate-300 font-medium rounded-full hover:bg-slate-700/50 transition-colors duration-300 ${isMobile ? "text-xs px-2.5 py-1" : "text-xs px-2.5 md:px-3 py-1"}`}
+                      <div className="flex flex-col gap-2">
+                        {courseworkDisplay.map((row, index) => (
+                          <div
+                            key={`${row.text}-${index}`}
+                            className={`w-full overflow-hidden rounded-full border border-slate-700/50 bg-slate-800/50 px-3 py-2 text-left text-slate-300 transition-opacity duration-300 ease-in-out ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}
+                            style={{
+                              opacity: row.isVisible ? 1 : 0,
+                              whiteSpace: "nowrap",
+                              textOverflow: "ellipsis",
+                              overflow: "hidden",
+                            }}
                           >
-                            {course}
-                          </span>
+                            <span className="font-semibold text-slate-200">{row.text.split(":")[0]}: </span>
+                            <span className="truncate">{row.text.split(":").slice(1).join(":")}</span>
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -344,8 +451,16 @@ export default function AboutMe() {
                           {cert.title}
                         </h4>
                         <p className={`text-gray-400 ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}>
-                          {cert.issuer} • {cert.year}
+                          {cert.issuer}
                         </p>
+                        <a
+                          href={cert.doiUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`mt-1 relative z-10 inline-flex break-all text-cyan-400 underline decoration-cyan-400/50 underline-offset-4 hover:text-cyan-300 hover:decoration-cyan-300 transition-colors cursor-pointer ${isMobile ? "text-xs" : "text-xs md:text-sm"}`}
+                        >
+                          {cert.doiUrl}
+                        </a>
                       </div>
                     ))}
                   </div>

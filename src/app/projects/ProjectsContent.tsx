@@ -3,19 +3,21 @@
 
 import { useSearchParams } from "next/navigation"
 import ProjectsList from "./components/ProjectsList"
-import NHLAnalysis from "./components/NHLAnalysis"
-import TariffAnalysis from "./components/tariff/TariffAnalysis"
+import QuartoNotebook from "./components/QuartoNotebook"
+import type { QuartoProject, ProjectCard } from "./lib/getQuartoProjects"
 
-export default function ProjectsContent() {
+export default function ProjectsContent({
+  quartoProject,
+  projectCards,
+}: {
+  quartoProject: QuartoProject | null
+  projectCards: ProjectCard[]
+}) {
   const searchParams = useSearchParams()
   const project = searchParams.get('project')
 
-  switch (project) {
-    case 'nhl':
-      return <NHLAnalysis />
-    case 'tariff':
-      return <TariffAnalysis />
-    default:
-      return <ProjectsList />
-  }
+  if (quartoProject) return <QuartoNotebook project={quartoProject} />
+  if (project) return null
+
+  return <ProjectsList projects={projectCards} />
 }

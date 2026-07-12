@@ -1,0 +1,16 @@
+{
+  "title": "Investigating Factors Influencing Internet Speed on UBC Vancouver Campus",
+  "contentSource": "quarto-html",
+  "excerpt": "Designed and ran a blocked factorial experiment measuring UBC's ubcsecure WiFi \ndownload speeds across campus building, building area (indoor/edge/outdoor), and \ntime of day, treating speed test website as a blocking factor to isolate it from \nthe effects of interest. ANOVA showed significant main effects of building, area, \nand time of day, plus significant interactions among all three, while device type, \nbrowser, and speed test website had no measurable effect, indicating the results \nreflect real network conditions rather than measurement artifacts.",
+  "cardImage": "/images/projects/internet/cardImage.png",
+  "category": "Factorial Design & Causal Inference",
+  "skills": [
+    "R",
+    "ANOVA",
+    "Experimental Design",
+    "Box-Cox Transformation",
+    "Tukey HSD"
+  ],
+  "githubUrl": "https://github.com/callixtafidelia/internet-speed-factorial-analysis",
+  "htmlFile": "/content/projects-html/internet/htmlFile.html"
+}

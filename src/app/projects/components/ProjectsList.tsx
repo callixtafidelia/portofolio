@@ -5,11 +5,12 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Sidebar from "@/components/sidebar"
 import { motion } from "framer-motion"
-import { ArrowLeft, Star, ExternalLink, Github, FolderOpen, LineChart } from "lucide-react"
+import { ArrowLeft, Star, Github, FolderOpen, LineChart } from "lucide-react"
+import type { ProjectCard } from "../lib/getQuartoProjects"
 
-export default function ProjectsList() {
+export default function ProjectsList({ projects }: { projects: ProjectCard[] }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const [hovered, setHovered] = useState<number | null>(null)
+  const [hovered, setHovered] = useState<string | null>(null)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -21,84 +22,7 @@ export default function ProjectsList() {
     return () => window.removeEventListener("resize", checkIsMobile)
   }, [])
 
-  const getProjectImage = (slug: string) => {
-    switch(slug) {
-      case 'nhl': return 'nhl.png'          
-      case 'flight': return 'map.png'
-      case 'readmap': return 'readmap.png'
-      case 'rebirdth': return 'rebirdth.png'
-    }
-  }
-
-  const getGitHubUrl = (slug: string) => {
-    switch(slug) {
-      case 'tariff': return 'https://github.com/callixtafidelia/'
-      case 'nhl': return 'https://github.com/callixtafidelia/hockey-skill-interactions-analysis'
-      case 'flight': return 'https://github.com/callixtafidelia/flight-no2-impact-study'
-      case 'readmap': return 'https://github.com/gatahcha/readmap-ai'
-      case 'rebirdth': return 'https://github.com/callixtafidelia/rebirdth'
-      default: return 'https://github.com/callixtafidelia/'
-    }
-  }
-
-  // New function to get external project URLs
-  const getProjectUrl = (slug: string) => {
-    switch(slug) {
-      case 'nhl': return 'https://rpubs.com/callixta/hockey-skill-interaction-analysis'
-      case 'flight': return 'https://www.dropbox.com/scl/fi/mvip5hainds8raij0usq5/Assessing-the-Impact-of-Flight-Activity-on-Urban-NO-Pollution-During-The-COVID-19-Pandemic-in-China.pdf?rlkey=ggh0032hf7z58rwj16gvserpz&st=vb5qllav&dl=0'
-      case 'readmap': return 'https://readmap-ai.com/'
-      case 'rebirdth': return 'https://callixtafidelia.github.io/rebirdth/'
-      default: return '#'
-    }
-  }
-
-  const featured = [
-    {
-      id: 5,
-      slug: "tariff",
-      title: "Tariff & Stock Market Attention After the 2024 U.S. Election",
-      description: "An interactive computational notebook analyzing Google Trends data (Jan 2022–Jan 2026). Raced five forecasting models to define \"normal,\" then measured how post‑election tariff attention overshot its forecast by +55.12% (vs. +8.36% for stocks) and how the two searches went from uncorrelated (r=0.02) to tightly coupled (r=0.81). Told through stacked code‑and‑output cells with live charts and a US choropleth.",
-      skills: ["R", "Python", "Time Series", "Forecasting", "Google Trends", "Choropleth"],
-      category: "Interactive Notebook · Time-Series & Attention Analysis",
-      imageUrl: "",
-    },
-    {
-      id: 1,
-      slug: "nhl",
-      title: "NHL Goal Production Analysis",
-      description: "Analyzed five seasons of NHL player performance data (22,117 observations across 1,460 players) using fixed‑effects panel regression in R to quantify how interactions between player skills influence goal production. The model explained 57.7% of goal variability, providing actionable insights for coaching strategies and player evaluation.",
-      skills: ["R", "Panel Data Analysis", "Regression", "Data Visualization"],
-      category: "Sports Analytics & Statistical Modeling",
-      imageUrl: "./public/nhl.png",
-    },
-    {
-      id: 2,
-      slug: "flight",
-      title: "COVID-19 NO₂ Impact Analysis",
-      description: "Analyzed flight trajectories from 58 major Chinese airports (Jan 2019–Dec 2020) alongside Sentinel‑5P TROPOMI satellite data to quantify changes in urban NO₂ pollution across pre‑COVID, disruption, and recovery phases. Applied two‑way fixed‑effects OLS controlling for wind and weather to isolate aviation's impact on air quality.",
-      skills: ["Remote Sensing", "R", "Spatial Regression", "Data Visualization"],
-      category: "Spatial Analysis & Remote Sensing",
-      imageUrl: "./public/map.png",
-    },
-    {
-      id: 3,
-      slug: "readmap",
-      title: "Readmap.ai",
-      description: "Built ReadMap.AI, a full‑stack platform that uses Google Vertex AI and MongoDB Atlas to generate personalized reading roadmaps. Leveraged semantic search over a large book database to match user interests, achieving 95% relevance accuracy, and wrapped it in a Next.js/TypeScript frontend for an intuitive UX.",
-      skills: ["Python", "MongoDB", "Next.js", "Typescript", "Vertex AI"],
-      category: "AI Learning Roadmap Tool",
-      imageUrl: "./public/readmap.png",
-    },
-    {
-      id: 4,
-      slug: "rebirdth",
-      title: "Rebirdth Educational Platform",
-      description: "Co‑founded and am currently developing Rebirdth, a student‑led community platform that empowers Indonesian students through research tutorials, peer‑mentoring events, and interactive articles. I design the website concept along with Instagram posts and reels to engage our audience. While the website is still under development, our community is actively sharing updates and educational content on Instagram @rebirdth.id.",
-      skills: ["Next.js", "Three.js", "TypeScript", "React", "Tailwind CSS"],
-      category: "Community Education Platform",
-      imageUrl: "./public/rebirdth.png",
-    },
-  ]
+  const featured = projects
 
   return (
     <>
@@ -205,15 +129,12 @@ export default function ProjectsList() {
               className="mb-12 text-center"
             >
               <div className="flex items-center gap-4 mb-4 justify-center">
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <FolderOpen size={24} className="text-white" />
-                </div>
                 <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
                   My <span className="text-gradient-enhanced italic">Projects</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed font-neue-montreal ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
-                A collection of my data science and machine learning projects
+                a collection of my technical and research work
               </p>
             </motion.div>
 
@@ -222,19 +143,19 @@ export default function ProjectsList() {
               <div className={`grid gap-8 ${isMobile ? "grid-cols-1" : "grid-cols-1 lg:grid-cols-2"}`}>
                 {featured.map((proj, index) => (
                   <motion.div
-                    key={proj.id}
+                    key={proj.slug}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                     className="glow-card rounded-2xl overflow-hidden group font-neue-montreal"
-                    onMouseEnter={() => setHovered(proj.id)}
+                    onMouseEnter={() => setHovered(proj.slug)}
                     onMouseLeave={() => setHovered(null)}
                   >
-                    {/* Real Image (or gradient placeholder for the interactive notebook) */}
+                    {/* Real Image (or gradient placeholder when no card image is uploaded) */}
                     <div className="relative h-48 overflow-hidden border-b border-white/10">
-                      {getProjectImage(proj.slug) ? (
+                      {proj.cardImageUrl ? (
                         <img
-                          src={getProjectImage(proj.slug)}
+                          src={proj.cardImageUrl}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           alt={proj.title}
                         />
@@ -254,7 +175,7 @@ export default function ProjectsList() {
                         </h3>
                         <span className="text-sm text-indigo-400 font-medium font-neue-montreal">{proj.category}</span>
                       </div>
-                      <p className="text-gray-300 text-sm leading-relaxed mb-6 font-neue-montreal">{proj.description}</p>
+                      <p className="text-gray-300 text-sm leading-relaxed mb-6 font-neue-montreal">{proj.excerpt}</p>
 
                       <div className="flex flex-wrap gap-2 mb-6">
                         {proj.skills.map((skill, i) => (
@@ -265,34 +186,24 @@ export default function ProjectsList() {
                       </div>
 
                       <div className={`flex gap-3 ${isMobile ? "flex-col" : ""}`}>
-                        {proj.slug === "tariff" ? (
-                          <Link
-                            href="/projects?project=tariff"
-                            className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium font-neue-montreal rounded-lg shadow-lg shadow-indigo-500/25 hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
-                          >
-                            <LineChart size={16} />
-                            Open Notebook
-                          </Link>
-                        ) : (
+                        <Link
+                          href={`/projects?project=${proj.slug}`}
+                          className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium font-neue-montreal rounded-lg shadow-lg shadow-indigo-500/25 hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
+                        >
+                          <LineChart size={16} />
+                          Open Notebook
+                        </Link>
+                        {proj.githubUrl && (
                           <a
-                            href={getProjectUrl(proj.slug)}
+                            href={proj.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium font-neue-montreal rounded-lg shadow-lg shadow-indigo-500/25 hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
+                            className={`flex items-center gap-2 px-4 py-2 bg-slate-900/50 hover:bg-slate-800/50 text-slate-300 hover:text-white text-sm font-medium font-neue-montreal rounded-lg border border-slate-700/50 hover:border-purple-500/30 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
                           >
-                            <ExternalLink size={16} />
-                            View Details
+                            <Github size={16} />
+                            GitHub
                           </a>
                         )}
-                        <a 
-                          href={getGitHubUrl(proj.slug)} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className={`flex items-center gap-2 px-4 py-2 bg-slate-900/50 hover:bg-slate-800/50 text-slate-300 hover:text-white text-sm font-medium font-neue-montreal rounded-lg border border-slate-700/50 hover:border-purple-500/30 transition-all duration-300 ${isMobile ? "justify-center" : ""}`}
-                        >
-                          <Github size={16} />
-                          GitHub
-                        </a>
                       </div>
                     </div>
                   </motion.div>

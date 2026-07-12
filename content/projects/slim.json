@@ -1,0 +1,16 @@
+{
+  "title": "Analysis of Population Responses to Different Patterns of Environmental Change",
+  "contentSource": "quarto-html",
+  "excerpt": "Simulated population adaptation in SLiM under four patterns of environmental change, gradual, periodic, step, and stochastic, across 108 combinations of selection strength and mutation parameters. Found that predictable environments (gradual, periodic) were far easier for populations to track than stochastic change, and that equal total mutational variance can still produce very different fitness outcomes depending on whether it came from frequent small mutations or rare large ones.",
+  "cardImage": "/images/projects/slim/cardImage.png",
+  "category": "Population Genetics Simulation & Evolutionary Modeling",
+  "skills": [
+    "R",
+    "SLiM",
+    "Population Genetics",
+    "Evolutionary Biology",
+    "Simulation"
+  ],
+  "githubUrl": "https://github.com/callixtafidelia/population-environmental-change",
+  "htmlFile": "/content/projects-html/slim/htmlFile.html"
+}

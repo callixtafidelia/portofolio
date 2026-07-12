@@ -1,0 +1,17 @@
+{
+  "title": "Impact of the 2024 U.S. Presidential Election on Public Interest in Tariffs and Stock Markets: A Google Trends Analysis",
+  "contentSource": "quarto-html",
+  "excerpt": "Analyzed Google Trends search data (Jan 2022–Jan 2026) using five forecasting models (ARIMA, SARIMA, Holt's Trend, Holt's Winter, SES) to establish baseline attention levels, then measured how post‑election tariff search interest overshot its forecast by +55.12% versus +8.36% for stock search interest, and how correlation between the two topics rose from r=0.02 to r=0.81.",
+  "cardImage": "/images/projects/tariff/cardImage.png",
+  "category": "Time-Series Forecasting & Public Attention Analysis",
+  "skills": [
+    "R",
+    "Python",
+    "Time Series",
+    "Forecasting",
+    "Google Trends"
+  ],
+  "githubUrl": "https://github.com/callixtafidelia/tariff-stock-analysis",
+  "order": 1,
+  "htmlFile": "/content/projects-html/tariff/htmlFile.html"
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Assessing the Impact of Flight Activity on Urban NO₂ Pollution During The COVID-19 Pandemic in China ",
+  "contentSource": "quarto-html",
+  "excerpt": "Analyzed flight trajectories from 58 major Chinese airports (Jan 2019–Dec 2020) alongside Sentinel-5P TROPOMI satellite data to quantify changes in urban NO₂ pollution across pre-COVID, disruption, and recovery phases.",
+  "cardImage": "/images/projects/flight/cardImage.png",
+  "category": "Spatial Analysis & Remote Sensing",
+  "skills": [
+    "Remote Sensing",
+    "R",
+    "Spatial Regression",
+    "Data Visualization"
+  ],
+  "githubUrl": "https://github.com/callixtafidelia/flight-no2-impact-study",
+  "order": 3,
+  "htmlFile": "/content/projects-html/flight/htmlFile.html"
+}

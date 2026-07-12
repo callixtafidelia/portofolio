@@ -106,10 +106,10 @@ export default function SkillsPage() {
       color: "from-cyan-500 to-cyan-700",
       glowColor: "rgba(6, 182, 212, 0.3)",
       skills: [
-        { name: "PostgreSQL", level: "Advanced", color: "gray", logoUrl: "./database/docker.png" },
+        { name: "PostgreSQL", level: "Advanced", color: "gray", logoUrl: "./database/postgresql.png" },
         { name: "MongoDB", level: "Intermediate", color: "gray", logoUrl: "./database/mongodb.png" },
         { name: "Google Cloud Platform", level: "Basic", color: "gray", logoUrl: "./database/GCP.png" },
-        { name: "Docker", level: "Intermediate", color: "gray", logoUrl: "./database/postgresql.png" },
+        { name: "Docker", level: "Intermediate", color: "gray", logoUrl: "./database/docker.png" },
       ],
     },
   ]
@@ -415,15 +415,12 @@ export default function SkillsPage() {
               className="mb-12 text-center"
             >
               <div className={`flex items-center gap-4 mb-4 justify-center`}>
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <Zap size={24} className="text-white" />
-                </div>
                 <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
                   Technical <span className="text-gradient-enhanced italic">Skills</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed font-neue-montreal ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
-                My expertise in data science and machine learning technologies
+                programming languages, frameworks, and tools I use regularly
               </p>
             </motion.div>
 

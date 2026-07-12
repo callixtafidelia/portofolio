@@ -65,25 +65,43 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
     return (
       <>
         <style jsx>{`
-          .profile-avatar {
+          .hex-logo-wrap {
             position: relative;
+            filter: drop-shadow(0 0 2px rgba(109, 143, 247, 0.3));
           }
-          
-          .profile-avatar::before {
-            content: '';
+
+          .hex-logo-ring,
+          .hex-logo-face {
             position: absolute;
-            inset: -2px;
-            background: linear-gradient(135deg, #7dd3fc, #818cf8, #a78bfa, #c084fc);
-            border-radius: 22px;
-            z-index: -1;
-            animation: rotate 3s linear infinite;
+            inset: 0;
+            clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
           }
-          
-          @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+          .hex-logo-ring {
+            background: conic-gradient(from 0deg, #a855f7, #6d8ff7, #4a90f7, #a855f7);
+            animation: hexRotate 5s linear infinite;
           }
-          
+
+          .hex-logo-face {
+            inset: 2px;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .hex-logo-face img {
+            width: 62%;
+            height: 62%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(140, 120, 255, 0.5));
+          }
+
+          @keyframes hexRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
           .nav-link-glow {
             position: relative;
             overflow: hidden;
@@ -167,17 +185,20 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
 
           {/* Profile Section */}
           <div className="flex-shrink-0 p-6 border-b border-white/10 flex flex-col items-center">
-            <div className="profile-avatar w-16 h-16 rounded-xl shadow-xl shadow-indigo-500/40 ring-2 ring-blue-500/50">
-              <div className="overflow-hidden rounded-xl w-full h-full">
-                <img src="/photo.jpg" alt="Callixta Fidelia C" className="w-full h-full object-cover" />
+            <div className="hex-logo-wrap w-16 h-16">
+              <div className="hex-logo-ring" />
+              <div className="hex-logo-face">
+                <img src="/logo.png" alt="Callixta Fidelia C" />
               </div>
             </div>
             {!collapsed && (
               <>
-                <h2 className="neue-montreal mt-4 text-xl font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent text-center">
+                <h2 className="font-body mt-4 text-lg font-semibold tracking-[0.05em] bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent text-center">
                   Callixta Fidelia C
                 </h2>
-                <p className="neue-montreal text-slate-400 text-sm mt-1 text-center"> Data Enthusiast @UBC</p>
+                <p className="font-body text-slate-400 text-[10px] sm:text-xs mt-1 tracking-[0.09em] lowercase text-center">
+                 fueled by coffee and curiosity
+                </p>
               </>
             )}
           </div>
@@ -257,25 +278,43 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
   return (
     <>
       <style jsx>{`
-        .profile-avatar-mobile {
+        .hex-logo-wrap {
           position: relative;
+          filter: drop-shadow(0 0 2px rgba(109, 143, 247, 0.3));
         }
-        
-        .profile-avatar-mobile::before {
-          content: '';
+
+        .hex-logo-ring,
+        .hex-logo-face {
           position: absolute;
-          inset: -2px;
-          background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
-          border-radius: 14px;
-          z-index: -1;
-          animation: rotate 3s linear infinite;
+          inset: 0;
+          clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
         }
-        
-        @keyframes rotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+
+        .hex-logo-ring {
+          background: conic-gradient(from 0deg, #a855f7, #6d8ff7, #4a90f7, #a855f7);
+          animation: hexRotate 5s linear infinite;
         }
-        
+
+        .hex-logo-face {
+          inset: 2px;
+          background: #0f172a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hex-logo-face img {
+          width: 62%;
+          height: 62%;
+          object-fit: contain;
+          filter: drop-shadow(0 0 8px rgba(140, 120, 255, 0.5));
+        }
+
+        @keyframes hexRotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
         .nav-link-glow-mobile {
           position: relative;
           overflow: hidden;
@@ -340,9 +379,10 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
         <div className="flex items-center justify-between px-4 py-3">
           {/* Logo/Name */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="profile-avatar-mobile w-10 h-10 rounded-lg shadow-lg shadow-indigo-500/40 ring-2 ring-blue-500/50">
-              <div className="overflow-hidden rounded-lg w-full h-full">
-                <img src="/photo.jpg" alt="Callixta Fidelia C" className="w-full h-full object-cover" />
+            <div className="hex-logo-wrap w-10 h-10">
+              <div className="hex-logo-ring" />
+              <div className="hex-logo-face">
+                <img src="/logo.png" alt="Callixta Fidelia C" />
               </div>
             </div>
             <span className="text-white bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
@@ -375,16 +415,19 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
         <div className="flex-shrink-0 p-6 border-b border-white/10">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="profile-avatar-mobile w-12 h-12 rounded-lg shadow-lg shadow-indigo-500/40 ring-2 ring-blue-500/50">
-                <div className="overflow-hidden rounded-lg w-full h-full">
-                  <img src="/photo.jpg" alt="Callixta Fidelia C" className="w-full h-full object-cover" />
+              <div className="hex-logo-wrap w-12 h-12">
+                <div className="hex-logo-ring" />
+                <div className="hex-logo-face">
+                  <img src="/logo.png" alt="Callixta Fidelia C" />
                 </div>
               </div>
               <div>
-                <h3 className="neue-montreal text-white font-bold bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                <h3 className="font-body text-white font-semibold tracking-[0.05em] bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
                   Callixta Fidelia C
                 </h3>
-                <p className="neue-montreal text-slate-400 text-sm">Data Enthusiast @UBC</p>
+                <p className="font-body text-slate-400 text-[10px] sm:text-xs tracking-[0.09em] uppercase">
+                 fueled by coffee and curiosity
+                </p>
               </div>
             </div>
             <button

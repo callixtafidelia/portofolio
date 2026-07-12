@@ -1,8 +1,7 @@
 // src/app/projects/page.tsx
-"use client"
-
 import { Suspense } from "react"
 import ProjectsContent from "./ProjectsContent"
+import { getQuartoProject, getQuartoProjectSlugs, getAllProjectCards } from "./lib/getQuartoProjects"
 
 // Loading component
 function ProjectsLoading() {
@@ -16,10 +15,32 @@ function ProjectsLoading() {
   )
 }
 
-export default function ProjectsPage() {
+interface Props {
+  searchParams: Promise<{ project?: string }>
+}
+
+export default async function ProjectsPage({ searchParams }: Props) {
+  const { project: projectSlug } = await searchParams
+
+  // Only reads the single requested project's small JSON entry (never the
+  // uploaded HTML file itself — the browser fetches that directly into the
+  // iframe) — plain nav (list view, tariff/nhl) never touches this
+  // collection at all, so it doesn't scale with however many notebooks
+  // get added later.
+  let quartoProject = null
+  if (projectSlug) {
+    const slugs = await getQuartoProjectSlugs()
+    if (slugs.includes(projectSlug)) {
+      quartoProject = await getQuartoProject(projectSlug)
+    }
+  }
+
+  // Only needed for the grid view — skip it when opening a single notebook.
+  const projectCards = quartoProject || projectSlug ? [] : await getAllProjectCards()
+
   return (
     <Suspense fallback={<ProjectsLoading />}>
-      <ProjectsContent />
+      <ProjectsContent quartoProject={quartoProject} projectCards={projectCards} />
     </Suspense>
   )
 }
