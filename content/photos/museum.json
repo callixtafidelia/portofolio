@@ -1,0 +1,10 @@
+{
+  "title": "museum",
+  "location": "Royal Ontario Museum",
+  "date": "April 2026",
+  "camera": "Samsung S22+",
+  "lens": "Adobe Lightroom",
+  "beforeImage": "/photography/museum/beforeImage.jpg",
+  "afterImage": "/photography/museum/afterImage.jpg",
+  "featured": true
+}

@@ -12,5 +12,6 @@
     "Holt-Winters"
   ],
   "githubUrl": "https://github.com/callixtafidelia/canadian-wage-forecasting-timeseries-analysis",
+  "order": 4,
   "htmlFile": "/content/projects-html/wages/htmlFile.html"
 }

@@ -222,15 +222,12 @@ ${email}`
             {/* Header with extra mobile spacing */}
             <div className={`mb-12 text-center ${isMobile ? "mt-4" : ""}`}>
               <div className={`flex items-center gap-4 mb-4 justify-center`}>
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <Mail size={24} className="text-white" />
-                </div>
-                <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
+               <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
                   Contact <span className="text-gradient-enhanced italic">Me</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
-                Let's connect and discuss opportunities in data science
+                let's connect and discuss opportunities
               </p>
             </div>
 

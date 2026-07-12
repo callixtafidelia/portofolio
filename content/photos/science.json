@@ -1,0 +1,10 @@
+{
+  "title": "science",
+  "location": "Science World",
+  "date": "July 2026",
+  "camera": "Samsung S22+",
+  "lens": "Adobe Lightroom",
+  "beforeImage": "/photography/science/beforeImage.jpg",
+  "afterImage": "/photography/science/afterImage.jpg",
+  "featured": true
+}

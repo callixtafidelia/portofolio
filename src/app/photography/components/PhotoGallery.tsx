@@ -189,15 +189,12 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
             {/* Themed header */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="mb-12 text-center">
               <div className="flex items-center gap-4 mb-4 justify-center">
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <Camera size={24} className="text-white" />
-                </div>
                 <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
                   Through <span className="text-gradient-enhanced italic">My Lens</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
-                Moments I&apos;ve captured, twice over — press and hold any photo to see it before the edit
+                small moments that deserved a second look
               </p>
             </motion.div>
 
@@ -339,7 +336,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
 
                 <div className="flex-1 bg-slate-900/80 backdrop-blur-sm rounded-xl px-6 py-4 border border-white/10">
                   <div className="mb-3">
-                    <p className="font-body text-xl sm:text-2xl text-white flex items-center gap-2">
+                    <p className="font-body text-base sm:text-lg text-white flex items-center gap-2">
                       <MapPin size={16} className="text-indigo-400/90" />{selectedPhoto.location}
                     </p>
                   </div>
@@ -347,10 +344,6 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                     <Meta label="Date" value={selectedPhoto.date} />
                     <Meta label="Camera" value={selectedPhoto.camera} />
                     <Meta label="Editor" value={selectedPhoto.lens} />
-                  </div>
-                  <div className="mt-3 pt-3 border-t border-white/10">
-                    <p className="font-body text-[9px] tracking-[0.25em] uppercase text-gray-600 mb-1">Description</p>
-                    <p className="text-gray-300 text-[13px] leading-relaxed">{selectedPhoto.editingNotes}</p>
                   </div>
                 </div>
 

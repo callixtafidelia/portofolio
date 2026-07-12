@@ -211,15 +211,12 @@ export default function BlogList({ posts }: { posts: BlogPost[] }) {
               className="mb-12 text-center"
             >
               <div className={`flex items-center gap-4 mb-4 justify-center`}>
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                  <BookOpen size={24} className="text-white" />
-                </div>
                 <h1 className={`font-semibold playfair ${isMobile ? "text-4xl sm:text-5xl" : "text-6xl"}`}>
                   Latest <span className="text-gradient-enhanced italic">Posts</span>
                 </h1>
               </div>
               <p className={`text-gray-300 leading-relaxed font-neue-montreal ${isMobile ? "text-base sm:text-lg" : "text-xl"}`}>
-                Articles and insights on data science and machine learning
+                where anything worth sharing finds its way into words
               </p>
             </motion.div>
 

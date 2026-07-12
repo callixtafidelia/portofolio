@@ -1,0 +1,10 @@
+{
+  "title": "park",
+  "location": "Acadia Park",
+  "date": "April 2026",
+  "camera": "Samsung S22+",
+  "lens": "Adobe Lightroom",
+  "beforeImage": "/photography/park/beforeImage.jpg",
+  "afterImage": "/photography/park/afterImage.jpg",
+  "featured": true
+}
