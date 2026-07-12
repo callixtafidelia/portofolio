@@ -113,10 +113,12 @@ export default function Home() {
                
 
                 {/* Title - Responsive text sizing */}
-                <h1 className="playfair text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[1.15] font-semibold">
-                  Nice to meet you, I'm {' '}
+                <h1 className="playfair text-5xl sm:text-6xl lg:text-6xl xl:text-7xl leading-[1.15] font-semibold">
+                  Nice to meet you,
+                  <br className="hidden sm:block" />
+                  {' '}I'm{' '}
                   <span className="playfair-italic bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                    Callixta 
+                    Callixta
                   </span>
                 </h1>
 
