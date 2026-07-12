@@ -19,13 +19,11 @@ export default function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    // Respect users who prefer reduced motion, and skip on touch devices
-    if (
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      window.matchMedia("(hover: none)").matches
-    ) {
+    // Respect users who prefer reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return
     }
+    const isTouch = window.matchMedia("(hover: none)").matches
 
     const canvas = canvasRef.current
     if (!canvas) return
@@ -68,6 +66,12 @@ export default function ParticleField() {
     const onLeave = () => {
       mouse.x = -9999
       mouse.y = -9999
+    }
+    const onTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0]
+      if (!touch) return
+      mouse.x = touch.clientX
+      mouse.y = touch.clientY
     }
     const onVisibility = () => {
       running = !document.hidden
@@ -149,17 +153,24 @@ export default function ParticleField() {
 
     resize()
     window.addEventListener("resize", resize)
-    window.addEventListener("mousemove", onMove)
-    window.addEventListener("mouseleave", onLeave)
     document.addEventListener("visibilitychange", onVisibility)
+    if (isTouch) {
+      window.addEventListener("touchmove", onTouchMove, { passive: true })
+      window.addEventListener("touchend", onLeave)
+    } else {
+      window.addEventListener("mousemove", onMove)
+      window.addEventListener("mouseleave", onLeave)
+    }
     draw()
 
     return () => {
       cancelAnimationFrame(animId)
       window.removeEventListener("resize", resize)
+      document.removeEventListener("visibilitychange", onVisibility)
+      window.removeEventListener("touchmove", onTouchMove)
+      window.removeEventListener("touchend", onLeave)
       window.removeEventListener("mousemove", onMove)
       window.removeEventListener("mouseleave", onLeave)
-      document.removeEventListener("visibilitychange", onVisibility)
     }
   }, [])
 
