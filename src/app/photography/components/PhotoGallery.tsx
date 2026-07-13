@@ -281,9 +281,10 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                             <div className="absolute top-3.5 right-3.5">
                               <LikeButton liked={liked.has(p.id)} count={countFor(p.id)} onToggle={() => toggle(p.id)} />
                             </div>
-                            <div className="photo-caption absolute bottom-0 inset-x-0 p-5">
-                              <p className="font-body text-lg text-white/90 flex items-center gap-1.5">
-                                <MapPin size={14} className="text-white/50" />{p.location}
+                            <div className="photo-caption absolute bottom-0 inset-x-0 p-3 sm:p-5">
+                              <p className="font-body text-sm sm:text-lg text-white/90 flex items-start gap-1.5">
+                                <MapPin size={14} className="text-white/50 shrink-0 mt-0.5" />
+                                <span className="line-clamp-2">{p.location}</span>
                               </p>
                             </div>
                           </div>

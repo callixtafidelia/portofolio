@@ -60,10 +60,11 @@ export default function BeforeAfterHold({ beforeSrc, afterSrc }: Props) {
 
       {/* Hold hint */}
       <div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white text-sm font-medium pointer-events-none transition-opacity duration-200"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium pointer-events-none transition-opacity duration-200 whitespace-nowrap"
         style={{ opacity: holding ? 0 : 1 }}
       >
-        <Eye size={15} />
+        <Eye size={13} className="sm:hidden" />
+        <Eye size={15} className="hidden sm:block" />
         Press &amp; hold to see the original
       </div>
     </div>
