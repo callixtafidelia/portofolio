@@ -425,7 +425,7 @@ export default function Sidebar({ active, onToggle }: SidebarProps) {
                 <h3 className="font-body text-white font-semibold tracking-[0.05em] bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
                   Callixta Fidelia C
                 </h3>
-                <p className="font-body text-slate-400 text-[10px] sm:text-xs tracking-[0.09em] uppercase">
+                <p className="font-body text-slate-400 text-[10px] sm:text-xs tracking-[0.09em] lowercase">
                  fueled by coffee and curiosity
                 </p>
               </div>
